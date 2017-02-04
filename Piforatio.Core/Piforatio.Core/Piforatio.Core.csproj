@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="ObjectsAbstract\IAim.cs" />
+    <Compile Include="ObjectsAbstract\ICoreObject.cs" />
+    <Compile Include="ObjectsAbstract\IProject.cs" />
+    <Compile Include="ObjectsAbstract\IPTask.cs" />
+    <Compile Include="ObjectsAbstract\IPTaskPlan.cs" />
+    <Compile Include="ObjectsAbstract\IQuant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Objects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
