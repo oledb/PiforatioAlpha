@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public class ProjectModel : IDataModel<IProject>
+    public class PTaskModel : IDataModel<IPTask>
     {
-        public PTaskModel GetPTaskModel(IProject project)
+        public IProject BaseProject { get; }
+        public IEnumerable<IPTask> GetAllData()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IProject> GetAllData()
+        public IEnumerable<IPTask> GetData(int projectId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IProject> GetData(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(IProject obj)
+        public void Update(IPTask obj)
         {
             throw new NotImplementedException();
         }
