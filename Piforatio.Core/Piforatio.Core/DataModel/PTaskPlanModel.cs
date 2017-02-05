@@ -7,26 +7,21 @@ using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public class PTaskModel : IDataModel<IPTask>
+    public class PTaskPlanModel : IDataModel<IPTaskPlan>
     {
-        public IProject BaseProject { get; }
+        public IPTask BasePTask { get; }
 
-        public PTaskPlanModel GetPlanModel (IPTask task)
+        public IEnumerable<IPTaskPlan> GetAllData()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPTask> GetAllData()
+        public IEnumerable<IPTaskPlan> GetData(int projectId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPTask> GetData(int projectId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(IPTask obj)
+        public void Update(IPTaskPlan obj)
         {
             throw new NotImplementedException();
         }

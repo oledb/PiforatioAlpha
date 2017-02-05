@@ -8,7 +8,7 @@ namespace Piforatio.Core.ObjectsAbstract
 {
     public interface IPTaskPlan : ICoreObject
     {
-        int PTaskID { get; set; }
+        int PTaskPlanID { get; set; }
         IPTask Task { get; set; }
         DateTime Date { get; set; }
         TaskStatus Status { get; set; }
