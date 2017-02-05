@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\IDataModel.cs" />
+    <Compile Include="DataModel\ProjectModel.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="ObjectsAbstract\IAim.cs" />
     <Compile Include="ObjectsAbstract\ICoreObject.cs" />
