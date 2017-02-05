@@ -6,31 +6,17 @@ using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public class ProjectModel : IDataModel<IProject>
+    public abstract class ProjectModel : IDataModel<IProject>
     {
-        public PTaskModel GetPTaskModel(IProject project)
-        {
-            throw new NotImplementedException();
-        }
+        protected List<IProject> listProject;
+        public abstract PTaskModel GetPTaskModel(IProject project);
 
-        public IEnumerable<IProject> GetAllData()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IEnumerable<IProject> GetAllData();
 
-        public IEnumerable<IProject> GetData(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IEnumerable<IProject> GetData(int id);
 
-        public void Update(IProject obj)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Update(IProject obj);
 
-        public void UpdateAll()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void UpdateAll();
     }
 }
