@@ -13,7 +13,7 @@ namespace Piforatio.Core.DataModel
 
         public abstract IEnumerable<IProject> GetAllData();
 
-        public abstract IEnumerable<IProject> GetData(int id);
+        public abstract IProject GetData(int id);
 
         public abstract void Update(IProject obj);
 

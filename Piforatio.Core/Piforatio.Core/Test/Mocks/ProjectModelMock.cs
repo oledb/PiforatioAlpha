@@ -5,24 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
+using Moq;
 
 namespace Piforatio.Core.Test.Mocks
 {
     public class ProjectModelMock : ProjectModel
     {
+        int _index;
         public ProjectModelMock()
         {
-            
+            _index = 0;
+            this.listProject.AddRange((IProject[])new object[]{
+                GenerateProject("MVC", new DateTime(2017,1,20)),
+                GenerateProject("Point Theory", new DateTime(2017,1,10)),
+                GenerateProject("Xamarin", new DateTime(2017,2,1)),
+            });
+        }
+
+        private IProject GenerateProject(string name, DateTime time)
+        {
+            var mock = new Mock<IProject>();
+            mock.Setup(p => p.Name).Returns(name);
+            mock.Setup(p => p.CreationTime).Returns(time);
+            mock.Setup(p => p.ProjectID).Returns(_index++);
+            return mock.Object;
         }
 
         public override IEnumerable<IProject> GetAllData()
         {
-            throw new NotImplementedException();
+            return listProject;
         }
 
-        public override IEnumerable<IProject> GetData(int id)
+        public override IProject GetData(int id)
         {
-            throw new NotImplementedException();
+            return (from p in listProject
+                    where p.ProjectID == id
+                    select p).SingleOrDefault();
         }
 
         public override PTaskModel GetPTaskModel(IProject project)
