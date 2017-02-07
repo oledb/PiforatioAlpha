@@ -9,14 +9,14 @@ using Moq;
 
 namespace Piforatio.Core.Test.Mocks
 {
-    public class ProjectModelMock : DataModel<IProject>
+    public class ProjectModelMock : ProjectModel
     {
         int _index;
         public ProjectModelMock()
         {
             _index = 0;
             listObject = new List<IProject>();
-            this.listObject.AddRange(new IProject[]{
+            listObject.AddRange(new IProject[]{
                 GenerateProject("MVC", new DateTime(2017,1,20)),
                 GenerateProject("Point Theory", new DateTime(2017,1,10)),
                 GenerateProject("Xamarin", new DateTime(2017,2,1)),
@@ -30,18 +30,6 @@ namespace Piforatio.Core.Test.Mocks
             mock.Setup(p => p.CreationTime).Returns(time);
             mock.Setup(p => p.ProjectID).Returns(_index++);
             return mock.Object;
-        }
-
-        public override IEnumerable<IProject> GetAllData()
-        {
-            return listObject;
-        }
-
-        public override IProject GetData(int id)
-        {
-            return (from p in listObject
-                    where p.ProjectID == id
-                    select p).SingleOrDefault();
         }
 
         public  PTaskModel GetPTaskModel(IProject project)
