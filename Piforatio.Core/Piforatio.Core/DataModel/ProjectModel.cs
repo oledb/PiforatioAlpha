@@ -23,6 +23,11 @@ namespace Piforatio.Core.DataModel
                     select p).SingleOrDefault();
         }
 
+        public PTaskModel GetPTaskModel(IProject project)
+        {
+            return new PTaskModel(dataContext);
+        }
+
         public override void Update(IProject obj)
         {
             //save data to file, db or something

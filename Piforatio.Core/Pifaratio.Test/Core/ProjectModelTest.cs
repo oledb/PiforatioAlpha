@@ -13,14 +13,21 @@ namespace Piforatio.Test.Core
     {
         public static List<IProject> CreateProjectList()
         {
-            int index = 0;
             var listObject = new List<IProject>();
+            CreateProjectList(listObject);
+            return listObject;
+        }
+
+        public static void CreateProjectList(List<IProject> listObject)
+        {
+            int index = 0;
+            
             listObject.AddRange(new IProject[]{
                 CreateProject("MVC", new DateTime(2017,1,20), index++),
                 CreateProject("Point Theory", new DateTime(2017,1,10), index++),
                 CreateProject("Xamarin", new DateTime(2017,2,1), index++),
             });
-            return listObject;
+            
         }
 
         public static IProject CreateProject(string name, DateTime time, int index)
@@ -60,6 +67,19 @@ namespace Piforatio.Test.Core
             var list = pm.GetAllData();
 
             Assert.IsNotNull(list);
+        }
+
+        [Test]
+        public void GetPTaskModel_get()
+        {
+            var pm = new ProjectModel(CreateDataContext());
+            var list = pm.GetAllData();
+            CreateProjectList(list);
+            var firstProject = list[0];
+            PTaskModel model = pm.GetPTaskModel(firstProject);
+
+            Assert.AreEqual(firstProject, model.BaseProject);
+
         }
     }
 }
