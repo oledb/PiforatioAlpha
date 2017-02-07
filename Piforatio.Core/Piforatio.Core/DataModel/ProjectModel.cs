@@ -8,7 +8,8 @@ namespace Piforatio.Core.DataModel
 {
     public class ProjectModel : DataModel<IProject>
     {
-
+        public ProjectModel(IDataContext context) : base(context)
+        { }
 
         public override List<IProject> GetAllData()
         {
@@ -30,6 +31,7 @@ namespace Piforatio.Core.DataModel
 
         public override void UpdateAll()
         {
+            //save data to file, db or something
             throw new NotImplementedException();
         }
     }

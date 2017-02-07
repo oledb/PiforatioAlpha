@@ -13,6 +13,12 @@ namespace Piforatio.Core.DataModel
         protected virtual void initDataModel(IDataContext context)
         {
             dataContext = context;
+            listObject = new List<T>();
+        }
+
+        public DataModel(IDataContext context)
+        {
+            initDataModel(context);
         }
         protected List<T> listObject;
         public abstract List<T> GetAllData();

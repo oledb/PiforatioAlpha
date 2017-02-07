@@ -9,6 +9,8 @@ namespace Piforatio.Core.DataModel
 {
     public abstract class PTaskModel : DataModel<IPTask>
     {
+        public PTaskModel(IDataContext context) : base(context) { }
+
         public IProject BaseProject { get; }
 
         public PTaskPlanModel GetPlanModel (IPTask task)

@@ -13,44 +13,53 @@ namespace Piforatio.Test.Core
     {
         public static List<IProject> CreateProjectList()
         {
+            int index = 0;
             var listObject = new List<IProject>();
             listObject.AddRange(new IProject[]{
-                GenerateProject("MVC", new DateTime(2017,1,20)),
-                GenerateProject("Point Theory", new DateTime(2017,1,10)),
-                GenerateProject("Xamarin", new DateTime(2017,2,1)),
+                CreateProject("MVC", new DateTime(2017,1,20), index++),
+                CreateProject("Point Theory", new DateTime(2017,1,10), index++),
+                CreateProject("Xamarin", new DateTime(2017,2,1), index++),
             });
             return listObject;
         }
 
-        public static IProject GenerateProject(string name, DateTime time)
+        public static IProject CreateProject(string name, DateTime time, int index)
         {
-            int _index = 0;
             var mock = new Mock<IProject>();
             mock.Setup(p => p.Name).Returns(name);
             mock.Setup(p => p.CreationTime).Returns(time);
-            mock.Setup(p => p.ProjectID).Returns(_index++);
+            mock.Setup(p => p.ProjectID).Returns(index);
+            return mock.Object;
+        }
+
+        public static IDataContext CreateDataContext()
+        {
+            var mock = new Mock<IDataContext>();
             return mock.Object;
         }
 
         [Test]
-        public void Create_success()
-        {
-            ProjectModel pm = new ProjectModel();
-            var list = new List<IProject>();
-            list = (List<IProject>)pm.GetAllData();
-            list.RemoveAll(p => true);
-            
+        public void GetAllData_success()
+        { 
+            const int result_array_length = 1;
+            var pm = new ProjectModel(CreateDataContext());
+            var list = pm.GetAllData();
 
-            foreach (var p in pm.GetAllData())
-            {
-                throw new Exception("Data was not removed! " + p.Name);
-            }
+            list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
+
+            var result = pm.GetAllData();
+            Assert.AreEqual(result_array_length, result.Count);
+            Assert.AreEqual("Test", result[0].Name);
         }
 
         [Test]
-        public void ctor_LitNotNull()
+        public void ctor_LitIsNotNull()
         {
-            var pm = new ProjectModel();
+            var pm = new ProjectModel(CreateDataContext());
+
+            var list = pm.GetAllData();
+
+            Assert.IsNotNull(list);
         }
     }
 }
