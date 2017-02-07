@@ -78,7 +78,8 @@ namespace Piforatio.Test.Core
             var firstProject = list[0];
             PTaskModel model = pm.GetPTaskModel(firstProject);
 
-            Assert.AreEqual(firstProject, model.BaseProject);
+            Assert.AreEqual(firstProject.Name, model.BaseProject.Name);
+            Assert.AreEqual(firstProject.CreationTime, model.BaseProject.CreationTime);
 
         }
     }

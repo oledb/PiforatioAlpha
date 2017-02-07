@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Piforatio.Core.ObjectsAbstract;
+using Moq;
 
 namespace Piforatio.Core.DataModel
 {
@@ -11,7 +12,7 @@ namespace Piforatio.Core.DataModel
     {
         public PTaskModel(IDataContext context) : base(context) { }
 
-        public IProject BaseProject { get; }
+        public IProject BaseProject { get; protected set; }
 
         public override List<IPTask> GetAllData()
         {
