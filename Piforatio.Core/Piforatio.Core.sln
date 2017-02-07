@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Core", "Piforatio.Core\Piforatio.Core.csproj", "{4E493174-A8DC-4EAF-80CA-BF05E4DE3EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pifaratio.Test", "Pifaratio.Test\Pifaratio.Test.csproj", "{A81168C8-6432-4BA0-8523-27A376D237E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Test", "Pifaratio.Test\Piforatio.Test.csproj", "{A81168C8-6432-4BA0-8523-27A376D237E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

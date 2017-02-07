@@ -10,7 +10,7 @@ namespace Piforatio.Core.DataModel
     public interface IDataModel<T> where T : ICoreObject
     {
         T GetData(int id);
-        IEnumerable<T> GetAllData();
+        List<T> GetAllData();
         void UpdateAll();
         void Update(T obj);
     }

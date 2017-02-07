@@ -9,8 +9,13 @@ namespace Piforatio.Core.DataModel
 {
     public abstract class DataModel<T> : IDataModel<T> where T : ICoreObject
     {
+        protected IDataContext dataContext;
+        protected virtual void initDataModel(IDataContext context)
+        {
+            dataContext = context;
+        }
         protected List<T> listObject;
-        public abstract IEnumerable<T> GetAllData();
+        public abstract List<T> GetAllData();
         public abstract T GetData(int id);
         public abstract void Update(T obj);
         public abstract void UpdateAll();

@@ -8,7 +8,9 @@ namespace Piforatio.Core.DataModel
 {
     public class ProjectModel : DataModel<IProject>
     {
-        public override IEnumerable<IProject> GetAllData()
+
+
+        public override List<IProject> GetAllData()
         {
             return listObject;
         }
@@ -22,6 +24,7 @@ namespace Piforatio.Core.DataModel
 
         public override void Update(IProject obj)
         {
+            //save data to file, db or something
             throw new NotImplementedException();
         }
 

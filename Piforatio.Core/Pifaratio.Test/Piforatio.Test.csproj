@@ -62,10 +62,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\ProjectModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piforatio.Core\Piforatio.Core.csproj">
+      <Project>{4e493174-a8dc-4eaf-80ca-bf05e4de3edd}</Project>
+      <Name>Piforatio.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
