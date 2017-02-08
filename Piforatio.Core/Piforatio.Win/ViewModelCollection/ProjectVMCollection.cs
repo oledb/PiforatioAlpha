@@ -9,6 +9,11 @@ namespace Piforatio.Win.ViewModelCollection
     public class ProjectVMCollection
     {
         protected ProjectModel _projectModel;
+        public ProjectVMCollection(ProjectModel projectModel)
+        {
+
+        }
+
         public ObservableCollection<IProject> Projects { get; }
 
         public ProjectVM SelectedProject { get; }

@@ -37,5 +37,12 @@ namespace Piforatio.Win.ViewModel
             Name = temp.Name; 
             CreationTime = temp.CreationTime;
         }
+
+        public ProjectVM() { }
+
+        public ProjectVM(IProject project)
+        {
+            
+        }
     }
 }
