@@ -10,7 +10,10 @@ namespace Piforatio.Core.DataModel
 {
     public class PTaskModel : DataModel<IPTask>
     {
-        public PTaskModel(IDataContextFabrica context, IProject project) : base(context) { }
+        public PTaskModel(IDataContextFabrica context, IProject project) : base(context)
+        {
+            BaseProject = project;
+        }
 
         public IProject BaseProject { get; protected set; }
 
