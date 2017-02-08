@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
 using System;
+using Moq;
 using Piforatio.Win.ViewModel;
 using Piforatio.Win.ViewModelCollection;
 using Piforatio.Test.Core;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
+using static Piforatio.Test.Core.FakeProjectFabrica;
 
 namespace Piforatio.Test.Win
 {
@@ -13,10 +15,14 @@ namespace Piforatio.Test.Win
     {
         public static ProjectVMCollection CreateProjectVMCollection()
         {
-            IDataContextFabrica context = FakeProjectFabrica.CreateDataContextFabricaMock();
+            IDataContextFabrica context = CreateDataContextFabricaMock();
+            return CreateProjectVMCollection(context);
+        }
+
+        public static ProjectVMCollection CreateProjectVMCollection(IDataContextFabrica context)
+        {
             var pm = new ProjectModel(context);
             var pvmc = new ProjectVMCollection(pm);
-
             return pvmc;
         }
 
@@ -47,7 +53,18 @@ namespace Piforatio.Test.Win
         [Test]
         public void UpdateData_success()
         {
-            throw new NotImplementedException();
+            var mockFabrica = new Mock<IDataContextFabrica>();
+            var mockContext = new Mock<IDataContext>();
+            mockContext.Setup(c => c.UpdateEntry(CreateProject("Asp.Net Forms", default(DateTime),0)));
+            mockFabrica.Setup(cf => cf.CreateContext()).Returns(mockContext.Object);
+
+            var pvmc = CreateProjectVMCollection(mockFabrica.Object);
+            var firstProject = pvmc.Projects[0];
+            pvmc.SelectProjectByID = firstProject.ProjectID;
+
+            pvmc.SelectedProject.Name = "Asp.Net Forms";
+
+            throw new NotImplementedException("Can not verify mock input data");
         }
     }
 }

@@ -6,7 +6,7 @@ using Piforatio.Core.DataModel;
 
 namespace Piforatio.Win.ViewModelCollection
 {
-    public class ProjectVMCollection
+    public class ProjectVMCollection : Notifier
     {
         protected ProjectModel _projectModel;
         public ProjectVMCollection(ProjectModel projectModel)
