@@ -62,5 +62,16 @@ namespace Piforatio.Test.Core
         {
             DB.set((IProject)obj);
         }
+
+        public int VerifyProjectByName(string name)
+        {
+            int count = 0;
+            foreach(var p in DB.get())
+            {
+                if (string.Compare(p.Name, name) == 0)
+                    count++;
+            }
+            return count;
+        }
     }
 }

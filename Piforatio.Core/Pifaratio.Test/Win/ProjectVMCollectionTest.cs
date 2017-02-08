@@ -53,6 +53,7 @@ namespace Piforatio.Test.Win
         [Test]
         public void ChangeSelectedProjectAndSave()
         {
+            const int Only_One = 1;
             var mockFabrica = new Mock<IDataContextFabrica>();
             var mockContext = new DataContextMock();
             mockFabrica.Setup(cf => cf.CreateContext()).Returns(mockContext);
@@ -63,7 +64,9 @@ namespace Piforatio.Test.Win
 
             pvmc.SelectedProject.Name = "Asp.Net Forms";
 
-            throw new NotImplementedException("Can not verify mock input data");
+            var count = mockContext.VerifyProjectByName("Asp.Net Forms");
+
+            Assert.AreEqual(Only_One, count);
         }
     }
 }

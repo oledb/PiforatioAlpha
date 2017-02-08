@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Specialized;
 using System.Linq;
 using System.Collections.ObjectModel;
 using Piforatio.Core.ObjectsAbstract;
@@ -50,6 +50,9 @@ namespace Piforatio.Win.ViewModelCollection
             }
         }
 
-        
+        protected void Changed_collection(object sender, NotifyCollectionChangedEventArgs args)
+        {
+
+        }
     }
 }

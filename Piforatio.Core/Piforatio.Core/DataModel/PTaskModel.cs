@@ -34,7 +34,7 @@ namespace Piforatio.Core.DataModel
 
         public override void UpdateAll()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

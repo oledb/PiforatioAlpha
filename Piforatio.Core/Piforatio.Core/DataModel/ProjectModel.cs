@@ -32,7 +32,7 @@ namespace Piforatio.Core.DataModel
         {
             using (var context = dataContext.CreateContext())
             {
-                throw new NotImplementedException();
+                context.UpdateEntry(obj);
             }
         }
 
