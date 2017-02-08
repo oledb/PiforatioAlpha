@@ -25,7 +25,7 @@ namespace Piforatio.Core.DataModel
 
         public PTaskModel GetPTaskModel(IProject project)
         {
-            return new PTaskModel(dataContext);
+            return new PTaskModel(dataContext, project);
         }
 
         public override void Update(IProject obj)

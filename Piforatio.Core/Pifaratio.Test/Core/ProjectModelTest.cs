@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Moq;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
+using static Piforatio.Test.Core.StubFabrica;
 
 namespace Piforatio.Test.Core
 {
@@ -28,15 +29,6 @@ namespace Piforatio.Test.Core
                 CreateProject("Xamarin", new DateTime(2017,2,1), index++),
             });
             
-        }
-
-        public static IProject CreateProject(string name, DateTime time, int index)
-        {
-            var mock = new Mock<IProject>();
-            mock.Setup(p => p.Name).Returns(name);
-            mock.Setup(p => p.CreationTime).Returns(time);
-            mock.Setup(p => p.ProjectID).Returns(index);
-            return mock.Object;
         }
 
         public static IDataContext CreateDataContext()
