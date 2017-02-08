@@ -39,14 +39,18 @@ namespace Piforatio.Core.DataModel
 
         public override void Update(IProject obj)
         {
-            //save data to file, db or something
-            throw new NotImplementedException();
+            using (var context = dataContext.CreateContext())
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public override void UpdateAll()
         {
-            //save data to file, db or something
-            throw new NotImplementedException();
+            using (var context = dataContext.CreateContext())
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

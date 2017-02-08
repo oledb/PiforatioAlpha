@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Core", "Piforatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Test", "Pifaratio.Test\Piforatio.Test.csproj", "{A81168C8-6432-4BA0-8523-27A376D237E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Win", "Piforatio.Win\Piforatio.Win.csproj", "{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A81168C8-6432-4BA0-8523-27A376D237E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81168C8-6432-4BA0-8523-27A376D237E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81168C8-6432-4BA0-8523-27A376D237E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

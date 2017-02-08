@@ -42,6 +42,7 @@ namespace Piforatio.Test.Core
             var pm = new ProjectModel(CreateDataContextFabricaMock());
             var list = pm.GetAllData();
             var firstProject = list[0];
+
             PTaskModel model = pm.GetPTaskModel(firstProject);
 
             Assert.AreEqual(firstProject.Name, model.BaseProject.Name);
