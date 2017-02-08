@@ -17,6 +17,7 @@ namespace Piforatio.Core.DataModel
             {
                 var query = (from p in context.GetData()
                               select p);
+                listObject.Clear();
                 foreach (var p in query)
                 {
                     listObject.Add((IProject)p);

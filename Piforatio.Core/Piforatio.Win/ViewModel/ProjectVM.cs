@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Piforatio.Core.ObjectsAbstract;
+using Piforatio.Core.DataModel;
 
 namespace Piforatio.Win.ViewModel
 {
@@ -9,21 +10,37 @@ namespace Piforatio.Win.ViewModel
         private int _projectID;
         public int ProjectID
         {
-            get; set;
+            get { return _projectID; }
+            set
+            {
+                _projectID = value;
+                NotifyPropertyChanged("ProjectID");
+            }
         }
 
         private string _name;
         public string Name
         {
-            get; set;
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged("Name");
+            }
         }
 
         private DateTime _creationTime;
         public DateTime CreationTime
         {
-            get; set;
+            get { return _creationTime; }
+            set
+            {
+                _creationTime = value;
+                NotifyPropertyChanged("CreationTime");
+            }
         }
 
+        protected PTaskModel taskModel;
         public bool IsPTaskLoaded { get; private set; }
         public IEnumerable<IPTask> Tasks
         {
@@ -39,10 +56,10 @@ namespace Piforatio.Win.ViewModel
         }
 
         public ProjectVM() { }
-
+        
         public ProjectVM(IProject project)
         {
-            
+            Update(project);
         }
     }
 }

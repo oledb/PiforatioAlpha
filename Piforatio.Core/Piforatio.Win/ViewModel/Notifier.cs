@@ -6,8 +6,7 @@ namespace Piforatio.Win.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(
-            string propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

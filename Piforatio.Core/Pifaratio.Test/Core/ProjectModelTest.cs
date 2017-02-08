@@ -20,6 +20,7 @@ namespace Piforatio.Test.Core
             var list = pm.GetAllData();
 
             list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
+            pm.Update(list[0]);
 
             var result = pm.GetAllData();
             Assert.AreEqual(result_array_length, result.Count);
