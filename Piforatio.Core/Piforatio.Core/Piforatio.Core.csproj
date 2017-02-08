@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DataModel\DataModel.cs" />
     <Compile Include="DataModel\IDataContext.cs" />
+    <Compile Include="DataModel\IDataContextFabrica.cs" />
     <Compile Include="DataModel\IDataModel.cs" />
     <Compile Include="DataModel\PTaskPlanModel.cs" />
     <Compile Include="DataModel\ProjectModel.cs" />

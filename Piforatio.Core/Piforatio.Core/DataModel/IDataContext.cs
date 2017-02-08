@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public interface IDataContext
+    public interface IDataContext : IDisposable
     {
-        void FixDataChange<T>(T[] obj);
+        IEnumerable<ICoreObject> GetData();
     }
 }

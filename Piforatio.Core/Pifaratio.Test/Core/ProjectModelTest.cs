@@ -31,9 +31,23 @@ namespace Piforatio.Test.Core
             
         }
 
-        public static IDataContext CreateDataContext()
+        public static IDataContext CreateDataContextMock()
         {
             var mock = new Mock<IDataContext>();
+            mock.Setup(c => c.GetData()).Returns(CreateProjectList());
+            return mock.Object;
+        }
+
+        public static IDataContextFabrica CreateDataContextFabricaMock()
+        {
+            var mock = new Mock<IDataContextFabrica>();
+            mock.Setup(cf => cf.CreateContext()).Returns(CreateDataContextMock());
+            return mock.Object;
+        }
+
+        public static IDataContextFabrica CreateDataContextFabricaStub()
+        {
+            var mock = new Mock<IDataContextFabrica>();
             return mock.Object;
         }
 
@@ -41,7 +55,7 @@ namespace Piforatio.Test.Core
         public void GetAllData_success()
         { 
             const int result_array_length = 1;
-            var pm = new ProjectModel(CreateDataContext());
+            var pm = new ProjectModel(CreateDataContextFabricaMock());
             var list = pm.GetAllData();
 
             list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
@@ -54,7 +68,7 @@ namespace Piforatio.Test.Core
         [Test]
         public void ctor_LitIsNotNull()
         {
-            var pm = new ProjectModel(CreateDataContext());
+            var pm = new ProjectModel(CreateDataContextFabricaMock());
 
             var list = pm.GetAllData();
 
@@ -64,7 +78,7 @@ namespace Piforatio.Test.Core
         [Test]
         public void GetPTaskModel_get()
         {
-            var pm = new ProjectModel(CreateDataContext());
+            var pm = new ProjectModel(CreateDataContextFabricaMock());
             var list = pm.GetAllData();
             CreateProjectList(list);
             var firstProject = list[0];

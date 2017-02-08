@@ -8,11 +8,20 @@ namespace Piforatio.Core.DataModel
 {
     public class ProjectModel : DataModel<IProject>
     {
-        public ProjectModel(IDataContext context) : base(context)
+        public ProjectModel(IDataContextFabrica context) : base(context)
         { }
 
         public override List<IProject> GetAllData()
         {
+            using (var context = dataContext.CreateContext())
+            {
+                var query = (from p in context.GetData()
+                              select p);
+                foreach (var p in query)
+                {
+                    listObject.Add((IProject)p);
+                }
+            }
             return listObject;
         }
 
