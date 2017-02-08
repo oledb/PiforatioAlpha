@@ -21,16 +21,27 @@ namespace Piforatio.Test.Win
 
         public static ProjectVMCollection CreateProjectVMCollection(IDataContextFactory context)
         {
-            var pm = new ProjectModel(context);
-            var pvmc = new ProjectVMCollection(pm);
-            return pvmc;
+            var projectModel = new ProjectModel(context);
+            var projectVMCollection = new ProjectVMCollection(projectModel);
+            return projectVMCollection;
+        }
+
+        IDataContextFactory factory;
+        DataContextMock context;
+
+        [TearDown]
+        public void ClearFactoryAndContext()
+        {
+            factory = null;
+            context = null;
         }
 
         [Test]
         public void ProjectsArrayIsNonNullOrEmpty()
         {
             const int projectCollectionLength = 3;
-            var pvmc = CreateProjectVMCollection();
+            CreateFabricaAndMockContext(out factory, out context);
+            var pvmc = CreateProjectVMCollection(factory);
 
             var projectCollection = pvmc.Projects;
 
@@ -41,7 +52,8 @@ namespace Piforatio.Test.Win
         [Test]
         public void SelectedProjectIsCorrected()
         {
-            var pvmc = CreateProjectVMCollection();
+            CreateFabricaAndMockContext(out factory, out context);
+            var pvmc = CreateProjectVMCollection(factory);
 
             var firstProject = pvmc.Projects[0];
             pvmc.SelectProjectByID = firstProject.ProjectID;
@@ -53,15 +65,12 @@ namespace Piforatio.Test.Win
         [Test]
         public void AddNewProjectToProjectVMCollection()
         {
-            IDataContextFactory factory;
-            DataContextMock context;
             CreateFabricaAndMockContext(out factory, out context);
-
             var pvmc = CreateProjectVMCollection(factory);
 
             pvmc.Projects.Add(CreateProject("Asp.Net", new DateTime(2017, 1, 30), 12));
 
-            context.VerifyProjectNameAndUpdateType("Asp.Net", ChangedType.Add);
+            context.VerifyProject("Asp.Net", ChangedType.Add);
         }
     }
 }

@@ -19,11 +19,7 @@ namespace Piforatio.Test.Core
             mock.Setup(p => p.ProjectID).Returns(index);
             return mock.Object;
         }
-
-        public static List<IProject> CreateProjectList()
-        {
-            return null;
-        }
+        
 
         public static IDataContextFactory CreateDataContextFabricaMock()
         {
@@ -49,11 +45,6 @@ namespace Piforatio.Test.Core
 
         }
 
-        public static IDataContext CreateDataContextMock()
-        {
-            var mock = new Mock<IDataContext>();
-            mock.Setup(c => c.GetProjects()).Returns(CreateProjectList());
-            return mock.Object;
-        }
+       
     }
 }
