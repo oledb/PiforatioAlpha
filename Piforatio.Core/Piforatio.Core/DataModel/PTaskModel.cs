@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Piforatio.Core.DataModel
 
         public IProject BaseProject { get; protected set; }
 
-        public override List<IPTask> GetAllData()
+        public override ObservableCollection<IPTask> GetAllData()
         {
             throw new NotImplementedException();
         }

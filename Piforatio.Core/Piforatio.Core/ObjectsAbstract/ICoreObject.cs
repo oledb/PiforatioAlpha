@@ -9,6 +9,6 @@ namespace Piforatio.Core.ObjectsAbstract
 {
     public interface ICoreObject
     {
-        void Update(ICoreObject obj);
+        void Update<T>(T obj) where T : ICoreObject;
     }
 }
