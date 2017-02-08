@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Piforatio.Core.ObjectsAbstract;
+using Piforatio.Core.DataModel;
 
 namespace Piforatio.Core.DataModel
 {
     public class ProjectModel : DataModel<IProject>
     {
-        public ProjectModel(IDataContextFabrica context) : base(context)
+        public ProjectModel(IDataContextFactory context) : base(context)
         { }
 
         public override ObservableCollection<IProject> GetAllData()
@@ -28,11 +29,11 @@ namespace Piforatio.Core.DataModel
             return new PTaskModel(dataContext, project);
         }
 
-        public override void Update(IProject obj)
+        public override void Update(IProject obj, ChangedType type)
         {
             using (var context = dataContext.CreateContext())
             {
-                context.UpdateEntry(obj);
+                context.UpdateProjectCollection(obj, type);
             }
         }
 
@@ -41,7 +42,7 @@ namespace Piforatio.Core.DataModel
             listObject.Clear();
             using (var context = dataContext.CreateContext())
             {
-                var query = (from p in context.GetData()
+                var query = (from p in context.GetProjects()
                              select p);
                 foreach (var p in query)
                 {

@@ -10,7 +10,7 @@ namespace Piforatio.Core.DataModel
 {
     public class PTaskModel : DataModel<IPTask>
     {
-        public PTaskModel(IDataContextFabrica context, IProject project) : base(context)
+        public PTaskModel(IDataContextFactory context, IProject project) : base(context)
         {
             BaseProject = project;
         }
@@ -27,7 +27,7 @@ namespace Piforatio.Core.DataModel
             throw new NotImplementedException();
         }
 
-        public override void Update(IPTask obj)
+        public override void Update(IPTask obj, ChangedType type)
         {
             throw new NotImplementedException();
         }

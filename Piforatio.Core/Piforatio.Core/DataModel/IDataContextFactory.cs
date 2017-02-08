@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Piforatio.Core.DataModel
 {
-    public interface IDataContextFabrica
+    public interface IDataContextFactory
     {
         IDataContext CreateContext();
     }

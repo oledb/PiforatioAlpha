@@ -22,42 +22,37 @@ namespace Piforatio.Test.Core
 
         public static List<IProject> CreateProjectList()
         {
-            var listObject = new List<IProject>();
-            CreateProjectList(listObject);
-            return listObject;
+            return null;
         }
 
-        public static void CreateProjectList(List<IProject> listObject)
+        public static IDataContextFactory CreateDataContextFabricaMock()
         {
-            int index = 0;
-
-            listObject.AddRange(new IProject[]{
-                CreateProject("MVC", new DateTime(2017,1,20), index++),
-                CreateProject("Point Theory", new DateTime(2017,1,10), index++),
-                CreateProject("Xamarin", new DateTime(2017,2,1), index++),
-            });
-
-        }
-
-        public static IDataContextFabrica CreateDataContextFabricaMock()
-        {
-            var mock = new Mock<IDataContextFabrica>();
+            var mock = new Mock<IDataContextFactory>();
             mock.Setup(cf => cf.CreateContext()).Returns(new DataContextMock());
             return mock.Object;
         }
 
-        public static IDataContextFabrica CreateDataContextFabricaStub()
+        public static IDataContextFactory CreateDataContextFabricaStub()
         {
-            var mock = new Mock<IDataContextFabrica>();
+            var mock = new Mock<IDataContextFactory>();
             var mockContext = new Mock<IDataContext>();
             mock.Setup(cf => cf.CreateContext()).Returns(mockContext.Object);
             return mock.Object;
         }
 
+        public static void CreateFabricaAndMockContext(out IDataContextFactory contextFactory, out DataContextMock contextMock)
+        {
+            var mock = new Mock<IDataContextFactory>();
+            contextMock = new DataContextMock();
+            mock.Setup(cf => cf.CreateContext()).Returns(contextMock);
+            contextFactory = mock.Object;
+
+        }
+
         public static IDataContext CreateDataContextMock()
         {
             var mock = new Mock<IDataContext>();
-            mock.Setup(c => c.GetData()).Returns(CreateProjectList());
+            mock.Setup(c => c.GetProjects()).Returns(CreateProjectList());
             return mock.Object;
         }
     }

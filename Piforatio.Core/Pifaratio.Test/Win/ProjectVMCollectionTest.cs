@@ -15,11 +15,11 @@ namespace Piforatio.Test.Win
     {
         public static ProjectVMCollection CreateProjectVMCollection()
         {
-            IDataContextFabrica context = CreateDataContextFabricaMock();
+            IDataContextFactory context = CreateDataContextFabricaMock();
             return CreateProjectVMCollection(context);
         }
 
-        public static ProjectVMCollection CreateProjectVMCollection(IDataContextFabrica context)
+        public static ProjectVMCollection CreateProjectVMCollection(IDataContextFactory context)
         {
             var pm = new ProjectModel(context);
             var pvmc = new ProjectVMCollection(pm);
@@ -27,7 +27,7 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void ProjectsIsNonNullOrEmpty()
+        public void ProjectsArrayIsNonNullOrEmpty()
         {
             const int projectCollectionLength = 3;
             var pvmc = CreateProjectVMCollection();
@@ -51,22 +51,17 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void ChangeSelectedProjectAndSave()
+        public void AddNewProjectToProjectVMCollection()
         {
-            const int Only_One = 1;
-            var mockFabrica = new Mock<IDataContextFabrica>();
-            var mockContext = new DataContextMock();
-            mockFabrica.Setup(cf => cf.CreateContext()).Returns(mockContext);
+            IDataContextFactory factory;
+            DataContextMock context;
+            CreateFabricaAndMockContext(out factory, out context);
 
-            var pvmc = CreateProjectVMCollection(mockFabrica.Object);
-            var firstProject = pvmc.Projects[0];
-            pvmc.SelectProjectByID = firstProject.ProjectID;
+            var pvmc = CreateProjectVMCollection(factory);
 
-            pvmc.SelectedProject.Name = "Asp.Net Forms";
+            pvmc.Projects.Add(CreateProject("Asp.Net", new DateTime(2017, 1, 30), 12));
 
-            var count = mockContext.VerifyProjectByName("Asp.Net Forms");
-
-            Assert.AreEqual(Only_One, count);
+            context.VerifyProjectNameAndUpdateType("Asp.Net", ChangedType.Add);
         }
     }
 }

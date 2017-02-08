@@ -12,6 +12,6 @@ namespace Piforatio.Core.DataModel
         T GetData(int id);
         ObservableCollection<T> GetAllData();
         void UpdateAll();
-        void Update(T obj);
+        void Update(T obj, ChangedType type);
     }
 }
