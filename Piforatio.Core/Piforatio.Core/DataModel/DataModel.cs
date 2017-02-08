@@ -16,6 +16,7 @@ namespace Piforatio.Core.DataModel
         {
             dataContext = context;
             listObject = new ObservableCollection<T>();
+            UpdateAll();
         }
 
         public DataModel(IDataContextFabrica context)

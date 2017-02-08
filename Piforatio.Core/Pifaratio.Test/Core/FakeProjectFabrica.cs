@@ -42,7 +42,7 @@ namespace Piforatio.Test.Core
         public static IDataContextFabrica CreateDataContextFabricaMock()
         {
             var mock = new Mock<IDataContextFabrica>();
-            mock.Setup(cf => cf.CreateContext()).Returns(CreateDataContextMock());
+            mock.Setup(cf => cf.CreateContext()).Returns(new DataContextMock());
             return mock.Object;
         }
 

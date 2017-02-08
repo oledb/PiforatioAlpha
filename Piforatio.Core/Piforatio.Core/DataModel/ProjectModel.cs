@@ -13,16 +13,6 @@ namespace Piforatio.Core.DataModel
 
         public override ObservableCollection<IProject> GetAllData()
         {
-            using (var context = dataContext.CreateContext())
-            {
-                var query = (from p in context.GetData()
-                              select p);
-                listObject.Clear();
-                foreach (var p in query)
-                {
-                    listObject.Add((IProject)p);
-                }
-            }
             return listObject;
         }
 
@@ -48,9 +38,15 @@ namespace Piforatio.Core.DataModel
 
         public override void UpdateAll()
         {
+            listObject.Clear();
             using (var context = dataContext.CreateContext())
             {
-                throw new NotImplementedException();
+                var query = (from p in context.GetData()
+                             select p);
+                foreach (var p in query)
+                {
+                    listObject.Add((IProject)p);
+                }
             }
         }
     }

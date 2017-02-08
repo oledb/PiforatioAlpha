@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\DataContextMock.cs" />
     <Compile Include="Core\ProjectModelTest.cs" />
     <Compile Include="Core\FakeProjectFabrica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

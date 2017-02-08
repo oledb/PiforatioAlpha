@@ -27,7 +27,7 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void ctor_ProjectsNotNullOrEmpty()
+        public void ProjectsIsNonNullOrEmpty()
         {
             const int projectCollectionLength = 3;
             var pvmc = CreateProjectVMCollection();
@@ -39,7 +39,7 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void SelectProject_NotNullOrEmpty()
+        public void SelectedProjectIsCorrected()
         {
             var pvmc = CreateProjectVMCollection();
 
@@ -51,12 +51,11 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void UpdateData_success()
+        public void ChangeSelectedProjectAndSave()
         {
             var mockFabrica = new Mock<IDataContextFabrica>();
-            var mockContext = new Mock<IDataContext>();
-            mockContext.Setup(c => c.UpdateEntry(CreateProject("Asp.Net Forms", default(DateTime),0)));
-            mockFabrica.Setup(cf => cf.CreateContext()).Returns(mockContext.Object);
+            var mockContext = new DataContextMock();
+            mockFabrica.Setup(cf => cf.CreateContext()).Returns(mockContext);
 
             var pvmc = CreateProjectVMCollection(mockFabrica.Object);
             var firstProject = pvmc.Projects[0];

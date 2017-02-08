@@ -13,7 +13,7 @@ namespace Piforatio.Test.Core
     public class ProjectModelTest
     {
         [Test]
-        public void GetAllData_success()
+        public void CreateAndSaveDataToModel()
         { 
             const int result_array_length = 1;
             var pm = new ProjectModel(CreateDataContextFabricaStub());
@@ -28,7 +28,7 @@ namespace Piforatio.Test.Core
         }
 
         [Test]
-        public void ctor_LitIsNotNull()
+        public void CreatedProjectListIsNotNull()
         {
             var pm = new ProjectModel(CreateDataContextFabricaMock());
 
@@ -38,7 +38,7 @@ namespace Piforatio.Test.Core
         }
 
         [Test]
-        public void GetPTaskModel_get()
+        public void GetPTaskModelForFirstProject()
         {
             var pm = new ProjectModel(CreateDataContextFabricaMock());
             var list = pm.GetAllData();
