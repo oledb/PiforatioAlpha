@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Win.ViewModel
 {
-    class ProjectVM : Notifier, IProject
+    public class ProjectVM : Notifier, IProject
     {
         private int _projectID;
         public int ProjectID

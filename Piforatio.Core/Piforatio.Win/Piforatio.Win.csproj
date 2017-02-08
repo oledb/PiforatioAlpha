@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModelCollection\ProjectVMCollection.cs" />
     <Compile Include="ViewModel\Notifier.cs" />
     <Compile Include="ViewModel\ProjectVM.cs" />
     <Page Include="MainWindow.xaml">

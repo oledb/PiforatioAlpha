@@ -74,6 +74,10 @@
       <Project>{4e493174-a8dc-4eaf-80ca-bf05e4de3edd}</Project>
       <Name>Piforatio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Piforatio.Win\Piforatio.Win.csproj">
+      <Project>{31950f74-ebea-4e8d-8a5f-d7d02ed567ef}</Project>
+      <Name>Piforatio.Win</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
