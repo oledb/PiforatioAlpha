@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Piforatio.Core.ObjectsAbstract;
@@ -11,7 +11,7 @@ namespace Piforatio.Core.DataModel
         public ProjectModel(IDataContextFabrica context) : base(context)
         { }
 
-        public override List<IProject> GetAllData()
+        public override ObservableCollection<IProject> GetAllData()
         {
             using (var context = dataContext.CreateContext())
             {
