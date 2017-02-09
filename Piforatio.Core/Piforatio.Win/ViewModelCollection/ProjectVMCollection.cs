@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Win.ViewModel;
 using Piforatio.Core.DataModel;
+using System;
 
 namespace Piforatio.Win.ViewModelCollection
 {
@@ -32,7 +33,6 @@ namespace Piforatio.Win.ViewModelCollection
             }
         }
 
-        
         public int? SelectProjectByID
         {
             set
@@ -48,11 +48,6 @@ namespace Piforatio.Win.ViewModelCollection
                 _selectedProject = new ProjectVM(temp);
                 NotifyPropertyChanged("SelectedProject");
             }
-        }
-
-        protected void Changed_collection(object sender, NotifyCollectionChangedEventArgs args)
-        {
-
         }
     }
 }

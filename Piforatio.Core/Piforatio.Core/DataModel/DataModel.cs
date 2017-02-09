@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
@@ -27,4 +26,6 @@ namespace Piforatio.Core.DataModel
         public abstract void Update(T obj, ChangedType type);
         public abstract void UpdateAll();
     }
+
+
 }

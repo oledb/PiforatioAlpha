@@ -13,12 +13,27 @@ namespace Piforatio.Test.Core
     {
         public void Dispose() { }
 
+        bool _isFull;
+
+        public DataContextMock() : this(true)
+        { }
+
+        public DataContextMock(bool isFull)
+        {
+            _isFull = isFull;
+        }
+
         public IEnumerable<IProject> GetProjects()
         {
-            int index = 0;
-            yield return CreateProject("MVC", new DateTime(2017, 1, 20), index++);
-            yield return CreateProject("Point Theory", new DateTime(2017, 1, 10), index++);
-            yield return CreateProject("Xamarin", new DateTime(2017, 2, 1), index++);
+            if (_isFull)
+            {
+                int index = 0;
+                yield return CreateProject("MVC", new DateTime(2017, 1, 20), index++);
+                yield return CreateProject("Point Theory", new DateTime(2017, 1, 10), index++);
+                yield return CreateProject("Xamarin", new DateTime(2017, 2, 1), index++);
+            }
+            else
+                yield return null;
         }
 
         public void VerifyProject(string name, ChangedType changeType)

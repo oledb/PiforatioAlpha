@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
+using System.Collections.Specialized;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
 
@@ -10,7 +10,9 @@ namespace Piforatio.Core.DataModel
     public class ProjectModel : DataModel<IProject>
     {
         public ProjectModel(IDataContextFactory context) : base(context)
-        { }
+        {
+            listObject.CollectionChanged += changed_collection;
+        }
 
         public override ObservableCollection<IProject> GetAllData()
         {
@@ -37,6 +39,25 @@ namespace Piforatio.Core.DataModel
             }
         }
 
+        protected void changed_collection(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            using (var context = dataContext.CreateContext())
+            {
+                if (args.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (var project in args.NewItems)
+                        context.UpdateProjectCollection((IProject)project, ChangedType.Add);
+                }
+                else if (args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var project in args.OldItems)
+                        context.UpdateProjectCollection((IProject)project, ChangedType.Delete);
+                }
+                else
+                    throw new InvalidOperationException($"Unknown argument type '{args.Action}'");
+            }
+        }
+
         public override void UpdateAll()
         {
 
@@ -44,9 +65,9 @@ namespace Piforatio.Core.DataModel
             {
                 var query = (from p in context.GetProjects()
                              select p);
-                foreach (var p in query)
+                foreach (var project in query)
                 {
-                    listObject.Add((IProject)p);
+                    listObject.Add(project);
                 }
             }
         }

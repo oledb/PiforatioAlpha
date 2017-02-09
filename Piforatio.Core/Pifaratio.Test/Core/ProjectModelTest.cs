@@ -16,13 +16,14 @@ namespace Piforatio.Test.Core
         public void CreateAndSaveDataToModel()
         { 
             const int result_array_length = 1;
-            var pm = new ProjectModel(CreateDataContextFabricaStub());
-            var list = pm.GetAllData();
+            var projectModel = new ProjectModel(CreateDataContextFabricaStub());
+            var list = projectModel.GetAllData();
+            var list2 = projectModel.GetAllData();
 
             list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
-            pm.Update(list[0], ChangedType.Add);
+            projectModel.Update(list[0], ChangedType.Add);
 
-            var result = pm.GetAllData();
+            var result = projectModel.GetAllData();
             Assert.AreEqual(result_array_length, result.Count);
             Assert.AreEqual("Test", result[0].Name);
         }
