@@ -1,11 +1,12 @@
-﻿using System.Collections.Specialized;
-using System.Linq;
-using System.Collections.ObjectModel;
+﻿using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
+using Piforatio.Win.Commands;
 using Piforatio.Win.ViewModel;
-using Piforatio.Core.DataModel;
-using System.ComponentModel;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Piforatio.Win.ViewModelCollection
 {
@@ -45,16 +46,15 @@ namespace Piforatio.Win.ViewModelCollection
                             select p).SingleOrDefault();
 
                 if (temp == null) return;
-
                 _selectedProject = new ProjectVM(temp);
+                _selectedProject.PropertyChanged += selectedProject_update;
                 NotifyPropertyChanged("SelectedProject");
             }
         }
 
         protected void selectedProject_update(object sender, PropertyChangedEventArgs args)
         {
-            if (!(sender is IProject))
-                throw new InvalidCastException("Event object must implement IProject");
+            _projectModel.Update((IProject)sender, ChangedType.Modify);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Piforatio.Core.DataModel
 {
     public class ProjectModel : DataModel<IProject>
     {
-        public ProjectModel(IDataContextFactory context) : base(context)
-        {
+
+        public ProjectModel(IDataContextFactory context) : base(context) {
             listObject.CollectionChanged += listObject_changed;
         }
 
@@ -32,7 +32,7 @@ namespace Piforatio.Core.DataModel
 
         public override void Update(IProject obj, ChangedType type)
         {
-            using (var context = dataContext.CreateContext())
+            using (var context = this.dataContext.CreateContext())
             {
                 context.UpdateProjectCollection(obj, type);
             }
