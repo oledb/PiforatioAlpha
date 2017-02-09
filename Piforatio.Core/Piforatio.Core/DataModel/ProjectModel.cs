@@ -39,7 +39,7 @@ namespace Piforatio.Core.DataModel
 
         public override void UpdateAll()
         {
-            listObject.Clear();
+
             using (var context = dataContext.CreateContext())
             {
                 var query = (from p in context.GetProjects()

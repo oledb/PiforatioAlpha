@@ -72,5 +72,28 @@ namespace Piforatio.Test.Win
 
             context.VerifyProject("Asp.Net", ChangedType.Add);
         }
+
+        [Test]
+        public void DeleteProjectFromProjectVMCollection()
+        {
+            CreateFabricaAndMockContext(out factory, out context);
+            var pvmc = CreateProjectVMCollection(factory);
+
+            pvmc.Projects.RemoveAt(0);
+
+            context.VerifyProject("MVC", ChangedType.Delete);
+        }
+
+        [Test]
+        public void ChangeSelectedProject()
+        {
+            CreateFabricaAndMockContext(out factory, out context);
+            var pvmc = CreateProjectVMCollection(factory);
+            pvmc.SelectProjectByID = 0;
+
+            pvmc.SelectedProject.Name = "Asp.Net";
+
+            context.VerifyProject("Asp.Net", ChangedType.Modify);
+        }
     }
 }
