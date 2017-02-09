@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Win.ViewModel;
 using Piforatio.Core.DataModel;
+using System.ComponentModel;
 using System;
 
 namespace Piforatio.Win.ViewModelCollection
@@ -48,6 +49,12 @@ namespace Piforatio.Win.ViewModelCollection
                 _selectedProject = new ProjectVM(temp);
                 NotifyPropertyChanged("SelectedProject");
             }
+        }
+
+        protected void selectedProject_update(object sender, PropertyChangedEventArgs args)
+        {
+            if (!(sender is IProject))
+                throw new InvalidCastException("Event object must implement IProject");
         }
     }
 }

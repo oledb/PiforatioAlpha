@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Specialized;
 using Piforatio.Core.ObjectsAbstract;
-using Piforatio.Core.DataModel;
 
 namespace Piforatio.Core.DataModel
 {
@@ -11,7 +10,7 @@ namespace Piforatio.Core.DataModel
     {
         public ProjectModel(IDataContextFactory context) : base(context)
         {
-            listObject.CollectionChanged += changed_collection;
+            listObject.CollectionChanged += listObject_changed;
         }
 
         public override ObservableCollection<IProject> GetAllData()
@@ -39,7 +38,7 @@ namespace Piforatio.Core.DataModel
             }
         }
 
-        protected void changed_collection(object sender, NotifyCollectionChangedEventArgs args)
+        protected void listObject_changed(object sender, NotifyCollectionChangedEventArgs args)
         {
             using (var context = dataContext.CreateContext())
             {
