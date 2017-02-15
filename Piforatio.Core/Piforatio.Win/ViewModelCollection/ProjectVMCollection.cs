@@ -13,6 +13,8 @@ namespace Piforatio.Win.ViewModelCollection
     public class ProjectVMCollection : Notifier
     {
         protected ProjectModel _projectModel;
+        public ProjectVMCollection() { }
+
         public ProjectVMCollection(ProjectModel projectModel)
         {
             _projectModel = projectModel;

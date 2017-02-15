@@ -1,12 +1,21 @@
-﻿<Window x:Class="Piforatio.Win.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piforatio.Win"
+        xmlns:ViewModel="clr-namespace:Piforatio.Win.ViewModel" 
+        xmlns:ViewModelCollection="clr-namespace:Piforatio.Win.ViewModelCollection" x:Class="Piforatio.Win.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" SizeToContent="Width">
+    <Window.DataContext>
+        <ViewModelCollection:ProjectVMCollection/>
+    </Window.DataContext>
+    <Grid Height="319" VerticalAlignment="Bottom" RenderTransformOrigin="0.38,0.506">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="338*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="list1"  DisplayMemberPath="Name"/>
     </Grid>
 </Window>
