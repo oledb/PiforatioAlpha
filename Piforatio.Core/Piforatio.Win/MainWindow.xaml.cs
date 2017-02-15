@@ -36,6 +36,7 @@ namespace Piforatio.Win
             var vm = new ProjectModel(contextFactory.Object);
             _projectVMCollection = new ProjectVMCollection(vm);
             DataContext = _projectVMCollection;
+            mainMenu.Visibility = Visibility.Collapsed;
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +52,21 @@ namespace Piforatio.Win
         private void menuGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        bool isMenuVisiable = false;
+        private void mainMenu_Toggle()
+        {
+            if (isMenuVisiable)
+                mainMenu.Visibility = Visibility.Collapsed;
+            else
+                mainMenu.Visibility = Visibility.Visible;
+            isMenuVisiable = !isMenuVisiable;
+        }
+
+        private void mainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainMenu_Toggle();
         }
     }
 }

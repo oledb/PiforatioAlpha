@@ -56,7 +56,7 @@ namespace Piforatio.Test.Win
             var pvmc = CreateProjectVMCollection(factory);
 
             var firstProject = pvmc.Projects[0];
-            pvmc.SelectProjectByID = firstProject.ProjectID;
+           // pvmc.SelectProjectByID = firstProject.ProjectID;
 
             Assert.AreEqual(firstProject.Name, pvmc.SelectedProject.Name);
             Assert.AreEqual(firstProject.CreationTime, pvmc.SelectedProject.CreationTime);
@@ -89,7 +89,7 @@ namespace Piforatio.Test.Win
         {
             CreateFabricaAndMockContext(out factory, out context);
             var pvmc = CreateProjectVMCollection(factory);
-            pvmc.SelectProjectByID = 0;
+           // pvmc.SelectProjectByID = 0;
 
             pvmc.SelectedProject.Name = "Asp.Net";
 

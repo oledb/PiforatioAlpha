@@ -18,15 +18,10 @@ namespace Piforatio.Win.ViewModelCollection
         public ProjectVMCollection(ProjectModel projectModel)
         {
             _projectModel = projectModel;
+            Projects = _projectModel.GetAllData();
         }
 
-        public ObservableCollection<IProject> Projects
-        {
-            get
-            {
-                return _projectModel.GetAllData();
-            }
-        }
+        public ObservableCollection<IProject> Projects { get; set; }
 
         protected ProjectVM _selectedProject;
         public ProjectVM SelectedProject
@@ -35,28 +30,32 @@ namespace Piforatio.Win.ViewModelCollection
             {
                 return _selectedProject;
             }
-        }
-
-        public int? SelectProjectByID
-        {
             set
             {
-                if (value == null) return;
-
-                var temp = (from p in Projects
-                            where p.ProjectID == value
-                            select p).SingleOrDefault();
-
-                if (temp == null) return;
-                _selectedProject = new ProjectVM(temp);
-                _selectedProject.PropertyChanged += selectedProject_update;
-                NotifyPropertyChanged("SelectedProject");
+                _selectedProject = value;
+                NotifyPropertyChanged("SelectedProject");       
             }
         }
 
-        protected void selectedProject_update(object sender, PropertyChangedEventArgs args)
+        private int _index = -1;
+        public int SelectProjectByValue
         {
-            _projectModel.Update((IProject)sender, ChangedType.Modify);
+            get
+            {
+                return _index;
+            }
+            set
+            {
+                _index = value;
+                if (_index == -1)
+                    SelectedProject = null;
+                SelectedProject = new ProjectVM(Projects[_index]); 
+            }
+        }
+
+        public void UpdateSelectedProject(IProject newProject)
+        {
+            _projectModel.Update(SelectedProject, ChangedType.Modify);
         }
     }
 }
