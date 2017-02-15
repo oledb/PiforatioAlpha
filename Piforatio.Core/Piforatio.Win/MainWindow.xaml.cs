@@ -16,6 +16,7 @@ using Piforatio.Win.ViewModelCollection;
 using Piforatio.Win.ViewModel;
 using Piforatio.Win.Fakes;
 using Piforatio.Core.DataModel;
+using Piforatio.Win.View.Panels;
 using Moq;
 
 namespace Piforatio.Win
@@ -26,9 +27,21 @@ namespace Piforatio.Win
     public partial class MainWindow : Window
     {
         private ProjectVMCollection _projectVMCollection;
+
+        private DataView dataView;
+        private TimerView timerView;
+        private SettingsView settingsView;
         public MainWindow()
         {
             InitializeComponent();
+            dataView = new DataView();
+            timerView = new TimerView();
+            settingsView = new SettingsView();
+            mainMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void CreateViewModels()
+        {
             var context = new DataContextMock(true);
             var contextFactory = new Mock<IDataContextFactory>();
             contextFactory.Setup(cf => cf.CreateContext())
@@ -36,7 +49,6 @@ namespace Piforatio.Win
             var vm = new ProjectModel(contextFactory.Object);
             _projectVMCollection = new ProjectVMCollection(vm);
             DataContext = _projectVMCollection;
-            mainMenu.Visibility = Visibility.Collapsed;
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -66,6 +78,20 @@ namespace Piforatio.Win
 
         private void mainMenuButton_Click(object sender, RoutedEventArgs e)
         {
+            mainMenu_Toggle();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            mainGridPanel.Children.Clear();
+            string content = ((dynamic)sender).Content.ToString();
+            if (content == "Timer")
+                mainGridPanel.Children.Add(timerView);
+            else if (content == "Data")
+                mainGridPanel.Children.Add(dataView);
+            else
+                mainGridPanel.Children.Add(settingsView);
+
             mainMenu_Toggle();
         }
     }
