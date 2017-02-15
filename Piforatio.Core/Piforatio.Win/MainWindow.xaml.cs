@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Piforatio.Win.ViewModelCollection;
-using Piforatio.Win.ViewModel;
 using Piforatio.Win.Fakes;
 using Piforatio.Core.DataModel;
 using Piforatio.Win.View.Panels;
@@ -37,6 +24,7 @@ namespace Piforatio.Win
             dataView = new DataView();
             timerView = new TimerView();
             settingsView = new SettingsView();
+            mainGridPanel.Children.Add(dataView);
             mainMenu.Visibility = Visibility.Collapsed;
         }
 
@@ -51,6 +39,7 @@ namespace Piforatio.Win
             DataContext = _projectVMCollection;
         }
 
+        /* Events */
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -66,21 +55,6 @@ namespace Piforatio.Win
             DragMove();
         }
 
-        bool isMenuVisiable = false;
-        private void mainMenu_Toggle()
-        {
-            if (isMenuVisiable)
-                mainMenu.Visibility = Visibility.Collapsed;
-            else
-                mainMenu.Visibility = Visibility.Visible;
-            isMenuVisiable = !isMenuVisiable;
-        }
-
-        private void mainMenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            mainMenu_Toggle();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             mainGridPanel.Children.Clear();
@@ -91,8 +65,51 @@ namespace Piforatio.Win
                 mainGridPanel.Children.Add(dataView);
             else
                 mainGridPanel.Children.Add(settingsView);
+            MainMenuToggleCommand_Execute(sender, null);
+        }
 
-            mainMenu_Toggle();
+        /* Commands Events */
+        bool isMenuVisiable = false;
+        private void MainMenuToggleCommand_Execute(object sender, ExecutedRoutedEventArgs args)
+        {
+            if (isMenuVisiable)
+                mainMenu.Visibility = Visibility.Collapsed;
+            else
+                mainMenu.Visibility = Visibility.Visible;
+            isMenuVisiable = !isMenuVisiable;
+        }
+
+        private void MainMenuButtonsCommand_Execute(object sender, ExecutedRoutedEventArgs args)
+        {
+            mainGridPanel.Children.Clear();
+            if (args.Parameter.ToString() == "timer")
+                mainGridPanel.Children.Add(timerView);
+            else if (args.Parameter.ToString() == "data")
+                mainGridPanel.Children.Add(dataView);
+            else
+                mainGridPanel.Children.Add(settingsView);
+        }
+    }
+
+
+
+    public static class MainWindowCommands
+    {
+        public readonly static RoutedUICommand MainMenuToggleCommand;
+        public readonly static RoutedUICommand MainMenuButtonsCommand;
+
+        static MainWindowCommands()
+        {
+            MainMenuToggleCommand = new RoutedUICommand("Press to show menu",
+                "Main Menu", typeof(MainWindowCommands), new InputGestureCollection()
+                {
+                    new KeyGesture(Key.M,ModifierKeys.Alt)
+                });
+
+            
+
+            MainMenuButtonsCommand = new RoutedUICommand("Press to chouse menu item",
+                "Item elements", typeof(MainWindowCommands));
         }
     }
 }
