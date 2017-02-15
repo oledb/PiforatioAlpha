@@ -7,15 +7,36 @@
         xmlns:ViewModel="clr-namespace:Piforatio.Win.ViewModel" 
         xmlns:ViewModelCollection="clr-namespace:Piforatio.Win.ViewModelCollection" x:Class="Piforatio.Win.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" SizeToContent="Width">
-    <Window.DataContext>
-        <ViewModelCollection:ProjectVMCollection/>
-    </Window.DataContext>
-    <Grid Height="319" VerticalAlignment="Bottom" RenderTransformOrigin="0.38,0.506">
+        Title="MainWindow" MinHeight="350" MinWidth="525" WindowStyle="None" Foreground="{x:Null}" SizeToContent="Width" ShowActivated="False">
+    <Window.Resources>
+        <Style x:Key="MenuButtonStyle">
+            <Setter Property="Button.Background" Value="{x:Null}"/>
+            <Setter Property="Button.BorderBrush" Value="{x:Null}"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="179*"/>
-            <ColumnDefinition Width="338*"/>
+            <ColumnDefinition Width="234*"/>
+            <ColumnDefinition Width="283*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="list1"  DisplayMemberPath="Name"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="menuGrid" Grid.ColumnSpan="2" MouseLeftButtonDown="menuGrid_MouseLeftButtonDown" Background="#FFEAE7E7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36"/>
+                <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="68"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="mainMenuButton" Grid.Column="0" Content="M" 
+                    Margin="4,4,4,4" Style="{StaticResource MenuButtonStyle}"/>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,-8,0">
+                <Button x:Name="minimizeButton" Content="_" Margin="4 4 0 4"  
+                        Width="28" Click="minimizeButton_Click" Style="{StaticResource MenuButtonStyle}"/>
+                <Button x:Name="closeButton" Content="X"  Margin="4 4 0 4" 
+                        Width="28" Click="closeButton_Click" Style="{StaticResource MenuButtonStyle}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

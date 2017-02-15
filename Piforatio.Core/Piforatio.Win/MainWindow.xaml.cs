@@ -37,5 +37,20 @@ namespace Piforatio.Win
             _projectVMCollection = new ProjectVMCollection(vm);
             DataContext = _projectVMCollection;
         }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void minimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void menuGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
