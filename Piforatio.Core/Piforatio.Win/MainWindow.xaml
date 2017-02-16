@@ -9,11 +9,14 @@
         xmlns:ViewModelCollection="clr-namespace:Piforatio.Win.ViewModelCollection" x:Class="Piforatio.Win.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600" 
-    WindowStyle="None" ResizeMode="NoResize" SizeToContent="Manual" BorderThickness="1,1,1,1" BorderBrush="Gray">
+    WindowStyle="None" ResizeMode="NoResize" SizeToContent="Manual" BorderThickness="1,1,1,1">
     <!-- Resources -->
     <Window.Resources>
         <ResourceDictionary Source="./View/Visual/PiforatioVisualStyle.xaml" />
     </Window.Resources>
+    <Window.BorderBrush>
+        <SolidColorBrush Color="{StaticResource ResourceKey=Main_Color}"/>
+    </Window.BorderBrush>
     <!-- Commands -->
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindowCommands.MainMenuToggleCommand"
@@ -47,7 +50,7 @@
             </StackPanel>
         </Grid>
         <!-- Main Field -->
-        <Grid x:Name="mainGrid" Grid.Row="1" Background="{StaticResource Window_BackgoundBrush}">
+        <Grid x:Name="mainGrid" Grid.Row="1" Background="{StaticResource Transperent_Brush}">
             <!-- menu navBar start-->
             <Grid x:Name="menuNavBar"
                    Height="{Binding ElementName=mainGrid, Path=Height}" Width="150" HorizontalAlignment="Left"
