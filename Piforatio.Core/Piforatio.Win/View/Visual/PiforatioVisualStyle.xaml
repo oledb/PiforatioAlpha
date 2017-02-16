@@ -23,4 +23,5 @@
         <Setter Property="Button.Background" Value="{StaticResource MenuNavBar_BackgoundBrush}"/>
         <Setter Property="Button.BorderBrush" Value="{x:Null}"/>
     </Style>
+    
 </ResourceDictionary>

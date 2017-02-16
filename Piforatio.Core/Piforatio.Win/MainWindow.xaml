@@ -8,7 +8,7 @@
         xmlns:ViewModel="clr-namespace:Piforatio.Win.ViewModel" 
         xmlns:ViewModelCollection="clr-namespace:Piforatio.Win.ViewModelCollection" x:Class="Piforatio.Win.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500" 
+        Title="MainWindow" Height="400" Width="600" 
     WindowStyle="None" ResizeMode="NoResize" SizeToContent="Manual" BorderThickness="1,1,1,1" BorderBrush="Gray">
     <!-- Resources -->
     <Window.Resources>
@@ -48,8 +48,8 @@
         </Grid>
         <!-- Main Field -->
         <Grid x:Name="mainGrid" Grid.Row="1" Background="{StaticResource Window_BackgoundBrush}">
-            <!-- main Menu (navBar) start-->
-            <Grid x:Name="mainMenu"
+            <!-- menu navBar start-->
+            <Grid x:Name="menuNavBar"
                    Height="{Binding ElementName=mainGrid, Path=Height}" Width="150" HorizontalAlignment="Left"
                   Panel.ZIndex="9999">
                 <i:Interaction.Triggers>
@@ -57,7 +57,7 @@
                         <i:InvokeCommandAction Command="local:MainWindowCommands.MainMenuToggleCommand"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <StackPanel x:Name="stackPanelMainMenu" Background="#FFE5E7EE">
+                <StackPanel x:Name="stackPanelMainMenu"  Style="{StaticResource MenuNavBar_Style}">
                     <Button x:Name="timerMenuButton" Content="Timer" Padding="0 8 0 8" Style="{StaticResource MenuButton_Style}" 
                             Command="local:MainWindowCommands.MainMenuButtonsCommand" CommandParameter="timer"/>
                     <Button x:Name="dataMenuButton" Content="Data" Padding="0 8 0 8" Style="{StaticResource MenuButton_Style}"

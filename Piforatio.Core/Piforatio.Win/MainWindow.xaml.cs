@@ -25,7 +25,7 @@ namespace Piforatio.Win
             timerView = new TimerView();
             settingsView = new SettingsView();
             mainGridPanel.Children.Add(dataView);
-            mainMenu.Visibility = Visibility.Collapsed;
+            menuNavBar.Visibility = Visibility.Collapsed;
         }
 
         private void CreateViewModels()
@@ -73,9 +73,9 @@ namespace Piforatio.Win
         private void MainMenuToggleCommand_Execute(object sender, ExecutedRoutedEventArgs args)
         {
             if (isMenuVisiable)
-                mainMenu.Visibility = Visibility.Collapsed;
+                menuNavBar.Visibility = Visibility.Collapsed;
             else
-                mainMenu.Visibility = Visibility.Visible;
+                menuNavBar.Visibility = Visibility.Visible;
             isMenuVisiable = !isMenuVisiable;
         }
 

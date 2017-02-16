@@ -6,13 +6,20 @@
     <Color x:Key="ButtonMenu_BackgroundColor">#00000000</Color>
     <SolidColorBrush x:Key="ButtonMenu_BackgoundBrush" Color="{StaticResource ButtonMenu_BackgroundColor}"/>
 
-    <Color x:Key="MenuTopPanel_BackgroundColor">#FF808080</Color>
+    <Color x:Key="MenuTopPanel_BackgroundColor">#FF99ccff</Color>
     <SolidColorBrush x:Key="MenuTopPanel_BackgoundBrush" Color="{StaticResource MenuTopPanel_BackgroundColor}"/>
 
-    <Color x:Key="MenuNavBar_BackgroundColor">#FF808080</Color>
+    <Color x:Key="MenuNavBar_BackgroundColor">#FFcce6ff</Color>
     <SolidColorBrush x:Key="MenuNavBar_BackgoundBrush" Color="{StaticResource MenuNavBar_BackgroundColor}"/>
 
     <Color x:Key="Window_BackgroundColor">#00000000</Color>
     <SolidColorBrush x:Key="Window_BackgoundBrush" Color="{StaticResource Window_BackgroundColor}"/>
-
+    
+    <!--
+        Message Color
+    -->
+    <Color x:Key="Info_Color">#FFcce6ff</Color>
+    <Color x:Key="Warning_Color">#FFcce6ff</Color>
+    <Color x:Key="Error_Color">#FFcce6ff</Color>
+    <Color x:Key="Success_Color">#FFcce6ff</Color>
 </ResourceDictionary>

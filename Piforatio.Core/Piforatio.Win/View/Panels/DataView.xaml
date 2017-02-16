@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Piforatio.Win.View.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="370" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Visual/PiforatioVisualStyle.xaml"/>
+    </UserControl.Resources>
     <Grid>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center">It's a data view</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Data Menu-->
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="projectButton" Content="Projects" 
+                    Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
+            <Button x:Name="taskButton" Content="Tasks" 
+                    Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
+            <Button x:Name="plansButton" Content="Plans" 
+                    Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
+            <Button x:Name="quantsButton" Content="Quants" 
+                    Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
+            <Button x:Name="aimsButton" Content="Aims" 
+                    Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
