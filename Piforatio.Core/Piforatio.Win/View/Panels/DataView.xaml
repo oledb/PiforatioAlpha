@@ -15,10 +15,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Data Menu-->
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="projectButton" Content="Projects" 
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button x:Name="projectButton" Content="Projects" Click="projectButton_Click"
                     Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
-            <Button x:Name="taskButton" Content="Tasks" 
+            <Button x:Name="taskButton" Content="Tasks"  Click="taskButton_Click"
                     Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
             <Button x:Name="plansButton" Content="Plans" 
                     Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
@@ -27,5 +27,8 @@
             <Button x:Name="aimsButton" Content="Aims" 
                     Margin="4 4 4 4" Width="70" Style="{StaticResource MenuButton_Style}"/>
         </StackPanel>
+        <Grid x:Name="dataGridPanel" Grid.Row="1">
+            
+        </Grid>
     </Grid>
 </UserControl>

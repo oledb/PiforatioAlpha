@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Piforatio.Win.View.Panels.DataViewPanels;
 
 namespace Piforatio.Win.View.Panels
 {
@@ -20,9 +21,29 @@ namespace Piforatio.Win.View.Panels
     /// </summary>
     public partial class DataView : UserControl
     {
+        private ProjectsView projectView;
+        private TasksView tasksView;
         public DataView()
         {
             InitializeComponent();
+            projectView = new ProjectsView();
+            tasksView = new TasksView();
+        }
+
+        private void toggleControlToDataGridPanel(UserControl selectedControl)
+        {
+            dataGridPanel.Children.Clear();
+            dataGridPanel.Children.Add(selectedControl);
+        }
+
+        private void projectButton_Click(object sender, RoutedEventArgs e)
+        {
+            toggleControlToDataGridPanel(projectView);
+        }
+
+        private void taskButton_Click(object sender, RoutedEventArgs e)
+        {
+            toggleControlToDataGridPanel(tasksView);
         }
     }
 }
