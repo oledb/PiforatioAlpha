@@ -28,6 +28,7 @@ namespace Piforatio.Win.View.Panels
             InitializeComponent();
             projectView = new ProjectsView();
             tasksView = new TasksView();
+            toggleControlToDataGridPanel(projectView);
         }
 
         private void toggleControlToDataGridPanel(UserControl selectedControl)

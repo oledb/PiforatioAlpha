@@ -6,7 +6,65 @@
              xmlns:local="clr-namespace:Piforatio.Win.View.Panels.DataViewPanels"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="600">
-    <Grid>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center">It's a projects view</Label>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../../Visual/PiforatioVisualStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Projects List -->
+        <ListView x:Name="ProjectsListView" Grid.Column="0" Margin="4">
+            <ListViewItem>
+                <StackPanel>
+                    <Label>Project 1</Label>
+                    <Label>Project 1 Description</Label>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem>
+                <StackPanel>
+                    <Label>Project 2</Label>
+                    <Label>Project 2 Description</Label>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem>
+                <Button Content="Add New"/>
+            </ListViewItem>
+        </ListView>
+        <!-- Selected Project -->
+        <Grid Grid.Column="1" Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="61*"/>
+                <RowDefinition Height="125*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="4">
+                <Label>Project name</Label>
+                <TextBox></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="4">
+                <Label>Project aim</Label>
+                <TextBox Height="80"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="4">
+                <Label>Project type</Label>
+                <ComboBox>
+                    <ComboBoxItem>
+                        <Label>Learn</Label>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Label>Work</Label>
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <!-- Projects button -->
+            <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Right" Width="156">
+                <Button Margin="4 4 4 0" Content="Save" Width="70"/>
+                <Button Margin="4 4 4 0" Content="Cancel" Width="70"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
