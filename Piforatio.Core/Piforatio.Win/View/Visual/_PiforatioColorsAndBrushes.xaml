@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--
+        Menu and MainWindow
+    -->
+    <Color x:Key="ButtonMenu_BackgroundColor">#00000000</Color>
+    <SolidColorBrush x:Key="ButtonMenu_BackgoundBrush" Color="{StaticResource ButtonMenu_BackgroundColor}"/>
+
+    <Color x:Key="MenuTopPanel_BackgroundColor">#FF808080</Color>
+    <SolidColorBrush x:Key="MenuTopPanel_BackgoundBrush" Color="{StaticResource MenuTopPanel_BackgroundColor}"/>
+
+    <Color x:Key="MenuNavBar_BackgroundColor">#FF808080</Color>
+    <SolidColorBrush x:Key="MenuNavBar_BackgoundBrush" Color="{StaticResource MenuNavBar_BackgroundColor}"/>
+
+    <Color x:Key="Window_BackgroundColor">#00000000</Color>
+    <SolidColorBrush x:Key="Window_BackgoundBrush" Color="{StaticResource Window_BackgroundColor}"/>
+
+</ResourceDictionary>
