@@ -91,9 +91,7 @@ namespace Piforatio.Win
         }
     }
 
-
-
-    public static class MainWindowCommands
+    public class MainWindowCommands
     {
         public readonly static RoutedUICommand MainMenuToggleCommand;
         public readonly static RoutedUICommand MainMenuButtonsCommand;
@@ -105,8 +103,6 @@ namespace Piforatio.Win
                 {
                     new KeyGesture(Key.M,ModifierKeys.Alt)
                 });
-
-            
 
             MainMenuButtonsCommand = new RoutedUICommand("Press to chouse menu item",
                 "Item elements", typeof(MainWindowCommands));

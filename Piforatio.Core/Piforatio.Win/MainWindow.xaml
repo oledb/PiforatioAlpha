@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:Piforatio.Win"
         xmlns:ViewModel="clr-namespace:Piforatio.Win.ViewModel" 
         xmlns:ViewModelCollection="clr-namespace:Piforatio.Win.ViewModelCollection" x:Class="Piforatio.Win.MainWindow"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
         Title="MainWindow" Height="400" Width="600" 
-    WindowStyle="None" ResizeMode="NoResize" SizeToContent="Manual" BorderThickness="1,1,1,1">
+    WindowStyle="None" ResizeMode="NoResize" SizeToContent="Manual" BorderThickness="1" Icon="time.ico">
     <!-- Resources -->
     <Window.Resources>
         <ResourceDictionary Source="./View/Visual/PiforatioVisualStyle.xaml" />
@@ -20,9 +20,9 @@
     <!-- Commands -->
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindowCommands.MainMenuToggleCommand"
-                        Executed="MainMenuToggleCommand_Execute"/>
+                        Executed="MainMenuToggleCommand_Execute" ></CommandBinding>
         <CommandBinding Command="local:MainWindowCommands.MainMenuButtonsCommand"
-                        Executed="MainMenuButtonsCommand_Execute"/>
+                        Executed="MainMenuButtonsCommand_Execute"></CommandBinding>
     </Window.CommandBindings>
     <!-- Main -->
     <Grid x:Name="windowGrid">
