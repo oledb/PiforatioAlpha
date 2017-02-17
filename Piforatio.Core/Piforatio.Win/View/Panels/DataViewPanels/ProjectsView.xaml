@@ -43,17 +43,17 @@
             </Grid.RowDefinitions>
             <!-- Project inputs -->
             <StackPanel Grid.Row="0" >
-                <StackPanel Margin="4">
+                <StackPanel Margin="0,4">
                     <Label>Project name</Label>
-                    <TextBox></TextBox>
+                    <TextBox Margin="4,0"></TextBox>
                 </StackPanel>
-                <StackPanel Margin="4">
+                <StackPanel Margin="0,4">
                     <Label>Project aim</Label>
-                    <TextBox Height="80"></TextBox>
+                    <TextBox Margin="4,0" Height="80"></TextBox>
                 </StackPanel>
-                <StackPanel Margin="4">
+                <StackPanel Margin="0,4">
                     <Label>Project type</Label>
-                    <ComboBox>
+                    <ComboBox Margin="4,0" SelectedIndex="0">
                         <ComboBoxItem>
                             <sys:String>Learn</sys:String>
                         </ComboBoxItem>
