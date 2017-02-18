@@ -7,27 +7,34 @@
     <!-- Main -->
     <Color x:Key="Transperent_Color">#00000000</Color>
 
-    <Color x:Key="Main_Color">#1e90ff</Color>
+    <Color x:Key="Main_Color">#0099ff</Color>
 
-    <Color x:Key="MainLight_Color">#009acd</Color>
-    <Color x:Key="MainLight2_Color">#00b2ee</Color>
-    <Color x:Key="MainLight3_Color">#00bfff</Color>
+    <Color x:Key="MainLight_Color">#33adff</Color>
+    <Color x:Key="MainLight2_Color">#80ccff</Color>
+    <Color x:Key="MainLight3_Color">#ccebff</Color>
 
-    <Color x:Key="MainDark_Color">#1c86ee</Color>
-    <Color x:Key="MainDark2_Color">#1874cd</Color>
-    <Color x:Key="MainDark3_Color">#104e8b</Color>
+    <Color x:Key="MainDark_Color">#007acc</Color>
+    <Color x:Key="MainDark2_Color">#004d80</Color>
+    <Color x:Key="MainDark3_Color">#001f33</Color>
+
+    <!-- Disabled -->
+    <Color x:Key="Gray_Color">#808080</Color>
+    <Color x:Key="Gray2_Color">#b3b3b3</Color>
+    <Color x:Key="Gray3_Color">#e6e6e6</Color>
 
     <!-- Info -->
+    <Color x:Key="Selected_Color">#bfff00</Color>
     <Color x:Key="Info_Color">#212121</Color>
     <Color x:Key="Warning_Color">#ffc125</Color>
     <Color x:Key="Error_Color">#ff3030</Color>
     <Color x:Key="Success_Color">#458b00</Color>
-    
+
     <!--
         Color Brush
     -->
+    <!-- Main -->
     <SolidColorBrush x:Key="Transperent_Brush" Color="{StaticResource Transperent_Color}"/>
-    
+
     <SolidColorBrush x:Key="Main_Brush" Color="{StaticResource Main_Color}"/>
 
     <SolidColorBrush x:Key="MainLight_Brush" Color="{StaticResource MainLight_Color}"/>
@@ -37,7 +44,13 @@
     <SolidColorBrush x:Key="MainDark_Brush" Color="{StaticResource MainDark_Color}"/>
     <SolidColorBrush x:Key="MainDark2_Brush" Color="{StaticResource MainDark2_Color}"/>
     <SolidColorBrush x:Key="MainDark3_Brush" Color="{StaticResource MainDark3_Color}"/>
+    <!-- Disabled -->
+    <SolidColorBrush x:Key="Gray_Brush" Color="{StaticResource Gray_Color}"/>
+    <SolidColorBrush x:Key="Gray2_Brush" Color="{StaticResource Gray2_Color}"/>
+    <SolidColorBrush x:Key="Gray3_Brush" Color="{StaticResource Gray3_Color}"/>
 
+    <!-- Info -->
+    <SolidColorBrush x:Key="Selected_Brush" Color="{StaticResource Selected_Color}"/>
     <SolidColorBrush x:Key="Info_Brush" Color="{StaticResource Info_Color}"/>
     <SolidColorBrush x:Key="Warning_Brush" Color="{StaticResource Warning_Color}"/>
     <SolidColorBrush x:Key="Error_Brush" Color="{StaticResource Error_Color}"/>
