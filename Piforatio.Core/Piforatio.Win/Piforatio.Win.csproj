@@ -92,8 +92,14 @@
     <Compile Include="View\Panels\DataView.xaml.cs">
       <DependentUpon>DataView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Panels\DataViewPanels\PlanView.xaml.cs">
+      <DependentUpon>PlanView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Panels\DataViewPanels\ProjectsView.xaml.cs">
       <DependentUpon>ProjectsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\DataViewPanels\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Panels\DataViewPanels\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
@@ -120,7 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Panels\DataViewPanels\PlanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Panels\DataViewPanels\ProjectsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Panels\DataViewPanels\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,11 +23,15 @@ namespace Piforatio.Win.View.Panels
     {
         private ProjectsView projectView;
         private TasksView tasksView;
+        private PlanView planView;
+        private ReportView reportView;
         public DataView()
         {
             InitializeComponent();
             projectView = new ProjectsView();
             tasksView = new TasksView();
+            planView = new PlanView();
+            reportView = new ReportView();
             toggleControlToDataGridPanel(projectView);
         }
 
@@ -45,6 +49,16 @@ namespace Piforatio.Win.View.Panels
         private void taskButton_Click(object sender, RoutedEventArgs e)
         {
             toggleControlToDataGridPanel(tasksView);
+        }
+
+        private void plansButton_Click(object sender, RoutedEventArgs e)
+        {
+            toggleControlToDataGridPanel(planView);
+        }
+
+        private void reportButton_Click(object sender, RoutedEventArgs e)
+        {
+            toggleControlToDataGridPanel(reportView);
         }
     }
 }
