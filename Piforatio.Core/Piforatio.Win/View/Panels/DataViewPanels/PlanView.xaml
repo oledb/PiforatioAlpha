@@ -8,18 +8,21 @@
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding ElementName=calendar,Path=Width}"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <!-- Calendar -->
         <Calendar Name="calendar" Grid.Column="0" Margin="4"></Calendar>
-        <Grid Grid.Column="1">
+        <!-- Day fields-->
+        <Grid Grid.Column="1" Margin="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="56*"/>
                 <RowDefinition Height="61*"/>
                 <RowDefinition Height="158*"/>
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="4">
+            <!-- Select task -->
+            <StackPanel Grid.Row="0">
                 <Label>Select task</Label>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -32,6 +35,7 @@
                             Margin="4"/>
                 </Grid>
             </StackPanel>
+            <!-- Set day aim-->
             <StackPanel Grid.Row="1">
                 <StackPanel Orientation="Horizontal">
                     <Label>Aim meaure</Label>
@@ -48,10 +52,12 @@
                             Margin="4"/>
                 </Grid>
             </StackPanel>
+            <!-- days' tasks-->
             <ListBox Grid.Row="2" Margin="4">
 
             </ListBox>
 
+            <!-- Control button-->
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Width="156">
                 <Button Margin="4 4 4 0" Content="Save" Width="70"/>
                 <Button Margin="4 4 4 0" Content="Cancel" Width="70"/>
