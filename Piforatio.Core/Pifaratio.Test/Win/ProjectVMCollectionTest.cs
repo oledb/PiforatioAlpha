@@ -13,19 +13,6 @@ namespace Piforatio.Test.Win
     [TestFixture]
     public class ProjectVMCollectionTest
     {
-        public static ProjectVMCollection CreateProjectVMCollection()
-        {
-            IDataContextFactory context = CreateDataContextFabricaMock();
-            return CreateProjectVMCollection(context);
-        }
-
-        public static ProjectVMCollection CreateProjectVMCollection(IDataContextFactory context)
-        {
-            var projectModel = new ProjectModel(context);
-            var projectVMCollection = new ProjectVMCollection(projectModel);
-            return projectVMCollection;
-        }
-
         IDataContextFactory factory;
         DataContextMock context;
 
@@ -39,12 +26,15 @@ namespace Piforatio.Test.Win
         [Test]
         public void ProjectsArrayIsNonNullOrEmpty()
         {
+            //Arrange
             const int projectCollectionLength = 3;
             CreateFabricaAndMockContext(out factory, out context);
-            var pvmc = CreateProjectVMCollection(factory);
+            var projectVMCollection = CreateProjectVMCollection(factory);
 
-            var projectCollection = pvmc.Projects;
+            //Act
+            var projectCollection = projectVMCollection.Projects;
 
+            //Assert
             Assert.IsNotNull(projectCollection);
             Assert.AreEqual(projectCollectionLength, projectCollection.Count);
         }
@@ -52,48 +42,79 @@ namespace Piforatio.Test.Win
         [Test]
         public void SelectedProjectIsCorrected()
         {
+            //Arrange
             CreateFabricaAndMockContext(out factory, out context);
-            var pvmc = CreateProjectVMCollection(factory);
+            var projectVMCollection = CreateProjectVMCollection(factory);
 
-            var firstProject = pvmc.Projects[0];
-           // pvmc.SelectProjectByID = firstProject.ProjectID;
+            //Act
+            var firstProject = projectVMCollection.Projects[0];
+            projectVMCollection.SelectProjectByValue = firstProject.ProjectID;
 
-            Assert.AreEqual(firstProject.Name, pvmc.SelectedProject.Name);
-            Assert.AreEqual(firstProject.CreationTime, pvmc.SelectedProject.CreationTime);
+            //Assert
+            Assert.AreEqual(firstProject.Name, projectVMCollection.SelectedProject.Name);
+            Assert.AreEqual(firstProject.CreationTime, projectVMCollection.SelectedProject.CreationTime);
         }
 
         [Test]
         public void AddNewProjectToProjectVMCollection()
         {
+            //Arrange
             CreateFabricaAndMockContext(out factory, out context);
-            var pvmc = CreateProjectVMCollection(factory);
+            var projectVMCollection = CreateProjectVMCollection(factory);
+            IProject newProject = CreateProject("Asp.Net", new DateTime(2017, 1, 30), 12);
 
-            pvmc.Projects.Add(CreateProject("Asp.Net", new DateTime(2017, 1, 30), 12));
+            //Act
+            projectVMCollection.AddProject(newProject);
 
+            //Assert
             context.VerifyProject("Asp.Net", ChangedType.Add);
         }
 
         [Test]
         public void DeleteProjectFromProjectVMCollection()
         {
+            //Arrange
+            const int FirstProjectValue = 0;
+            const int ProjectCountEq2 = 2;
             CreateFabricaAndMockContext(out factory, out context);
-            var pvmc = CreateProjectVMCollection(factory);
+            var projectVMCollection = CreateProjectVMCollection(factory);
 
-            pvmc.Projects.RemoveAt(0);
+            //Act
+            projectVMCollection.SelectProjectByValue = FirstProjectValue;
+            projectVMCollection.RemoveSelectedProject();
 
+            //Assert
             context.VerifyProject("MVC", ChangedType.Delete);
+            Assert.AreEqual(ProjectCountEq2, projectVMCollection.Projects.Count);
         }
 
         [Test]
         public void ChangeSelectedProject()
         {
+            //Arrange
             CreateFabricaAndMockContext(out factory, out context);
-            var pvmc = CreateProjectVMCollection(factory);
-           // pvmc.SelectProjectByID = 0;
+            var projectVMCollection = CreateProjectVMCollection(factory);
+            projectVMCollection.SelectProjectByValue = 0;
 
-            pvmc.SelectedProject.Name = "Asp.Net";
+            //Act
+            projectVMCollection.SelectedProject.Name = "Asp.Net";
+            projectVMCollection.SaveSelectedProjectChange();
 
+            //Assert
             context.VerifyProject("Asp.Net", ChangedType.Modify);
+        }
+
+        public static ProjectVMCollection CreateProjectVMCollection()
+        {
+            IDataContextFactory context = CreateDataContextFabricaMock();
+            return CreateProjectVMCollection(context);
+        }
+
+        public static ProjectVMCollection CreateProjectVMCollection(IDataContextFactory context)
+        {
+            var projectModel = new ProjectModel(context);
+            var projectVMCollection = new ProjectVMCollection(projectModel);
+            return projectVMCollection;
         }
     }
 }

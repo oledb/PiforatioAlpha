@@ -50,13 +50,35 @@ namespace Piforatio.Win.ViewModelCollection
                 _index = value;
                 if (_index == -1)
                     SelectedProject = null;
-                SelectedProject = new ProjectVM(Projects[_index]); 
+                else
+                    SelectedProject = new ProjectVM(Projects[_index]); 
             }
         }
 
-        public void UpdateSelectedProject(IProject newProject)
+        public void AddProject(IProject project)
+        {
+            _projectModel.Update(project, ChangedType.Add);
+            Projects.Add(project);
+            SelectProjectByValue = Projects.Count - 1;
+        }
+
+        public void RemoveSelectedProject()
+        {
+            IProject project = (from p in Projects
+                                where p.ProjectID == SelectedProject.ProjectID
+                                select p).SingleOrDefault();
+            if (project == null)
+                throw new NullReferenceException($"Internal error. Can not find {SelectedProject.Name} project");
+            _projectModel.Update(project, ChangedType.Delete);
+            Projects.Remove(project);
+            SelectProjectByValue = -1;
+
+        }
+
+        public void SaveSelectedProjectChange()
         {
             _projectModel.Update(SelectedProject, ChangedType.Modify);
+            Projects[SelectProjectByValue].Update((IProject)SelectedProject);
         }
     }
 }
