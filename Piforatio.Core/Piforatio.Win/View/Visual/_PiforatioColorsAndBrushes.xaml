@@ -34,6 +34,7 @@
     -->
     <!-- Main -->
     <SolidColorBrush x:Key="Transperent_Brush" Color="{StaticResource Transperent_Color}"/>
+    <SolidColorBrush x:Key="White_Brush" Color="White"/>
 
     <SolidColorBrush x:Key="Main_Brush" Color="{StaticResource Main_Color}"/>
 

@@ -3,5 +3,45 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="_PiforatioColorsAndBrushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
+    <!-- Simple button -->
+    <ControlTemplate x:Key="Simple_Button" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" 
+                    BorderBrush="{StaticResource Main_Brush}" 
+                    BorderThickness="1" 
+                    Background="{StaticResource White_Brush}" 
+                    SnapsToDevicePixels="True">
+            <ContentPresenter x:Name="contentPresenter" 
+                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" 
+                              ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                              Focusable="False" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="{TemplateBinding Padding}" 
+                              RecognizesAccessKey="True" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Border.Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="{StaticResource Gray2_Color}" BlurRadius="7" Opacity="1.0"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource MainDark_Brush }"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource White_Brush }"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Gray3_Brush }"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Gray_Brush }"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Gray_Brush }"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>
