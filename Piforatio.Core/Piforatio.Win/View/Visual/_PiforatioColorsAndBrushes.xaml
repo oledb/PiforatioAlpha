@@ -24,7 +24,7 @@
     <Color x:Key="Gray3_Color">#e6e6e6</Color>
 
     <!-- Info -->
-    <Color x:Key="Selected_Color">#bfff00</Color>
+    <Color x:Key="Selected_Color">#9933ff</Color>
     <Color x:Key="Info_Color">#212121</Color>
     <Color x:Key="Warning_Color">#ffc125</Color>
     <Color x:Key="Error_Color">#ff3030</Color>

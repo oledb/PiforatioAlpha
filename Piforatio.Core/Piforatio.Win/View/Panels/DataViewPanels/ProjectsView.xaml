@@ -44,11 +44,11 @@
             <StackPanel Grid.Row="0" >
                 <StackPanel Margin="0,4">
                     <Label>Project name</Label>
-                    <TextBox Margin="4,0"></TextBox>
+                    <TextBox Margin="4,0" Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project aim</Label>
-                    <TextBox Margin="4,0" Height="80"></TextBox>
+                    <TextBox Margin="4,0" Height="80" Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project type</Label>

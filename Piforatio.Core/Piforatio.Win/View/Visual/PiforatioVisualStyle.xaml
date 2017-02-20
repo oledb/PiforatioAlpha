@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="_PiforatioColorsAndBrushes.xaml" />
         <ResourceDictionary Source="_PiforatioButtons.xaml" />
+        <ResourceDictionary Source="_PiforatioTextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--
