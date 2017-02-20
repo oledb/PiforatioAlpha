@@ -20,6 +20,9 @@
     <Window.BorderBrush>
         <SolidColorBrush Color="{StaticResource ResourceKey=Main_Color}"/>
     </Window.BorderBrush>
+    <Window.Background>
+        <SolidColorBrush Color="{StaticResource ResourceKey=White_Color}"/>
+    </Window.Background>
     <!-- Commands -->
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindowCommands.MainMenuToggleCommand"

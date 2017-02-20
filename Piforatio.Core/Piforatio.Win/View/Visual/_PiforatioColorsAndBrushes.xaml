@@ -6,6 +6,7 @@
     -->
     <!-- Main -->
     <Color x:Key="Transperent_Color">#00000000</Color>
+    <Color x:Key="White_Color">White</Color>
 
     <Color x:Key="Main_Color">#0099ff</Color>
 
