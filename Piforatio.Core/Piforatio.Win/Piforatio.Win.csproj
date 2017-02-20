@@ -86,8 +86,10 @@
     <Compile Include="Fakes\DataContextMock.cs" />
     <Compile Include="Fakes\FakeProjectFabrica.cs" />
     <Compile Include="ViewModelCollection\ProjectVMCollection.cs" />
+    <Compile Include="ViewModelCollection\PTaskVMCollection.cs" />
     <Compile Include="ViewModel\Notifier.cs" />
     <Compile Include="ViewModel\ProjectVM.cs" />
+    <Compile Include="ViewModel\PTaskVM.cs" />
     <Compile Include="View\Panels\DataView.xaml.cs">
       <DependentUpon>DataView.xaml</DependentUpon>
     </Compile>

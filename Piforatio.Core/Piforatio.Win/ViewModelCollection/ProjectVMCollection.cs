@@ -1,12 +1,9 @@
 ﻿using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
-using Piforatio.Win.Commands;
 using Piforatio.Win.ViewModel;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 
 namespace Piforatio.Win.ViewModelCollection
 {
@@ -19,6 +16,8 @@ namespace Piforatio.Win.ViewModelCollection
         /// </summary>
         public ProjectVMCollection(ProjectModel projectModel)
         {
+            if (projectModel == null)
+                throw new NullReferenceException("Can not initilize an instance of ProjectVMCollection due to null reference");
             _projectModel = projectModel;
             _projectModel.Load();
             Projects = new ObservableCollection<IProject>(_projectModel.GetAllProjects());
@@ -77,6 +76,8 @@ namespace Piforatio.Win.ViewModelCollection
         /// <param name="project"></param>
         public void AddProject(IProject project)
         {
+            if (project == null)
+                throw new NullReferenceException("Can not add a new project to ProjectVMCollection dut to null reference");
             _projectModel.Update(project, ChangedType.Add);
             Projects.Add(project);
             SelectProjectByValue = Projects.Count - 1;
