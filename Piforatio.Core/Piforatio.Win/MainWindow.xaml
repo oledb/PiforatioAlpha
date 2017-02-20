@@ -14,6 +14,9 @@
     <Window.Resources>
         <ResourceDictionary Source="./View/Visual/PiforatioVisualStyle.xaml" />
     </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
     <Window.BorderBrush>
         <SolidColorBrush Color="{StaticResource ResourceKey=Main_Color}"/>
     </Window.BorderBrush>
