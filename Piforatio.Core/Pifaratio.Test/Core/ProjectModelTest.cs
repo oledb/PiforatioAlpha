@@ -14,15 +14,19 @@ namespace Piforatio.Test.Core
     {
         [Test]
         public void CreateAndSaveDataToModel()
-        { 
+        {
+            //Arrange
             const int result_array_length = 1;
             var projectModel = new ProjectModel(CreateDataContextFabricaStub());
+            projectModel.Load();
             var list = projectModel.GetAllProjects();
             var list2 = projectModel.GetAllProjects();
 
+            //Act
             list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
             projectModel.Update(list[0], ChangedType.Add);
 
+            //Assert
             var result = projectModel.GetAllProjects();
             Assert.AreEqual(result_array_length, result.Count);
             Assert.AreEqual("Test", result[0].Name);
@@ -31,9 +35,9 @@ namespace Piforatio.Test.Core
         [Test]
         public void CreatedProjectListIsNotNull()
         {
-            var pm = new ProjectModel(CreateDataContextFabricaMock());
+            var projectModel = new ProjectModel(CreateDataContextFabricaMock());
 
-            var list = pm.GetAllProjects();
+            var list = projectModel.GetAllProjects();
 
             Assert.IsNotNull(list);
         }
@@ -41,11 +45,12 @@ namespace Piforatio.Test.Core
         [Test]
         public void GetPTaskModelForFirstProject()
         {
-            var pm = new ProjectModel(CreateDataContextFabricaMock());
-            var list = pm.GetAllProjects();
+            var projectModel = new ProjectModel(CreateDataContextFabricaMock());
+            projectModel.Load();
+            var list = projectModel.GetAllProjects();
             var firstProject = list[0];
 
-            PTaskModel model = pm.GetPTaskModel(firstProject);
+            PTaskModel model = projectModel.GetPTaskModel(firstProject);
 
             Assert.AreEqual(firstProject.Name, model.BaseProject.Name);
             Assert.AreEqual(firstProject.CreationTime, model.BaseProject.CreationTime);

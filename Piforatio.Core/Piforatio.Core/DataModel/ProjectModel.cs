@@ -14,6 +14,7 @@ namespace Piforatio.Core.DataModel
 
         public ProjectModel(IDataContextFactory contextFactory) {
             _dataContextFactory = contextFactory;
+            _listProject = new List<IProject>();
         }
 
         public List<IProject> GetAllProjects()
