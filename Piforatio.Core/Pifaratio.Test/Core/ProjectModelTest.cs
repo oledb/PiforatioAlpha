@@ -17,13 +17,13 @@ namespace Piforatio.Test.Core
         { 
             const int result_array_length = 1;
             var projectModel = new ProjectModel(CreateDataContextFabricaStub());
-            var list = projectModel.GetAllData();
-            var list2 = projectModel.GetAllData();
+            var list = projectModel.GetAllProjects();
+            var list2 = projectModel.GetAllProjects();
 
             list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
             projectModel.Update(list[0], ChangedType.Add);
 
-            var result = projectModel.GetAllData();
+            var result = projectModel.GetAllProjects();
             Assert.AreEqual(result_array_length, result.Count);
             Assert.AreEqual("Test", result[0].Name);
         }
@@ -33,7 +33,7 @@ namespace Piforatio.Test.Core
         {
             var pm = new ProjectModel(CreateDataContextFabricaMock());
 
-            var list = pm.GetAllData();
+            var list = pm.GetAllProjects();
 
             Assert.IsNotNull(list);
         }
@@ -42,7 +42,7 @@ namespace Piforatio.Test.Core
         public void GetPTaskModelForFirstProject()
         {
             var pm = new ProjectModel(CreateDataContextFabricaMock());
-            var list = pm.GetAllData();
+            var list = pm.GetAllProjects();
             var firstProject = list[0];
 
             PTaskModel model = pm.GetPTaskModel(firstProject);

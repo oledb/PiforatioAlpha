@@ -8,7 +8,7 @@ using Moq;
 
 namespace Piforatio.Core.DataModel
 {
-    public class PTaskModel : DataModel<IPTask>
+    public class PTaskModel //: DataModel<IPTask>
     {
         public PTaskModel(IDataContextFactory context, IProject project) : base(context)
         {
@@ -17,24 +17,24 @@ namespace Piforatio.Core.DataModel
 
         public IProject BaseProject { get; protected set; }
 
-        public override ObservableCollection<IPTask> GetAllData()
+        public ObservableCollection<IPTask> GetAllData()
         {
             throw new NotImplementedException();
         }
 
-        public override IPTask GetData(int id)
+        public IPTask GetData(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(IPTask obj, ChangedType type)
+        public void Update(IPTask obj, ChangedType type)
         {
             throw new NotImplementedException();
         }
 
-        public override void UpdateAll()
+        public void UpdateAll()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

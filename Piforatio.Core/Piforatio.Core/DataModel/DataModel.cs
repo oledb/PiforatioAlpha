@@ -4,7 +4,12 @@ using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public abstract class DataModel<T> : IDataModel<T> where T : ICoreObject
+    /// <summary>
+    /// <see cref="DataModel{T}"/> will be using as base class for all *Model classes
+    /// This class has not been used yet
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class DataModel<T>  where T : ICoreObject
     {
         protected IDataContextFactory dataContext;
         protected ObservableCollection<T> listObject;
@@ -13,7 +18,7 @@ namespace Piforatio.Core.DataModel
         {
             dataContext = context;
             listObject = new ObservableCollection<T>();
-            UpdateAll();
+            //UpdateAll();
         }
 
         public DataModel(IDataContextFactory context)
@@ -24,7 +29,7 @@ namespace Piforatio.Core.DataModel
         public abstract ObservableCollection<T> GetAllData();
         public abstract T GetData(int id);
         public abstract void Update(T obj, ChangedType type);
-        public abstract void UpdateAll();
+        public abstract void Load();
     }
 
 

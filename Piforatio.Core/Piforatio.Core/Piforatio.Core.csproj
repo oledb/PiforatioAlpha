@@ -52,9 +52,7 @@
     <Compile Include="DataModel\DataModel.cs" />
     <Compile Include="DataModel\IDataContext.cs" />
     <Compile Include="DataModel\IDataContextFactory.cs" />
-    <Compile Include="DataModel\IDataModel.cs" />
     <Compile Include="DataModel\ModelEntityEventArgs.cs" />
-    <Compile Include="DataModel\PTaskPlanModel.cs" />
     <Compile Include="DataModel\ProjectModel.cs" />
     <Compile Include="DataModel\PTaskModel.cs" />
     <Compile Include="ObjectsAbstract\Enumerations.cs" />

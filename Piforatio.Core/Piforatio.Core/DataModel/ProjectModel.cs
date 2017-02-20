@@ -2,71 +2,55 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 using Piforatio.Core.ObjectsAbstract;
 
 namespace Piforatio.Core.DataModel
 {
-    public class ProjectModel : DataModel<IProject>
+    public class ProjectModel //: DataModel<IProject>
     {
+        private IDataContextFactory _dataContextFactory;
+        private List<IProject> _listProject;
 
-        public ProjectModel(IDataContextFactory context) : base(context) {
-            listObject.CollectionChanged += listObject_changed;
+        public ProjectModel(IDataContextFactory contextFactory) {
+            _dataContextFactory = contextFactory;
         }
 
-        public override ObservableCollection<IProject> GetAllData()
+        public List<IProject> GetAllProjects()
         {
-            return listObject;
+            return _listProject;
         }
 
-        public override IProject GetData(int id)
+        public IProject GetProject(int id)
         {
-            return (from p in listObject
+            return (from p in _listProject
                     where p.ProjectID == id
                     select p).SingleOrDefault();
         }
 
         public PTaskModel GetPTaskModel(IProject project)
         {
-            return new PTaskModel(dataContext, project);
+            return new PTaskModel(_dataContextFactory, project);
         }
 
-        public override void Update(IProject obj, ChangedType type)
+        public void Update(IProject obj, ChangedType type)
         {
-            using (var context = this.dataContext.CreateContext())
+            using (var context = _dataContextFactory.CreateContext())
             {
                 context.UpdateProjectCollection(obj, type);
             }
         }
 
-        protected void listObject_changed(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            using (var context = dataContext.CreateContext())
-            {
-                if (args.Action == NotifyCollectionChangedAction.Add)
-                {
-                    foreach (var project in args.NewItems)
-                        context.UpdateProjectCollection((IProject)project, ChangedType.Add);
-                }
-                else if (args.Action == NotifyCollectionChangedAction.Remove)
-                {
-                    foreach (var project in args.OldItems)
-                        context.UpdateProjectCollection((IProject)project, ChangedType.Delete);
-                }
-                else
-                    throw new InvalidOperationException($"Unknown argument type '{args.Action}'");
-            }
-        }
-
-        public override void UpdateAll()
+        public void Load()
         {
 
-            using (var context = dataContext.CreateContext())
+            using (var context = _dataContextFactory.CreateContext())
             {
                 var query = (from p in context.GetProjects()
                              select p);
                 foreach (var project in query)
                 {
-                    listObject.Add(project);
+                    _listProject.Add(project);
                 }
             }
         }

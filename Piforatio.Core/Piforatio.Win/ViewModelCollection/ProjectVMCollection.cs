@@ -18,7 +18,8 @@ namespace Piforatio.Win.ViewModelCollection
         public ProjectVMCollection(ProjectModel projectModel)
         {
             _projectModel = projectModel;
-            Projects = _projectModel.GetAllData();
+            _projectModel.Load();
+            Projects = new ObservableCollection<IProject>(_projectModel.GetAllProjects());
         }
 
         public ObservableCollection<IProject> Projects { get; set; }
