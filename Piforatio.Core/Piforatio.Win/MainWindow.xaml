@@ -41,15 +41,17 @@
                 <ColumnDefinition/>
                 <ColumnDefinition MaxWidth="68"/>
             </Grid.ColumnDefinitions>
+            <!-- navBar button-->
             <Button x:Name="mainMenuButton" Grid.Column="0"
-                    Margin="4,4,4,4" Content="&#xF0C9;" Style="{StaticResource MenuButton_Style}"
+                    Margin="4,4,4,4" Content="&#xF0C9;" 
+                    Template="{StaticResource MenuPanel_Button}"
                     Command="local:MainWindowCommands.MainMenuToggleCommand"/>
-            <!-- Minimize and close -->
+            <!-- Minimize and close buttons -->
             <StackPanel Grid.Column="2" Orientation="Horizontal">
                 <Button x:Name="minimizeButton" Content="&#xF078;" Margin="4 4 0 4"  
-                        Width="28" Click="minimizeButton_Click" Style="{StaticResource MenuButton_Style}"/>
+                        Width="28" Click="minimizeButton_Click" Template="{StaticResource MenuPanel_Button}"/>
                 <Button x:Name="closeButton" Content="&#x2716;"  Margin="4 4 0 4" 
-                        Width="28" Click="closeButton_Click" Style="{StaticResource MenuButton_Style}"/>
+                        Width="28" Click="closeButton_Click" Template="{StaticResource CloseMenuPanel_Button}"/>
             </StackPanel>
         </Grid>
         <!-- Main Field -->
@@ -64,11 +66,11 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <StackPanel x:Name="stackPanelMainMenu"  Style="{StaticResource MenuNavBar_Style}">
-                    <Button x:Name="timerMenuButton" Content="Timer" Padding="0 8 0 8" Style="{StaticResource MenuButton_Style}" 
+                    <Button x:Name="timerMenuButton" Content="Timer" Padding="0 8 0 8" Template="{StaticResource MenuPanel_Button}" 
                             Command="local:MainWindowCommands.MainMenuButtonsCommand" CommandParameter="timer"/>
-                    <Button x:Name="dataMenuButton" Content="Data" Padding="0 8 0 8" Style="{StaticResource MenuButton_Style}"
+                    <Button x:Name="dataMenuButton" Content="Data" Padding="0 8 0 8" Template="{StaticResource MenuPanel_Button}"
                             Command="local:MainWindowCommands.MainMenuButtonsCommand" CommandParameter="data"/>
-                    <Button x:Name="settingsMenuButton" Content="Settings" Padding="0 8 0 8" Style="{StaticResource MenuButton_Style}"
+                    <Button x:Name="settingsMenuButton" Content="Settings" Padding="0 8 0 8" Template="{StaticResource MenuPanel_Button}"
                             Command="local:MainWindowCommands.MainMenuButtonsCommand" CommandParameter="settings"/>
                 </StackPanel>
             </Grid>

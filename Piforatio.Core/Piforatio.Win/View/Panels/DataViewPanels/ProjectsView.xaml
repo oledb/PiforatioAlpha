@@ -16,12 +16,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!-- Projects List -->
-        <Grid x:Name="ProjectsListView" Grid.Column="0" Margin="4">
+        <Grid x:Name="ProjectsListView" Grid.Column="0" Margin="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="32"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Content="Add new project" Width="177" Grid.Row="0" Margin="-4,0,-4,4"
+            <Button Content="Add new project" Width="177" Grid.Row="0" Margin="0,0,0,4"
                         Template="{StaticResource Simple_Button}"/>
             <ListView x:Name="projectsListView" Grid.Row="1">
                 <StackPanel>
