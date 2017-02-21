@@ -1,4 +1,4 @@
-﻿namespace Piforatio.Core
+﻿namespace Piforatio.Core.ObjectsAbstract
 {
     public enum ProjectType
     {

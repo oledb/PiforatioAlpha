@@ -19,7 +19,17 @@ namespace Piforatio.Win.Fakes
             mock.Setup(p => p.ProjectID).Returns(index);
             return mock.Object;
         }
-        
+
+        public static IProject CreateProject(string name, DateTime time, int index, ProjectType type, string description)
+        {
+            var mock = new Mock<IProject>();
+            mock.Setup(p => p.Name).Returns(name);
+            mock.Setup(p => p.CreationTime).Returns(time);
+            mock.Setup(p => p.ProjectID).Returns(index);
+            mock.Setup(p => p.Description).Returns(description);
+            mock.Setup(p => p.Type).Returns(type);
+            return mock.Object;
+        }
 
         public static IDataContextFactory CreateDataContextFabricaMock()
         {

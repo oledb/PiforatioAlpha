@@ -30,7 +30,7 @@
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=CreationTime}"/>
+                            <TextBlock Text="{Binding Path=Description}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -44,10 +44,12 @@
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <!-- Project inputs -->
-            <StackPanel Grid.Row="0" >
+            <StackPanel Grid.Row="0" DataContext="{Binding Path=SelectedProject}">
                 <StackPanel Margin="0,4">
                     <Label>Project name</Label>
-                    <TextBox Margin="4,0" Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"></TextBox>
+                    <TextBox Margin="4,0" 
+                             Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"
+                             Text="{Binding Path=Name}"/>
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project aim</Label>

@@ -27,9 +27,12 @@ namespace Piforatio.Win.Fakes
             if (_isFull)
             {
                 int index = 0;
-                yield return CreateProject("MVC", new DateTime(2017, 1, 20), index++);
-                yield return CreateProject("Point Theory", new DateTime(2017, 1, 10), index++);
-                yield return CreateProject("Xamarin", new DateTime(2017, 2, 1), index++);
+                yield return CreateProject("MVC", new DateTime(2017, 1, 20), index++, ProjectType.Study,
+                    "Learn some basic MVC aspects.");
+                yield return CreateProject("Point Theory", new DateTime(2017, 1, 10), index++, ProjectType.Work, 
+                    "Create Piforatio xaml project and construct basic theory");
+                yield return CreateProject("Xamarin", new DateTime(2017, 2, 1), index++, ProjectType.Study, 
+                    "Learn Xamarin user interface designer and c# programming language");
             }
             else
                 yield return null;

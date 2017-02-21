@@ -11,6 +11,8 @@ namespace Piforatio.Core.ObjectsAbstract
         int ProjectID { get; set; }
         string Name { get; set; }
         IEnumerable<IPTask> Tasks { get; set; }
+        ProjectType Type { get; set; }
+        string Description { get; set; }
         DateTime CreationTime { get; set; }
     }
 }

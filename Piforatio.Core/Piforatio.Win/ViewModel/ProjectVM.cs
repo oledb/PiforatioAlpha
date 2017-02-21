@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
+using Piforatio.Core;
 
 namespace Piforatio.Win.ViewModel
 {
@@ -47,11 +48,37 @@ namespace Piforatio.Win.ViewModel
             get; set;
         }
 
+        private ProjectType _type;
+        public ProjectType Type
+        {
+            get { return _type; }
+
+            set
+            {
+                _type = value;
+                NotifyPropertyChanged("Type");
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+
+            set
+            {
+                _description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
+
         public void Update<T>(T obj) where T : ICoreObject
         {
             IProject temp = (obj as IProject);
             ProjectID = temp.ProjectID;
-            Name = temp.Name; 
+            Name = temp.Name;
+            Description = temp.Description;
+            Type = temp.Type;
             CreationTime = temp.CreationTime;
         }
 
