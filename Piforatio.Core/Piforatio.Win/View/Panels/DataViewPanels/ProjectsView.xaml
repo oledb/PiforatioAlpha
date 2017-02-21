@@ -25,7 +25,8 @@
                         Template="{StaticResource Simple_Button}"/>
             <ListBox x:Name="projectsListView" 
                      Grid.Row="1"
-                     ItemsSource="{Binding Projects}">
+                     ItemsSource = "{Binding Projects}"
+                     SelectedIndex = "{Binding SelectProjectByValue}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -53,7 +54,9 @@
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project aim</Label>
-                    <TextBox Margin="4,0" Height="80" Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"></TextBox>
+                    <TextBox Margin="4,0" Height="80" 
+                             Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"
+                             Text="{Binding Path=Description}"/>
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project type</Label>
