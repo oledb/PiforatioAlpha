@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Piforatio.Win.View.Panels.DataViewPanels;
+using Piforatio.Core.DataModel;
+using Piforatio.Core.ObjectsAbstract;
+using Piforatio.Win.ViewModelCollection;
+using Piforatio.Win.ViewModel;
+using Piforatio.Win.Fakes;
 
 namespace Piforatio.Win.View.Panels
 {
@@ -25,13 +18,20 @@ namespace Piforatio.Win.View.Panels
         private TasksView tasksView;
         private PlanView planView;
         private ReportView reportView;
-        public DataView()
+
+        private ProjectVMCollection _projectVMCollection;
+        public DataView(ProjectVMCollection projectVMCollection)
         {
             InitializeComponent();
-            projectView = new ProjectsView();
+            //Dependency
+            _projectVMCollection = projectVMCollection;
+
+            //User Controls
+            projectView = new ProjectsView(_projectVMCollection);
             tasksView = new TasksView();
             planView = new PlanView();
             reportView = new ReportView();
+
             toggleControlToDataGridPanel(projectView);
         }
 

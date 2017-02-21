@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Piforatio.Win.View.Panels.DataViewPanels;
+using Piforatio.Core.DataModel;
+using Piforatio.Core.ObjectsAbstract;
+using Piforatio.Win.ViewModelCollection;
+using Piforatio.Win.ViewModel;
+using Piforatio.Win.Fakes;
 
 namespace Piforatio.Win.View.Panels.DataViewPanels
 {
@@ -20,9 +14,13 @@ namespace Piforatio.Win.View.Panels.DataViewPanels
     /// </summary>
     public partial class ProjectsView : UserControl
     {
-        public ProjectsView()
+        private ProjectVMCollection _projectVMCollection;
+        public ProjectsView(ProjectVMCollection projectVMCollection)
         {
             InitializeComponent();
+            _projectVMCollection = projectVMCollection;
+            DataContext = _projectVMCollection;
+            
         }
     }
 }

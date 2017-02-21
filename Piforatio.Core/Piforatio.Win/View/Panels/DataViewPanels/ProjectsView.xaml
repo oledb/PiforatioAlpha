@@ -23,16 +23,19 @@
             </Grid.RowDefinitions>
             <Button Content="Add new project" Width="177" Grid.Row="0" Margin="0,0,0,4"
                         Template="{StaticResource Simple_Button}"/>
-            <ListView x:Name="projectsListView" Grid.Row="1">
-                <StackPanel>
-                    <Label>Project 1</Label>
-                    <Label>Project 1 Description</Label>
-                </StackPanel>
-                <StackPanel>
-                    <Label>Project 2</Label>
-                    <Label>Project 2 Description</Label>
-                </StackPanel>
-            </ListView>
+            <ListBox x:Name="projectsListView" 
+                     Grid.Row="1"
+                     ItemsSource="{Binding Projects}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text="{Binding Path=CreationTime}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
         </Grid>
         <!-- Selected Project -->
         <Grid Grid.Column="1" Margin="4">

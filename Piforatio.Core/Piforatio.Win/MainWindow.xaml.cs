@@ -18,10 +18,12 @@ namespace Piforatio.Win
         private DataView dataView;
         private TimerView timerView;
         private SettingsView settingsView;
+
         public MainWindow()
         {
             InitializeComponent();
-            dataView = new DataView();
+            CreateViewModels();
+            dataView = new DataView(_projectVMCollection);
             timerView = new TimerView();
             settingsView = new SettingsView();
             mainGridPanel.Children.Add(dataView);
