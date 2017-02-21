@@ -10,6 +10,17 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../../Visual/PiforatioVisualStyle.xaml"/>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local:ProjectsView.AddNewProject" 
+                        CanExecute="AddNewProject_CanExecute"
+                        Executed="AddNewProject_Execute"/>
+        <CommandBinding Command="local:ProjectsView.SaveNewProject" 
+                        CanExecute="SaveNewProject_CanExecute"
+                        Executed="SaveNewProject_Execute"/>
+        <CommandBinding Command="local:ProjectsView.AddNewProject" 
+                        CanExecute="CancelNewProject_CanExecute"
+                        Executed="CancelNewProject_Execute"/>
+    </UserControl.CommandBindings>
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -22,7 +33,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Button Content="Add new project" Width="177" Grid.Row="0" Margin="0,0,0,4"
-                        Template="{StaticResource Simple_Button}"/>
+                        Template="{StaticResource Simple_Button}"
+                        Command="local:ProjectsView.AddNewProject"/>
             <ListBox x:Name="projectsListView" 
                      Grid.Row="1"
                      ItemsSource = "{Binding Projects}"
@@ -48,13 +60,13 @@
             <StackPanel Grid.Row="0" DataContext="{Binding Path=SelectedProject}">
                 <StackPanel Margin="0,4">
                     <Label>Project name</Label>
-                    <TextBox Margin="4,0" 
+                    <TextBox x:Name="nameTextBox" Margin="4,0" 
                              Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"
                              Text="{Binding Path=Name}"/>
                 </StackPanel>
                 <StackPanel Margin="0,4">
                     <Label>Project aim</Label>
-                    <TextBox Margin="4,0" Height="80" 
+                    <TextBox x:Name="aimTextBox" Margin="4,0" Height="80" 
                              Style="{StaticResource ResourceKey=Simple_TextBoxStyle}"
                              Text="{Binding Path=Description}"/>
                 </StackPanel>
@@ -73,9 +85,11 @@
             <!-- Projects button -->
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Width="156">
                 <Button Margin="4 4 4 0" Content="Save" Width="70"
-                        Template="{StaticResource Simple_Button}"/>
+                        Template="{StaticResource Simple_Button}"
+                        Command="local:ProjectsView.SaveNewProject"/>
                 <Button Margin="4 4 4 0" Content="Cancel" Width="70"
-                        Template="{StaticResource Simple_Button}"/>
+                        Template="{StaticResource Simple_Button}"
+                        Command="local:ProjectsView.CancelNewProject"/>
             </StackPanel>
         </Grid>
     </Grid>

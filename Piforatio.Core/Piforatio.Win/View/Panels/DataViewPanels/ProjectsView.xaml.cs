@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System;
 using System.Windows.Controls;
 using Piforatio.Win.View.Panels.DataViewPanels;
 using Piforatio.Core.DataModel;
@@ -7,6 +7,7 @@ using Piforatio.Win.ViewModelCollection;
 using Piforatio.Win.ViewModel;
 using Piforatio.Win.Fakes;
 using System.Windows.Input;
+using static System.String;
 
 namespace Piforatio.Win.View.Panels.DataViewPanels
 {
@@ -17,7 +18,7 @@ namespace Piforatio.Win.View.Panels.DataViewPanels
     {
         private ProjectVMCollection _projectVMCollection;
 
-        private IProject newProject = null;
+        private object newProject;
 
         public ProjectsView(ProjectVMCollection projectVMCollection)
         {
@@ -26,18 +27,21 @@ namespace Piforatio.Win.View.Panels.DataViewPanels
             DataContext = _projectVMCollection;    
         }
 
-        private RoutedUICommand AddNewProject = new RoutedUICommand("Add new project", "Add new project", typeof(UserControl));
-        private RoutedUICommand SaveNewProject = new RoutedUICommand("Save new project", "Save new project", typeof(UserControl));
-        private RoutedUICommand CancelNewProject = new RoutedUICommand("Cancel new project", "Cancel new project", typeof(UserControl));
+        public static RoutedUICommand AddNewProject = new RoutedUICommand("Add new project", "Add new project", typeof(UserControl));
+        public static RoutedUICommand SaveNewProject = new RoutedUICommand("Save new project", "Save new project", typeof(UserControl));
+        public static RoutedUICommand CancelNewProject = new RoutedUICommand("Cancel new project", "Cancel new project", typeof(UserControl));
 
         private void AddNewProject_Execute(object sender, ExecutedRoutedEventArgs args)
         {
-
+            newProject = new ProjectVM();
+            _projectVMCollection.SelectProjectByValue = -1;
+            nameTextBox.Text = "";
+            aimTextBox.Text = "";
         }
 
         private void AddNewProject_CanExecute(object sender, CanExecuteRoutedEventArgs args)
         {
-
+            args.CanExecute = newProject == null;
         }
 
         private void SaveNewProject_Execute(object sender, ExecutedRoutedEventArgs args)
@@ -47,7 +51,7 @@ namespace Piforatio.Win.View.Panels.DataViewPanels
 
         private void SaveNewProject_CanExecute(object sender, CanExecuteRoutedEventArgs args)
         {
-
+            args.CanExecute = newProject != null && IsNullOrEmpty(nameTextBox.Text) && IsNullOrEmpty(aimTextBox.Text);
         }
 
         private void CancelNewProject_Execute(object sender, ExecutedRoutedEventArgs args)
@@ -57,7 +61,7 @@ namespace Piforatio.Win.View.Panels.DataViewPanels
 
         private void CancelNewProject_CanExecute(object sender, CanExecuteRoutedEventArgs args)
         {
-
+            args.CanExecute = newProject != null;
         }
     }
 }
