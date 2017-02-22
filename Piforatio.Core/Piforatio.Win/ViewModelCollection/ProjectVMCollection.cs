@@ -65,7 +65,8 @@ namespace Piforatio.Win.ViewModelCollection
                 if (_index == -1)
                     SelectedProject = null;
                 else
-                    SelectedProject = new ProjectVM(Projects[_index]); 
+                    SelectedProject = new ProjectVM(Projects[_index]);
+                NotifyPropertyChanged("SelectProjectByValue");
             }
         }
 
