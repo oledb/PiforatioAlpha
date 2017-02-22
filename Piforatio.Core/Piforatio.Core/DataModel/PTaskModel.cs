@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Piforatio.Core.DataModel
 
         public IProject BaseProject { get; protected set; }
 
-        public ObservableCollection<IPTask> GetAllData()
+        public IEnumerable<IPTask> GetTasks()
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace Piforatio.Core.DataModel
             throw new NotImplementedException();
         }
 
-        public void UpdateAll()
+        public void Load()
         {
             throw new NotImplementedException();
         }

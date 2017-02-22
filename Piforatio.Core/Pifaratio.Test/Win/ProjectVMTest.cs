@@ -13,7 +13,7 @@ namespace Piforatio.Test.Win
         public void Update_dataNotEmpty()
         {
             var pvm = new ProjectVM();
-            var project = FakeProjectFabrica.CreateProject("MVC", new DateTime(2017, 1, 30), 34);
+            var project = FakesFabrica.CreateProject("MVC", new DateTime(2017, 1, 30), 34);
 
             pvm.Update(project);
 
@@ -25,7 +25,7 @@ namespace Piforatio.Test.Win
         [Test]
         public void ctor_dataNotEmpty()
         {
-            var project = FakeProjectFabrica.CreateProject("MVC", new DateTime(2017, 1, 30), 34);
+            var project = FakesFabrica.CreateProject("MVC", new DateTime(2017, 1, 30), 34);
 
             var pvm = new ProjectVM(project);
 

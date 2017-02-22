@@ -53,17 +53,17 @@ namespace Piforatio.Win.Fakes
             _type = changeType;
         }
 
-        public IEnumerable<IPTask> GetPTaskAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPTask> GetPTask(IProject project)
+        public IEnumerable<IPTask> GetPTasks(IProject project)
         {
             throw new NotImplementedException();
         }
 
         public void UpdatePTasckCollection(IPTask task, IProject baseProject, ChangedType changeType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject)
         {
             throw new NotImplementedException();
         }

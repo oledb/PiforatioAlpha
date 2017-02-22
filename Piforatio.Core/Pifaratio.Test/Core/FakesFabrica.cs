@@ -9,7 +9,7 @@ using Moq;
 
 namespace Piforatio.Test.Core
 {
-    public static class FakeProjectFabrica
+    public static class FakesFabrica
     {
         public static IProject CreateProject(string name, DateTime time, int index)
         {
@@ -19,7 +19,24 @@ namespace Piforatio.Test.Core
             mock.Setup(p => p.ProjectID).Returns(index);
             return mock.Object;
         }
-        
+
+        public static IPTask CreatePTask(IProject baseProject, string description, int index)
+        {
+            var mock = new Mock<IPTask>();
+            mock.Setup(pt => pt.BaseProject).Returns(baseProject);
+            mock.Setup(pt => pt.Desctiption).Returns(description);
+            mock.Setup(pt => pt.TaskID).Returns(index);
+            return mock.Object;
+        }
+
+        public static IAim CreateAim(int index, string valueType, int value)
+        {
+            var mock = new Mock<IAim>();
+            mock.Setup(a => a.AimID).Returns(index);
+            mock.Setup(a => a.ValueType).Returns(valueType);
+            mock.Setup(a => a.Value).Returns(value);
+            return mock.Object;
+        }
 
         public static IDataContextFactory CreateDataContextFabricaMock()
         {
@@ -42,9 +59,6 @@ namespace Piforatio.Test.Core
             contextMock = new DataContextMock();
             mock.Setup(cf => cf.CreateContext()).Returns(contextMock);
             contextFactory = mock.Object;
-
-        }
-
-       
+        } 
     }
 }

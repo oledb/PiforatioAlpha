@@ -9,8 +9,8 @@ namespace Piforatio.Core.DataModel
     {
         IEnumerable<IProject> GetProjects();
         void UpdateProjectCollection(IProject project, ChangedType changeType);
-        IEnumerable<IPTask> GetPTaskAll();
-        IEnumerable<IPTask> GetPTask(IProject project);
+        IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject);
+        IEnumerable<IPTask> GetPTasks(IProject project);
         void UpdatePTasckCollection(IPTask task, IProject baseProject, ChangedType changeType);
     }
 }

@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Moq;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
-using static Piforatio.Test.Core.FakeProjectFabrica;
+using static Piforatio.Test.Core.FakesFabrica;
 
 namespace Piforatio.Test.Core
 {

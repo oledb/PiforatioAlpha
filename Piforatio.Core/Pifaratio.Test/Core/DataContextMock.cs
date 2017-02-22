@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
-using static Piforatio.Test.Core.FakeProjectFabrica;
+using static Piforatio.Test.Core.FakesFabrica;
 
 namespace Piforatio.Test.Core
 {
@@ -53,17 +53,33 @@ namespace Piforatio.Test.Core
             _type = changeType;
         }
 
-        public IEnumerable<IPTask> GetPTaskAll()
+        List<IProject> listProject;
+        public IEnumerable<IPTask> GetPTasks(IProject project)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPTask> GetPTask(IProject project)
-        {
-            throw new NotImplementedException();
+            if (listProject == null)
+                GetProjects().ToList();
+            if (project.Name == "MVC")
+            {
+                int index = 0;
+                IPTask task = CreatePTask(listProject[0], "Read book about MVC", index++);
+                task.Aim = CreateAim(0, "Pages", 300);
+                yield return task;
+                task = CreatePTask(listProject[0], "Setup Nuget Packeges", index++);
+                task.Aim = CreateAim(1, "Boolean", 0);
+                yield return task;
+                task = CreatePTask(listProject[0], "Read book about MVC", index++);
+                yield return task;
+            }
+            else
+                yield return null;
         }
 
         public void UpdatePTasckCollection(IPTask task, IProject baseProject, ChangedType changeType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject)
         {
             throw new NotImplementedException();
         }
