@@ -94,7 +94,7 @@ namespace Piforatio.Win.ViewModelCollection
                                 where p.ProjectID == SelectedProject.ProjectID
                                 select p).SingleOrDefault();
             if (project == null)
-                throw new NullReferenceException($"Internal error. Can not find {SelectedProject.Name} project");
+                throw new NullReferenceException($"Internal error. Can not find {SelectedProject?.Name} project");
             _projectModel.Update(project, ChangedType.Delete);
             Projects.Remove(project);
             SelectProjectByValue = -1;

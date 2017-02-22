@@ -65,9 +65,11 @@
     <Compile Include="Core\DataContextMock.cs" />
     <Compile Include="Core\ProjectModelTest.cs" />
     <Compile Include="Core\FakeProjectFabrica.cs" />
+    <Compile Include="Core\PTaskModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Win\ProjectVMCollectionTest.cs" />
     <Compile Include="Win\ProjectVMTest.cs" />
+    <Compile Include="Win\PTaskVMCollectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
