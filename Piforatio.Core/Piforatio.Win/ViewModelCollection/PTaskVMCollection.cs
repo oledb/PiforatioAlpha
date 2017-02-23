@@ -20,7 +20,8 @@ namespace Piforatio.Win.ViewModelCollection
 
         public PTaskVMCollection(PTaskModel pTaskModel)
         {
-            throw new NotImplementedException();
+            pTaskModel = _pTaskModel;
+            pTaskModel.Load();
         }
 
         public int SelectPTaskByValue

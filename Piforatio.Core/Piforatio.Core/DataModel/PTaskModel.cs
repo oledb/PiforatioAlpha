@@ -10,31 +10,43 @@ namespace Piforatio.Core.DataModel
 {
     public class PTaskModel //: DataModel<IPTask>
     {
-        public PTaskModel(IDataContextFactory context, IProject project) 
+        IDataContextFactory dataContextFactory;
+        public PTaskModel(IDataContextFactory factory, IProject project) 
         {
             BaseProject = project;
+            dataContextFactory = factory;
+            ptaskList = new List<IPTask>();
         }
 
         public IProject BaseProject { get; protected set; }
+        private List<IPTask> ptaskList;
 
         public IEnumerable<IPTask> GetTasks()
         {
-            throw new NotImplementedException();
+            return ptaskList;
         }
 
         public IPTask GetData(int id)
         {
-            throw new NotImplementedException();
+            return (from t in ptaskList
+                    where t.TaskID == id
+                    select t).SingleOrDefault();
         }
 
         public void Update(IPTask obj, ChangedType type)
         {
-            throw new NotImplementedException();
+            using (var context = dataContextFactory.CreateContext())
+            {
+                context.UpdatePTask(obj, BaseProject, type);
+            }
         }
 
         public void Load()
         {
-            throw new NotImplementedException();
+            using (var context = dataContextFactory.CreateContext())
+            {
+                ptaskList = context.GetPTasks(BaseProject).ToList();
+            }
         }
     }
 }
