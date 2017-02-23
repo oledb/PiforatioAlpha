@@ -18,6 +18,11 @@ namespace Piforatio.Win.ViewModelCollection
 
         private PTaskModel _pTaskModel;
 
+        public PTaskVMCollection(PTaskModel pTaskModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public int SelectPTaskByValue
         {
             get

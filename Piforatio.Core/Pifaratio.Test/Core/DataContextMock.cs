@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Piforatio.Core.DataModel;
 using Piforatio.Core.ObjectsAbstract;
@@ -13,19 +12,19 @@ namespace Piforatio.Test.Core
     {
         public void Dispose() { }
 
-        bool _isFull;
+        bool _isDbEmpty;
 
-        public DataContextMock() : this(true)
+        public DataContextMock() : this(false)
         { }
 
-        public DataContextMock(bool isFull)
+        public DataContextMock(bool isDbEmpty)
         {
-            _isFull = isFull;
+            _isDbEmpty = isDbEmpty;
         }
 
         public IEnumerable<IProject> GetProjects()
         {
-            if (_isFull)
+            if (!_isDbEmpty)
             {
                 int index = 0;
                 yield return CreateProject("MVC", new DateTime(2017, 1, 20), index++);
@@ -38,19 +37,19 @@ namespace Piforatio.Test.Core
 
         public void VerifyProject(string name, ChangedType changeType)
         {
-            if (string.IsNullOrEmpty(_name) || _type == null)
-                throw new Exception("Data was not be updated! Input data is null");
+            if (string.IsNullOrEmpty(_name) || _typeProject == null)
+                throw new Exception("Project was not be updated! Input data is null");
 
             Assert.AreEqual(name, _name);
-            Assert.AreEqual(changeType, _type);
+            Assert.AreEqual(changeType, _typeProject);
         }
 
         string _name;
-        ChangedType? _type;
+        ChangedType? _typeProject;
         public void UpdateProjectCollection(IProject project, ChangedType changeType)
         {
             _name = project.Name;
-            _type = changeType;
+            _typeProject = changeType;
         }
 
         List<IProject> listProject;
@@ -74,14 +73,26 @@ namespace Piforatio.Test.Core
                 yield return null;
         }
 
-        public void UpdatePTasckCollection(IPTask task, IProject baseProject, ChangedType changeType)
+        IPTask _task;
+        ChangedType _typePTask;
+        IProject _baseProject;
+        public void UpdatePTask(IPTask task, IProject baseProject, ChangedType changeType)
         {
-            throw new NotImplementedException();
+            _task = task;
+            _typePTask = changeType;
+            _baseProject = baseProject;
+        }
+
+        public void VerifyPTask(Func<IPTask, IProject, ChangedType, bool> verify)
+        {
+            if (!verify(_task, _baseProject, _typePTask))
+                throw new Exception("PTask was not be updated!");
         }
 
         public IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject)
         {
-            throw new NotImplementedException();
+            const IProject nullProject = null;
+            return GetPTasks(nullProject);
         }
     }
 }

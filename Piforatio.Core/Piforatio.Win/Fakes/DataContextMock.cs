@@ -58,11 +58,15 @@ namespace Piforatio.Win.Fakes
             throw new NotImplementedException();
         }
 
-        public void UpdatePTasckCollection(IPTask task, IProject baseProject, ChangedType changeType)
+        public void UpdatePTask(IPTask task, IProject baseProject, ChangedType changeType)
         {
             throw new NotImplementedException();
         }
 
+        public void VerifyPTask(int TaskID, ChangedType Type)
+        {
+
+        }
         public IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject)
         {
             throw new NotImplementedException();

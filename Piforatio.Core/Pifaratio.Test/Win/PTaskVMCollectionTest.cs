@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Linq;
 using Moq;
 using Piforatio.Win.ViewModel;
 using Piforatio.Win.ViewModelCollection;
@@ -55,21 +56,51 @@ namespace Piforatio.Test.Win
         public void AddNewTaskToPTaskVMCollection()
         {
             //Arrange
-            fakeProjectVMC = CreatFakeProjectVMCollection();
+            DataContextMock context;
+            fakeProjectVMC = CreatFakeProjectVMCollection(out context);
             fakeProjectVMC.SelectProjectByValue = firstProjectValue;
             var PTaskVMC = fakeProjectVMC.CreatePTaskVMCollection();
             const int TestPTaskID = 43563;
             var newPTask = CreatePTask(PTaskVMC.BaseProject, "Test PTask", TestPTaskID);
 
             //Act
-            
+            PTaskVMC.AddPTask(newPTask);
+            var findPTask = PTaskVMC.PTasks.Where(t => t.TaskID == TestPTaskID)
+                                           .SingleOrDefault();
 
             //Assert
-            throw new NotImplementedException();
+            Assert.IsNotNull(findPTask);
+            Assert.AreEqual(TestPTaskID, findPTask.TaskID);
+            context.VerifyPTask( (task, baseTask, changeType) =>
+           {
+               return (task.TaskID == TestPTaskID) && changeType == ChangedType.Add;
+           });
         }
 
         [Test]
         public void ChangePTaskInPTaskVMCollection()
+        {
+            //Arrange
+            const string TestPTaskDescription = "Test PTask new";
+            DataContextMock context;
+            fakeProjectVMC = CreatFakeProjectVMCollection(out context);
+            fakeProjectVMC.SelectProjectByValue = firstProjectValue;
+            var PTaskVMC = fakeProjectVMC.CreatePTaskVMCollection();
+            PTaskVMC.SelectPTaskByValue = 0;
+
+            //Act
+            PTaskVMC.SelectedPTask.Desctiption = TestPTaskDescription;
+            PTaskVMC.ChangePTaskSelected();
+
+            //Assert
+            context.VerifyPTask((task, baseTask, changeType) =>
+            {
+                return (task.Desctiption == TestPTaskDescription) && changeType == ChangedType.Modify;
+            });
+        }
+
+        [Test]
+        public void AddAimToSelectedPTask()
         {
             //Arrange
 
@@ -80,7 +111,7 @@ namespace Piforatio.Test.Win
         }
 
         [Test]
-        public void ChangeAimInPTask()
+        public void RemovePTaskInPTaskVMCollection()
         {
             //Arrange
 
@@ -98,13 +129,20 @@ namespace Piforatio.Test.Win
 
         public ProjectVMCollection CreatFakeProjectVMCollection()
         {
-            return null;
+            DataContextMock context;
+            return CreatFakeProjectVMCollection(out context);
         }
 
         public ProjectVMCollection CreatFakeProjectVMCollection(out DataContextMock context)
         {
-            context = null;
-            return CreatFakeProjectVMCollection();
+            IDataContextFactory factory;
+            CreateFabricaAndMockContext(out factory, out context);
+            IProject project = CreateProject("MVC", new DateTime(), 0);
+            PTaskModel model = new PTaskModel(factory, project);
+            var mock = new Mock<ProjectVMCollection>();
+            PTaskVMCollection taskCollection = new PTaskVMCollection(model);
+            mock.Setup(c => c.CreatePTaskVMCollection()).Returns(taskCollection);
+            return mock.Object;
         }
     }
 }
