@@ -17,5 +17,44 @@ namespace Piforatio.Win.ViewModelCollection
         public IProject BaseProject { get; protected set; }
 
         private PTaskModel _pTaskModel;
+
+        public int SelectPTaskByValue
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IPTask SelectedPTask
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void AddPTask(IPTask pTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemovePTaskSelected()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangePTaskSelected()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

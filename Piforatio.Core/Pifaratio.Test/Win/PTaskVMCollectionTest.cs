@@ -14,34 +14,79 @@ namespace Piforatio.Test.Win
     class PTaskVMCollectionTest
     {
         private ProjectVMCollection fakeProjectVMC = null;
-
+        const int firstProjectValue = 0;
         [Test]
         public void CreatePTaskCollectionIsNotNull()
         {
-            throw new NotImplementedException();
+            //Arrange
+            fakeProjectVMC = CreatFakeProjectVMCollection();
+            fakeProjectVMC.SelectProjectByValue = firstProjectValue;
+
+            //Act
+            var PTaskVMC = fakeProjectVMC.CreatePTaskVMCollection();
+
+            //Assert
+            Assert.IsNotNull(PTaskVMC);
+            Assert.IsNotNull(PTaskVMC.PTasks);
         }
 
         [Test]
         public void ChangingValueIsChangeSelectedPTask()
         {
-            throw new NotImplementedException();
+            //Arrange
+            fakeProjectVMC = CreatFakeProjectVMCollection();
+            fakeProjectVMC.SelectProjectByValue = firstProjectValue;
+            var PTaskVMC = fakeProjectVMC.CreatePTaskVMCollection();
+
+            //Act
+            PTaskVMC.SelectPTaskByValue = 0;
+            var firstPTaskDescription = PTaskVMC?.SelectedPTask?.Desctiption;
+            PTaskVMC.SelectPTaskByValue = 1;
+            var secondPTaskDescription = PTaskVMC?.SelectedPTask?.Desctiption;
+
+            //Assert
+            Assert.IsNotNull(PTaskVMC.PTasks);
+            Assert.IsTrue(PTaskVMC.PTasks.Count > 1);
+            Assert.AreEqual(PTaskVMC.PTasks[0].Desctiption, firstPTaskDescription);
+            Assert.AreEqual(PTaskVMC.PTasks[1].Desctiption, secondPTaskDescription);
         }
 
         [Test]
         public void AddNewTaskToPTaskVMCollection()
         {
+            //Arrange
+            fakeProjectVMC = CreatFakeProjectVMCollection();
+            fakeProjectVMC.SelectProjectByValue = firstProjectValue;
+            var PTaskVMC = fakeProjectVMC.CreatePTaskVMCollection();
+            const int TestPTaskID = 43563;
+            var newPTask = CreatePTask(PTaskVMC.BaseProject, "Test PTask", TestPTaskID);
+
+            //Act
+            
+
+            //Assert
             throw new NotImplementedException();
         }
 
         [Test]
         public void ChangePTaskInPTaskVMCollection()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
             throw new NotImplementedException();
         }
 
         [Test]
         public void ChangeAimInPTask()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
             throw new NotImplementedException();
         }
 

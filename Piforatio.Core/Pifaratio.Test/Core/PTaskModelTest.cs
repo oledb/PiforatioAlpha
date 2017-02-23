@@ -18,26 +18,34 @@ namespace Piforatio.Test.Core
             //Arrange
             IDataContextFactory factory = CreateDataContextFabricaStub();
             PTaskModel model = new PTaskModel(factory, null);
+            IPTask ptask = CreatePTask(null, "Test", 100);
 
-            //Act
-
-            //Assert
-
-            throw new NotImplementedException();
+            //Act, Assert
+            Assert.Catch<NullReferenceException>(() => { model.Update(ptask, ChangedType.Add); });
         }
 
         [Test]
         public void CreateAndSavePTask()
         {
             //Arrange
-            IDataContextFactory factory = CreateDataContextFabricaStub();
-            IProject project = CreateProject("Test Project", new DateTime(2017, 1, 20), 34);
-            PTaskModel model = new PTaskModel(factory, null);
+            const int pTaskIndex = 215;
+            const int projectIndex = 1345;
+            DataContextMock context;
+            IDataContextFactory factory;
+            CreateFabricaAndMockContext(out factory, out context);
+            IProject project = CreateProject("Test Project", new DateTime(2017, 1, 20), projectIndex);
+            PTaskModel model = new PTaskModel(factory, project);
+            IPTask ptask = CreatePTask(project, "Test ptask", pTaskIndex);
 
             //Act
+            model.Update(ptask, ChangedType.Add);
+            IPTask firstPTask = model.GetTasks().Take(1).SingleOrDefault();
 
             //Assert
-            throw new NotImplementedException();
+            Assert.IsNotNull(firstPTask);
+            Assert.IsNotNull(firstPTask.BaseProject);
+            Assert.AreEqual(pTaskIndex, firstPTask.TaskID);
+            Assert.AreEqual(projectIndex, firstPTask.BaseProject.ProjectID);
         }
     }
 }

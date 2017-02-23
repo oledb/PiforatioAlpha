@@ -109,5 +109,10 @@ namespace Piforatio.Win.ViewModelCollection
             _projectModel.Update(SelectedProject, ChangedType.Modify);
             Projects[SelectProjectByValue].Update((IProject)SelectedProject);
         }
+
+        public PTaskVMCollection CreatePTaskVMCollection()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

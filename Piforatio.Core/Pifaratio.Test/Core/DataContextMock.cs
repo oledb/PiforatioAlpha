@@ -57,7 +57,7 @@ namespace Piforatio.Test.Core
         public IEnumerable<IPTask> GetPTasks(IProject project)
         {
             if (listProject == null)
-                GetProjects().ToList();
+                listProject = GetProjects().ToList();
             if (project.Name == "MVC")
             {
                 int index = 0;
