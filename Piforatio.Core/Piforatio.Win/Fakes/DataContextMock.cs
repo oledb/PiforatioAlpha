@@ -47,7 +47,7 @@ namespace Piforatio.Win.Fakes
 
         string _name;
         ChangedType? _type;
-        public void UpdateProjectCollection(IProject project, ChangedType changeType)
+        public void UpdateProject(IProject project, ChangedType changeType)
         {
             _name = project.Name;
             _type = changeType;

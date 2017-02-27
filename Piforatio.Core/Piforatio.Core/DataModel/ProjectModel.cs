@@ -38,7 +38,7 @@ namespace Piforatio.Core.DataModel
         {
             using (var context = _dataContextFactory.CreateContext())
             {
-                context.UpdateProjectCollection(obj, type);
+                context.UpdateProject(obj, type);
             }
         }
 
@@ -47,8 +47,8 @@ namespace Piforatio.Core.DataModel
 
             using (var context = _dataContextFactory.CreateContext())
             {
-                var query = (from p in context.GetProjects()
-                             select p);
+                var query = context.GetProjects();
+                if (query == null) return;
                 foreach (var project in query)
                 {
                     _listProject.Add(project);

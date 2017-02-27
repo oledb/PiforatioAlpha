@@ -61,7 +61,6 @@
     <Compile Include="ObjectsAbstract\IProject.cs" />
     <Compile Include="ObjectsAbstract\IPTask.cs" />
     <Compile Include="ObjectsAbstract\IPTaskPlan.cs" />
-    <Compile Include="ObjectsAbstract\IQuant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

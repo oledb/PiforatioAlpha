@@ -5,7 +5,6 @@ using NUnit.Framework;
 using Moq;
 using Piforatio.Core.ObjectsAbstract;
 using Piforatio.Core.DataModel;
-using static Piforatio.Test.Core.FakesFabrica;
 
 namespace Piforatio.Test.Core
 {
@@ -13,48 +12,77 @@ namespace Piforatio.Test.Core
     public class ProjectModelTest
     {
         [Test]
-        public void CreateAndSaveDataToModel()
+        public void SaveDataToModel()
         {
             //Arrange
-            const int result_array_length = 1;
-            var projectModel = new ProjectModel(CreateDataContextFabricaStub());
+            Mock<IDataContext> dataContext;
+            const int arrayLength = 1;
+            string projectName = "Test";
+            var projectModel = new ProjectModel(CreateFakeDataContextFabrica(out dataContext));
             projectModel.Load();
-            var list = projectModel.GetAllProjects();
-            var list2 = projectModel.GetAllProjects();
+            var newProject = CreateProject(projectName);
 
             //Act
-            list.Add(CreateProject("Test", new DateTime(2017, 1, 25), 0));
-            projectModel.Update(list[0], ChangedType.Add);
-
+            projectModel.Update(newProject, ChangedType.Add);
+            
             //Assert
-            var result = projectModel.GetAllProjects();
-            Assert.AreEqual(result_array_length, result.Count);
-            Assert.AreEqual("Test", result[0].Name);
+            dataContext.Verify(context => 
+                context.UpdateProject(newProject, ChangedType.Add), "Verify method does not work");
         }
 
         [Test]
         public void CreatedProjectListIsNotNull()
         {
-            var projectModel = new ProjectModel(CreateDataContextFabricaMock());
+            //Arrange
+            Mock<IDataContext> dataContext;
+            var projectModel = new ProjectModel(CreateFakeDataContextFabrica());
 
+            //Act
             var list = projectModel.GetAllProjects();
 
+            //Assert
             Assert.IsNotNull(list);
         }
 
         [Test]
         public void GetPTaskModelForFirstProject()
         {
-            var projectModel = new ProjectModel(CreateDataContextFabricaMock());
+            //Arrange
+            var projectModel = new ProjectModel(CreateFakeDataContextFabrica());
             projectModel.Load();
             var list = projectModel.GetAllProjects();
             var firstProject = list[0];
 
+            //Act
             PTaskModel model = projectModel.GetPTaskModel(firstProject);
 
+            //Assert
             Assert.AreEqual(firstProject.Name, model.BaseProject.Name);
             Assert.AreEqual(firstProject.CreationTime, model.BaseProject.CreationTime);
 
+        }
+
+        public static IDataContextFactory CreateFakeDataContextFabrica()
+        {
+            Mock<IDataContext> mockContext;
+            return CreateFakeDataContextFabrica(out mockContext);
+        }
+
+        public static IDataContextFactory CreateFakeDataContextFabrica(out Mock<IDataContext> mockDataContext)
+        {
+            var mock = new Mock<IDataContextFactory>();
+            mockDataContext = new Mock<IDataContext>();
+            mockDataContext.Setup(dc => dc.GetProjects())
+                       .Returns(new List<IProject>() { CreateProject("Test from fake database") });
+            mock.Setup(cf => cf.CreateContext()).Returns(mockDataContext.Object);
+            return mock.Object;
+        }
+
+        public static IProject CreateProject(string name)
+        {
+            var mock = new Mock<IProject>();
+            mock.Setup(p => p.Name).Returns(name);
+            return mock.Object;
         }
     }
 }

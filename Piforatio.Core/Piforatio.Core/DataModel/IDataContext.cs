@@ -8,9 +8,9 @@ namespace Piforatio.Core.DataModel
     public interface IDataContext : IDisposable
     {
         IEnumerable<IProject> GetProjects();
-        void UpdateProjectCollection(IProject project, ChangedType changeType);
-        IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject);
-        IEnumerable<IPTask> GetPTasks(IProject project);
-        void UpdatePTask(IPTask task, IProject baseProject, ChangedType changeType);
+        void UpdateProject(IProject project, ChangedType changeType);
+        //IEnumerable<IPTask> GetAllPTasks(bool onlyForActiveProject);
+        //IEnumerable<IPTask> GetPTasks(IProject project);
+        //void UpdatePTask(IPTask task, IProject baseProject, ChangedType changeType);
     }
 }

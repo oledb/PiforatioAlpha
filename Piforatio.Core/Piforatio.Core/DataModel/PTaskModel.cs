@@ -37,7 +37,7 @@ namespace Piforatio.Core.DataModel
         {
             using (var context = dataContextFactory.CreateContext())
             {
-                context.UpdatePTask(obj, BaseProject, type);
+                throw new NotImplementedException();
             }
         }
 
@@ -45,7 +45,7 @@ namespace Piforatio.Core.DataModel
         {
             using (var context = dataContextFactory.CreateContext())
             {
-                ptaskList = context.GetPTasks(BaseProject).ToList();
+                throw new NotImplementedException();
             }
         }
     }

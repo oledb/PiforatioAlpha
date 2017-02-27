@@ -12,6 +12,6 @@ namespace Piforatio.Core.ObjectsAbstract
         IPTask Task { get; set; }
         DateTime Date { get; set; }
         TaskStatus Status { get; set; }
-        IEnumerable<IQuant> Quants { get; set; }
+        //IEnumerable<IQuant> Quants { get; set; }
     }
 }
