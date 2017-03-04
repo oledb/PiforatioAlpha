@@ -5,9 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Core", "Piforatio.Core\Piforatio.Core.csproj", "{4E493174-A8DC-4EAF-80CA-BF05E4DE3EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Test", "Pifaratio.Test\Piforatio.Test.csproj", "{A81168C8-6432-4BA0-8523-27A376D237E3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Win", "Piforatio.Win\Piforatio.Win.csproj", "{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Core2", "Piforatio.Core2\Piforatio.Core2.csproj", "{5DA60DE3-5461-441C-8D6E-B4FBD034842D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piforatio.Core2Test", "Piforatio.Core2Test\Piforatio.Core2Test.csproj", "{06AE90EC-6F4C-4CFA-9871-2CC11DE08665}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{4E493174-A8DC-4EAF-80CA-BF05E4DE3EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E493174-A8DC-4EAF-80CA-BF05E4DE3EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E493174-A8DC-4EAF-80CA-BF05E4DE3EDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A81168C8-6432-4BA0-8523-27A376D237E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A81168C8-6432-4BA0-8523-27A376D237E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A81168C8-6432-4BA0-8523-27A376D237E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A81168C8-6432-4BA0-8523-27A376D237E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31950F74-EBEA-4E8D-8A5F-D7D02ED567EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA60DE3-5461-441C-8D6E-B4FBD034842D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA60DE3-5461-441C-8D6E-B4FBD034842D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA60DE3-5461-441C-8D6E-B4FBD034842D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA60DE3-5461-441C-8D6E-B4FBD034842D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06AE90EC-6F4C-4CFA-9871-2CC11DE08665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06AE90EC-6F4C-4CFA-9871-2CC11DE08665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06AE90EC-6F4C-4CFA-9871-2CC11DE08665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06AE90EC-6F4C-4CFA-9871-2CC11DE08665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

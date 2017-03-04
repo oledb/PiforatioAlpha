@@ -16,25 +16,22 @@ namespace Piforatio.Test.Core
         {
             //Arrange
             Mock<IDataContext> dataContext;
-            const int arrayLength = 1;
-            string projectName = "Test";
             var projectModel = new ProjectModel(CreateFakeDataContextFabrica(out dataContext));
             projectModel.Load();
-            var newProject = CreateProject(projectName);
+            var newProject = CreateProject("Test project");
 
             //Act
             projectModel.Update(newProject, ChangedType.Add);
             
             //Assert
             dataContext.Verify(context => 
-                context.UpdateProject(newProject, ChangedType.Add), "Verify method does not work");
+                context.UpdateProject(newProject, ChangedType.Add));
         }
 
         [Test]
         public void CreatedProjectListIsNotNull()
         {
             //Arrange
-            Mock<IDataContext> dataContext;
             var projectModel = new ProjectModel(CreateFakeDataContextFabrica());
 
             //Act
@@ -51,7 +48,7 @@ namespace Piforatio.Test.Core
             var projectModel = new ProjectModel(CreateFakeDataContextFabrica());
             projectModel.Load();
             var list = projectModel.GetAllProjects();
-            var firstProject = list[0];
+            var firstProject = list.Take(1).SingleOrDefault();
 
             //Act
             PTaskModel model = projectModel.GetPTaskModel(firstProject);
