@@ -5,7 +5,7 @@ using Piforatio.Core2;
 namespace Piforatio.Core2Test
 {
     [TestFixture]
-    public class MainTest
+    public class QuantCollectionTest
     {
         [Test]
         public void AddNewQuant()

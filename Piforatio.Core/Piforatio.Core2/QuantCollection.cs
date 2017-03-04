@@ -8,11 +8,23 @@ namespace Piforatio.Core2
 {
     public class QuantCollection
     {
-        public void Add(Quant quant)
+        private List<Quant> _list;
+        public QuantCollection()
         {
-
+            _list = new List<Quant>();
         }
 
-        public int Length { get; }
+        public void Add(Quant quant)
+        {
+            _list.Add(quant);
+        }
+
+        public int Length
+        {
+            get
+            {
+                return _list.Count;
+            }
+        }
     }
 }
