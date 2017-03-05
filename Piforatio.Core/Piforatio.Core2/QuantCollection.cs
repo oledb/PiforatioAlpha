@@ -38,9 +38,23 @@ namespace Piforatio.Core2
             return result.AsReadOnly();
         }
 
-        public ReadOnlyCollection<Quant> GetQuants(int week)
+        public ReadOnlyCollection<Quant> GetQuants(int week, int year)
         {
-            return GetQuants(new DateTime(2017, 02, 27));
+            var start = WeekNumber.FirstDateOfWeek(year, week);
+            var end = new DateTime(start.AddDays(7).Ticks);
+            var result = (from q in _list
+                          where (q.Time >= start.Date && q.Time <= end.Date)
+                          select q).ToList();
+            return result.AsReadOnly();
+        }
+
+        public void Update(int id, Quant @new)
+        {
+            var quant = _list.Find(q => q.QuantID == id);
+            quant.Project = @new.Project;
+            quant.Objective = @new.Objective;
+            quant.Comment = @new.Comment;
+            quant.Time = @new.Time;
         }
     }
 }

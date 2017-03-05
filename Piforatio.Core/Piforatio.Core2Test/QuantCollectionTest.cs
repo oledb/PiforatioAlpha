@@ -56,31 +56,63 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(quant2, list[1]);
         }
 
-        [Ignore("Fake")]
         [Test]
         public void GetQuantByWeek()
         {
             //Arrange
             var quantCollection = new QuantCollection();
-            var quant5week = new Quant()
-            {
-                Time = new DateTime(2017, 02, 27)
-            };
-            var quant4week = new Quant()
+            var quant8week = new Quant()
             {
                 Time = new DateTime(2017, 02, 26)
             };
-            quantCollection.Add(quant4week);
-            quantCollection.Add(quant5week);
+            var quant9week = new Quant()
+            {
+                Time = new DateTime(2017, 02, 27)
+            };
+            var quant10week = new Quant()
+            {
+                Time = new DateTime(2017, 03, 06)
+            };
+            quantCollection.Add(quant8week);
+            quantCollection.Add(quant9week);
 
             //Act
-            var list = quantCollection.GetQuants(5);
+            var list = quantCollection.GetQuants(9, 2017);
 
             //Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(quant5week, list[0]);
+            Assert.AreEqual(quant9week, list[0]);
         }
 
+        [Test]
+        public void UpdateQunat()
+        {
+            //Arrange
+            var oldComment = "Helo wold";
+            var newComment = "Hello world";
+            var today = new DateTime(2017, 2, 10);
+            var quant = new Quant
+            {
+                QuantID = 100,
+                Comment = oldComment,
+                Time = today
+            };
+            var quantCollection = new QuantCollection();
+            quantCollection.Add(quant);
+
+            //Act
+            var changedId = quantCollection.GetQuants(today)[0].QuantID;
+            var changedQuant = new Quant()
+            {
+                Comment = newComment,
+                Time = today
+            };
+            quantCollection.Update(changedId, changedQuant);
+            quant = quantCollection.GetQuants(today)[0];
+
+            //Assert
+            Assert.AreEqual(newComment, quant.Comment);
+        }
     }
 }
 

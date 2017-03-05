@@ -8,6 +8,7 @@ namespace Piforatio.Core2
 {
     public class Quant
     {
+        public int QuantID { get; set; }
         public DateTime Time { get; set; }
         public string Project { get; set; }
         public string Objective { get; set; }

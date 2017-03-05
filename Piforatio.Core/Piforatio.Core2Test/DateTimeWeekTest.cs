@@ -9,7 +9,7 @@ namespace Piforatio.Core2Test
     class DateTimeWeekTest
     {
         [Test]
-        public void Get9WeekStartDates()
+        public void Get9Week2017StartDate()
         {
             //Arrange
             DateTime start;
@@ -19,6 +19,19 @@ namespace Piforatio.Core2Test
 
             //Assert
             Assert.AreEqual(new DateTime(2017, 02, 27).Date, start.Date);
+        }
+
+        [Test]
+        public void Get9Week2016StartDate()
+        {
+            //Arrange
+            DateTime start;
+
+            //Act
+            start = WeekNumber.FirstDateOfWeek(2016, 9);
+
+            //Assert
+            Assert.AreEqual(new DateTime(2016, 02, 29).Date, start.Date);
         }
     }
 }
