@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objective.cs" />
+    <Compile Include="ObjectiveCollection.cs" />
+    <Compile Include="ObjectiveStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quant.cs" />
     <Compile Include="QuantCollection.cs" />
