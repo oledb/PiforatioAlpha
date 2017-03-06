@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DateTimeWeekTest.cs" />
     <Compile Include="ObjectiveCollectionTest.cs" />
+    <Compile Include="ProjectCollectionTest.cs" />
     <Compile Include="QuantCollectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

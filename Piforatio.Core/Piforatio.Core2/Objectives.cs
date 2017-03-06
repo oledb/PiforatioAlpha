@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
 
 namespace Piforatio.Core2
@@ -11,22 +9,14 @@ namespace Piforatio.Core2
 
         public ReadOnlyCollection<Objective> GetObjectives(string template)
         {
-            var result = (from q in list
-                          where q.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) >= 0
-                          select q).ToList();
-
-            return result.AsReadOnly();
+            return Get(o => o.Name.IndexOf(template,
+                          StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         public ReadOnlyCollection<Objective> GetObjectives(string template, ObjectiveStatus status)
         {
-            var result = (from q in list
-                          where q.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) >= 0 && q.Status == status
-                          select q).ToList();
-
-            return result.AsReadOnly();
+            return Get(o => o.Name.IndexOf(template,
+                          StringComparison.OrdinalIgnoreCase) >= 0 && o.Status == status);
         }
     }
 }

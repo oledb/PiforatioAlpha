@@ -13,21 +13,15 @@ namespace Piforatio.Core2
 
         public ReadOnlyCollection<Quant> GetQuants(DateTime date)
         {
-            var result = (from q in list
-                          where DateTime.Compare(q.Time.Date, date.Date) == 0
-                          orderby q.Time
-                          select q).ToList();
-
-            return result.AsReadOnly();
+            return Get(q => DateTime.Compare(q.Time.Date, date.Date) == 0).OrderBy(qs => qs.Time)
+                .ToList().AsReadOnly();
         }
 
         public ReadOnlyCollection<Quant> GetQuants(int week, int year)
         {
             var start = WeekNumber.FirstDateOfWeek(year, week);
             var end = new DateTime(start.AddDays(7).Ticks);
-            var result = (from q in list
-                          where (q.Time >= start.Date && q.Time <= end.Date)
-                          select q).ToList();
+            var result = Get(q => q.Time >= start.Date && q.Time <= end.Date).ToList();
             return result.AsReadOnly();
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Piforatio.Core2
 {
@@ -18,6 +18,14 @@ namespace Piforatio.Core2
         public void Add(T obj)
         {
             list.Add(obj);
+        }
+
+        public ReadOnlyCollection<T> Get(Func<T, bool> isValid)
+        {
+            var result = (from o in list
+                          where isValid(o)
+                          select o).ToList();
+            return result.AsReadOnly();
         }
 
         public int Length
