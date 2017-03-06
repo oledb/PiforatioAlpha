@@ -13,7 +13,7 @@ namespace Piforatio.Core2
         {
             var result = (from q in list
                           where q.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) > 0
+                          StringComparison.OrdinalIgnoreCase) >= 0
                           select q).ToList();
 
             return result.AsReadOnly();
@@ -23,10 +23,18 @@ namespace Piforatio.Core2
         {
             var result = (from q in list
                           where q.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) > 0 && q.Status == status
+                          StringComparison.OrdinalIgnoreCase) >= 0 && q.Status == status
                           select q).ToList();
 
             return result.AsReadOnly();
+        }
+
+        public void Update(int id, Objective newObj)
+        {
+            var obj = list.Find(o => o.ObjectiveID == id);
+            obj.Name = newObj.Name;
+            obj.Project = newObj.Project;
+            obj.Status = newObj.Status;
         }
     }
 }

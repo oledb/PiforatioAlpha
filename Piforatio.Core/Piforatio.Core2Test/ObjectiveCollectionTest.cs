@@ -55,7 +55,7 @@ namespace Piforatio.Core2Test
                 Status = ObjectiveStatus.Completed });
             collection.Add(new Objective() { Name = "Create Mvc test",
                 Status = ObjectiveStatus.InProgress});
-            collection.Add(new Objective() { Name = "Create MVC site",
+            collection.Add(new Objective() { Name = "MVC site",
                 Status = ObjectiveStatus.NotStarted});
 
             //Act
@@ -68,7 +68,32 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(1, list1.Count);
             Assert.AreEqual("Create Mvc test", list1[0].Name);
             Assert.AreEqual(1, list2.Count);
-            Assert.AreEqual("Create MVC site", list2[0].Name);
+            Assert.AreEqual("MVC site", list2[0].Name);
+        }
+
+        [Test]
+        public void UpdateObjectives()
+        {
+            //Arrange
+            var oldName = "Crate Mvc stie";
+            var newName = "Create Mvc site";
+            var collection = new Objectives();
+            collection.Add(new Objective()
+            {
+                ObjectiveID = 100,
+                Name = oldName
+            });
+
+            //Act
+            collection.Update(100, new Objective()
+            {
+                Name = newName
+            });
+            var list = collection.GetObjectives(newName);
+
+            //Assert
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(newName, list[0].Name);
         }
     }
 }
