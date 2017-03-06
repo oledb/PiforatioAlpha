@@ -20,7 +20,7 @@ namespace Piforatio.Core2Test
                 Name = "Read book MVC for professional",
                 Status = ObjectiveStatus.NotStarted,
             };
-            var objs = new ObjectiveCollection();
+            var objs = new Objectives();
 
             //Act
             objs.Add(obj);

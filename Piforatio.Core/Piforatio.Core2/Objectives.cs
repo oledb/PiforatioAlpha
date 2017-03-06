@@ -6,16 +6,8 @@ using System.Threading.Tasks;
 
 namespace Piforatio.Core2
 {
-    public class ObjectiveCollection
+    public class Objectives : BaseArray<Objective>
     {
-        public void Add(Objective obj)
-        {
-
-        }
-
-        public int Length
-        {
-            get;
-        }
+        public Objectives() : base() { }
     }
 }

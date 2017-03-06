@@ -11,7 +11,7 @@ namespace Piforatio.Core2
         public int QuantID { get; set; }
         public DateTime Time { get; set; }
         public string Project { get; set; }
-        public string Objective { get; set; }
+        public Objective Objective { get; set; }
         public string Comment { get; set; }
         public int Count { get; set; }
     }

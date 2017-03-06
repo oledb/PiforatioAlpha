@@ -7,30 +7,13 @@ using System.Threading.Tasks;
 
 namespace Piforatio.Core2
 {
-    public class QuantCollection
+    public class Quants : BaseArray<Quant>
     {
-        private List<Quant> _list;
-        public QuantCollection()
-        {
-            _list = new List<Quant>();
-        }
-
-        public void Add(Quant quant)
-        {
-            _list.Add(quant);
-        }
-
-        public int Length
-        {
-            get
-            {
-                return _list.Count;
-            }
-        }
+        public Quants() : base() { }
 
         public ReadOnlyCollection<Quant> GetQuants(DateTime date)
         {
-            var result = (from q in _list
+            var result = (from q in list
                           where DateTime.Compare(q.Time.Date, date.Date) == 0
                           orderby q.Time
                           select q).ToList();
@@ -42,7 +25,7 @@ namespace Piforatio.Core2
         {
             var start = WeekNumber.FirstDateOfWeek(year, week);
             var end = new DateTime(start.AddDays(7).Ticks);
-            var result = (from q in _list
+            var result = (from q in list
                           where (q.Time >= start.Date && q.Time <= end.Date)
                           select q).ToList();
             return result.AsReadOnly();
@@ -50,7 +33,7 @@ namespace Piforatio.Core2
 
         public void Update(int id, Quant @new)
         {
-            var quant = _list.Find(q => q.QuantID == id);
+            var quant = list.Find(q => q.QuantID == id);
             quant.Project = @new.Project;
             quant.Objective = @new.Objective;
             quant.Comment = @new.Comment;

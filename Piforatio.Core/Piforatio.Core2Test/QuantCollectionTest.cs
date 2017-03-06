@@ -18,11 +18,14 @@ namespace Piforatio.Core2Test
                 QuantID = 1000,
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
                 Project = "C# Books",
-                Objective = "Piforatio - Logic",
+                Objective = new Objective()
+                {
+                    Name = "Learn MVC"
+                },
                 Comment = "Start new",
                 Count = 4
             };
-            var quantCollection = new QuantCollection();
+            var quantCollection = new Quants();
 
             //Act
             quantCollection.Add(quantTrue);
@@ -41,7 +44,7 @@ namespace Piforatio.Core2Test
             var quant2 = new Quant() { Time = new DateTime(2017, 3, 24, 12, 30, 00) };
             var quantIncorrect = new Quant() { Time = Today };
 
-            var quantCollection = new QuantCollection();
+            var quantCollection = new Quants();
             quantCollection.Add(quantIncorrect);
             quantCollection.Add(quant2);
             quantCollection.Add(quant1);
@@ -61,7 +64,7 @@ namespace Piforatio.Core2Test
         public void GetQuantByWeek()
         {
             //Arrange
-            var quantCollection = new QuantCollection();
+            var quantCollection = new Quants();
             var quant8week = new Quant()
             {
                 Time = new DateTime(2017, 02, 26)
@@ -98,7 +101,7 @@ namespace Piforatio.Core2Test
                 Comment = oldComment,
                 Time = today
             };
-            var quantCollection = new QuantCollection();
+            var quantCollection = new Quants();
             quantCollection.Add(quant);
 
             //Act
