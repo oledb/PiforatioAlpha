@@ -22,15 +22,13 @@ namespace Piforatio.Core2Test
             calendar.Add(new Week()
             {
                 ID = 19,
-                StartDate = Date(2017, 2, 27),
-                Achivments = "",
+                StartDate = Date(2017, 2, 27)
             });
 
             //Assert
             Assert.AreEqual(1, calendar.Length);
         }
 
-        [Ignore("Fake average info")]
         [Test]
         public void GetCountsWeekInfo()
         {
@@ -40,7 +38,7 @@ namespace Piforatio.Core2Test
             var quants = QuantsFake.Create(objectives);
             var calendar = new Calendar(quants);
             var week9 = Date(2017, 2, 27);
-            calendar.Add(new Week(){ StartDate = week9 });
+            calendar.Add( new Week() { StartDate = week9 });
 
             //Act
             WeekInfo info = calendar.GetWeekInfo(week9);

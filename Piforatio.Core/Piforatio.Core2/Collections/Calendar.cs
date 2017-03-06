@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Piforatio.Core2
 {
@@ -40,9 +37,20 @@ namespace Piforatio.Core2
             return new WeekInfo(dic, total, aver);
         }
 
-        public double Round(double d)
+        private double Round(double d)
         {
-            return 3.25;
+            var a = Math.Truncate(d);
+            var b = d - a;
+            if (b <= 0.125)
+                return a;
+            else if (b > 0.125 && b <= 0.375)
+                return a + 0.25;
+            else if (b > 0.375 && b <= 0.625)
+                return a + 0.5;
+            else if (b > 0.625 && b <= 0.875)
+                return a + 0.75;
+            else
+                return a + 1;
         }
     }
 }
