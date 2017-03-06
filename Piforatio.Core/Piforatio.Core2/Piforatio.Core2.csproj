@@ -48,8 +48,8 @@
     <Compile Include="Objects\Project.cs" />
     <Compile Include="Collections\Projects.cs" />
     <Compile Include="Objects\ProjectType.cs" />
-    <Compile Include="Plan.cs" />
-    <Compile Include="Plans.cs" />
+    <Compile Include="Objects\Plan.cs" />
+    <Compile Include="Collections\Plans.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Quant.cs" />
     <Compile Include="Collections\Quants.cs" />

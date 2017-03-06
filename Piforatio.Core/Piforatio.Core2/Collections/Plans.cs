@@ -8,6 +8,9 @@ namespace Piforatio.Core2
 {
     public class Plans : BaseArray<Plan>
     {
-
+        public List<Plan> GetPlans(DateTime date)
+        {
+            return Get(p => p.Date.Date == date.Date);
+        }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Piforatio.Core2Test.Fakes;
 using NUnit.Framework;
 using Piforatio.Core2;
@@ -46,12 +44,19 @@ namespace Piforatio.Core2Test
             plans.Add( new Plan()
             {
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.GetObjectives("Read book")[0]
+                Objective = objectives.GetObjectives("Create test site")[0]
             });
-            
+            plans.Add(new Plan()
+            {
+                Date = new DateTime(2017, 3, 4),
+                Objective = objectives.GetObjectives("Create test site")[0]
+            });
 
             //Act
+            var list = plans.GetPlans(new DateTime(2017, 3, 3));
+
             //Assert
+            Assert.AreEqual(2, list.Count);
         }
     }
 }
