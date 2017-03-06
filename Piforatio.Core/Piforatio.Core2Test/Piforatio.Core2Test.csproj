@@ -50,10 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarTest.cs" />
+    <Compile Include="PlanCollectionTest.cs" />
     <Compile Include="DateTimeWeekTest.cs" />
     <Compile Include="Fakes\ObjectivesFake.cs" />
     <Compile Include="Fakes\ProjectsFake.cs" />
+    <Compile Include="Fakes\QuantsFake.cs" />
     <Compile Include="ObjectiveCollectionTest.cs" />
     <Compile Include="ProjectCollectionTest.cs" />
     <Compile Include="QuantCollectionTest.cs" />

@@ -8,17 +8,17 @@ namespace Piforatio.Core2Test.Fakes
         public static Projects Create()
         {
             var fake = new Projects();
-            int index = 0;
+            int id = 0;
             fake.Add(new Project()
             {
-                ID = index++,
+                ID = id++,
                 Name = "MVC",
                 Type = ProjectType.Learn,
                 Comment = "Learn MVC, frontend and backend"
             });
             fake.Add(new Project()
             {
-                ID = index++,
+                ID = id++,
                 Name = "Upwork",
                 Type = ProjectType.Work,
                 Comment = "Carry out orders"
