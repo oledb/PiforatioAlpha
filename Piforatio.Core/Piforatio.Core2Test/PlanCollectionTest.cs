@@ -58,5 +58,29 @@ namespace Piforatio.Core2Test
             //Assert
             Assert.AreEqual(2, list.Count);
         }
+
+        [Test]
+        public void UpdatePlan()
+        {
+            //Arrange
+            var projects = ProjectsFake.Create();
+            var objectives = ObjectivesFake.Create(projects);
+            var plans = new Plans();
+            plans.Add(new Plan()
+            {
+                ID = 12,
+                Date = new DateTime(2017, 3, 3),
+                Objective = objectives.GetObjectives("Read book")[0]
+            });
+
+            //Act
+            plans.Update(12, new Plan() { Date = new DateTime(2017, 3, 5) });
+            var list = plans.GetPlans(new DateTime(2017, 3, 5));
+
+            //Assert
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(12, list[0].ID);
+            Assert.AreEqual(1, plans.Length);
+        }
     }
 }

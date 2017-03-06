@@ -8,9 +8,13 @@ namespace Piforatio.Core2
         public DateTime Date { get; set; }
         public Objective Objective { get; set; }
 
-        public void Update(ICoreObject obj)
+        public void Update(ICoreObject @new)
         {
-            throw new NotImplementedException();
+            var plan = @new as Plan;
+            if (plan.Date != default(DateTime))
+                Date = plan.Date;
+            if (plan.Objective != null)
+                Objective = plan.Objective; 
         }
     }
 }
