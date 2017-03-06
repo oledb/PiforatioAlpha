@@ -18,5 +18,15 @@ namespace Piforatio.Core2
 
             return result.AsReadOnly();
         }
+
+        public ReadOnlyCollection<Objective> GetObjectives(string template, ObjectiveStatus status)
+        {
+            var result = (from q in list
+                          where q.Name.IndexOf(template,
+                          StringComparison.OrdinalIgnoreCase) > 0 && q.Status == status
+                          select q).ToList();
+
+            return result.AsReadOnly();
+        }
     }
 }

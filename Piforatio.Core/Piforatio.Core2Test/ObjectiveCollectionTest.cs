@@ -45,5 +45,30 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(1, list.Count);
             Assert.AreEqual("Read MVC book", list[0].Name);
         }
+
+        [Test]
+        public void GetObjetivesByNameAndStatus()
+        {
+            //Arrange
+            var collection = new Objectives();
+            collection.Add(new Objective() { Name = "Read mvc-book",
+                Status = ObjectiveStatus.Completed });
+            collection.Add(new Objective() { Name = "Create Mvc test",
+                Status = ObjectiveStatus.InProgress});
+            collection.Add(new Objective() { Name = "Create MVC site",
+                Status = ObjectiveStatus.NotStarted});
+
+            //Act
+            var list1 = collection.GetObjectives("mvc", 
+                ObjectiveStatus.InProgress);
+            var list2 = collection.GetObjectives("mvc",
+                ObjectiveStatus.NotStarted);
+
+            //Arrnage
+            Assert.AreEqual(1, list1.Count);
+            Assert.AreEqual("Create Mvc test", list1[0].Name);
+            Assert.AreEqual(1, list2.Count);
+            Assert.AreEqual("Create MVC site", list2[0].Name);
+        }
     }
 }
