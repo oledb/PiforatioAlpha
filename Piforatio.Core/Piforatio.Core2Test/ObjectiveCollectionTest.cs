@@ -16,7 +16,7 @@ namespace Piforatio.Core2Test
             var obj = new Objective()
             {
                 ID = 100,
-                Project = "Learn MVC",
+                Project = new Project() { Name = "Learn MVC" },
                 Name = "Read book MVC for professional",
                 Status = ObjectiveStatus.NotStarted,
             };
@@ -82,7 +82,7 @@ namespace Piforatio.Core2Test
             {
                 ID = 100,
                 Name = oldName,
-                Project = "Test",
+                Project = new Project() { Name = "Test" },
                 Status = ObjectiveStatus.InProgress
             });
 
@@ -96,7 +96,7 @@ namespace Piforatio.Core2Test
             //Assert
             Assert.AreEqual(1, list.Count);
             Assert.AreEqual(newName, list[0].Name);
-            Assert.AreEqual("Test", list[0].Project);
+            Assert.AreEqual("Test", list[0].Project.Name);
             Assert.AreEqual(ObjectiveStatus.InProgress, list[0].Status);
         }
     }

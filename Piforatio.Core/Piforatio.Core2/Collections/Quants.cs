@@ -9,7 +9,6 @@ namespace Piforatio.Core2
 {
     public class Quants : BaseArray<Quant>
     {
-        public Quants() : base() { }
 
         public List<Quant> GetQuants(DateTime date)
         {

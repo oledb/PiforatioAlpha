@@ -17,7 +17,6 @@ namespace Piforatio.Core2Test
             {
                 ID = 1000,
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
-                Project = "C# Books",
                 Objective = new Objective()
                 {
                     Name = "Learn MVC"

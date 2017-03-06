@@ -10,14 +10,14 @@ namespace Piforatio.Core2
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Project { get; set; }
+        public Project Project { get; set; }
         public ObjectiveStatus? Status { get; set; }
 
         public void Update(ICoreObject @new)
         {
             var newObj = @new as Objective;
             Name = newObj.Name;
-            if (!string.IsNullOrEmpty(newObj.Project))
+            if (newObj.Project != null)
                 Project = newObj.Project;
             if (newObj.Status != null)
                 Status = newObj.Status;
