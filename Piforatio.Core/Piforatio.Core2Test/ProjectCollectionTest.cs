@@ -60,7 +60,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void GetProjectsByPredicate()
+        public void GetProjectByPredicate()
         {
             //Arrange
             var collection = new Projects();
@@ -68,11 +68,11 @@ namespace Piforatio.Core2Test
             collection.Add(new Project() { Name = "JavaScript" });
 
             //Act
-            var list = collection.Get(p => p.Name == "MVC");
+            var project = collection.GetSingle(p => p.Name == "MVC");
 
             //Assert
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("MVC", list[0].Name);
+            Assert.AreEqual(typeof(Project), project.GetType());
+            Assert.AreEqual("MVC", project.Name);
         }
 
         [Test]

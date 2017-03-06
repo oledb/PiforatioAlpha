@@ -27,6 +27,13 @@ namespace Piforatio.Core2
             return result;
         }
 
+        public T GetSingle(Func<T, bool> isValid)
+        {
+            return (from o in list
+                    where isValid(o)
+                    select o).SingleOrDefault();
+        }
+
         public int Length
         {
             get { return list.Count; }
