@@ -11,18 +11,18 @@ namespace Piforatio.Core2
     {
         public Quants() : base() { }
 
-        public ReadOnlyCollection<Quant> GetQuants(DateTime date)
+        public List<Quant> GetQuants(DateTime date)
         {
             return Get(q => DateTime.Compare(q.Time.Date, date.Date) == 0).OrderBy(qs => qs.Time)
-                .ToList().AsReadOnly();
+                .ToList();
         }
 
-        public ReadOnlyCollection<Quant> GetQuants(int week, int year)
+        public List<Quant> GetQuants(int week, int year)
         {
             var start = WeekNumber.FirstDateOfWeek(year, week);
             var end = new DateTime(start.AddDays(7).Ticks);
-            var result = Get(q => q.Time >= start.Date && q.Time <= end.Date).ToList();
-            return result.AsReadOnly();
+            var result = Get(q => q.Time >= start.Date && q.Time <= end.Date);
+            return result;
         }
     }
 }

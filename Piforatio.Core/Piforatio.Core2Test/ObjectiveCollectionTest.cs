@@ -47,7 +47,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void GetObjetivesByNameAndStatus()
+        public void GetObjetivesByStatus()
         {
             //Arrange
             var collection = new Objectives();
@@ -59,9 +59,9 @@ namespace Piforatio.Core2Test
                 Status = ObjectiveStatus.NotStarted});
 
             //Act
-            var list1 = collection.GetObjectives("mvc", 
+            var list1 = collection.GetObjectives(
                 ObjectiveStatus.InProgress);
-            var list2 = collection.GetObjectives("mvc",
+            var list2 = collection.GetObjectives(
                 ObjectiveStatus.NotStarted);
 
             //Arrnage

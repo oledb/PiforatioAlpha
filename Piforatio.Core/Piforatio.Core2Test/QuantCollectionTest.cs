@@ -54,7 +54,7 @@ namespace Piforatio.Core2Test
 
             //Assert
 
-            Assert.IsTrue(list is ReadOnlyCollection<Quant>);
+            Assert.IsTrue(list is List<Quant>);
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual(quant1, list[0]);
             Assert.AreEqual(quant2, list[1]);

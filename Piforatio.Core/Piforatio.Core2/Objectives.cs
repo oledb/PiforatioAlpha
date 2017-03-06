@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Piforatio.Core2
 {
@@ -7,16 +7,15 @@ namespace Piforatio.Core2
     {
         public Objectives() : base() { }
 
-        public ReadOnlyCollection<Objective> GetObjectives(string template)
+        public List<Objective> GetObjectives(string template)
         {
             return Get(o => o.Name.IndexOf(template,
                           StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        public ReadOnlyCollection<Objective> GetObjectives(string template, ObjectiveStatus status)
+        public List<Objective> GetObjectives(ObjectiveStatus status)
         {
-            return Get(o => o.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) >= 0 && o.Status == status);
+            return Get(o => o.Status == status);
         }
     }
 }

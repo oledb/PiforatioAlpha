@@ -75,6 +75,45 @@ namespace Piforatio.Core2Test
             Assert.AreEqual("MVC", list[0].Name);
         }
 
+        [Test]
+        public void GetProjectsByType()
+        {
+            //Arrange
+            var collection = new Projects();
+            collection.Add(new Project()
+            {
+                Name = "MVC",
+                Type = ProjectType.Learn
+            });
+            collection.Add(new Project()
+            {
+                Name = "Java",
+                Type = ProjectType.Work
+            });
+
+            //Act
+            var list = collection.GetProjects(ProjectType.Learn);
+
+            //Assert
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual("MVC", list[0].Name);
+        }
         
+        [Test]
+        public void GetAllProjects()
+        {
+            //Arrange
+            var collection = new Projects();
+            collection.Add(new Project());
+            collection.Add(new Project());
+            collection.Add(new Project());
+            collection.Add(new Project());
+
+            //Act
+            var list = collection.GetProjects();
+
+            //Assert
+            Assert.AreEqual(4, list.Count);
+        }
     }
 }

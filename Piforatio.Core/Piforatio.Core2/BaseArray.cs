@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 
 namespace Piforatio.Core2
@@ -20,12 +19,12 @@ namespace Piforatio.Core2
             list.Add(obj);
         }
 
-        public ReadOnlyCollection<T> Get(Func<T, bool> isValid)
+        public List<T> Get(Func<T, bool> isValid)
         {
             var result = (from o in list
                           where isValid(o)
                           select o).ToList();
-            return result.AsReadOnly();
+            return result;
         }
 
         public int Length
