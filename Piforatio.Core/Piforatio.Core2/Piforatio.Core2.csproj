@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseArray.cs" />
+    <Compile Include="ICoreObject.cs" />
     <Compile Include="Objective.cs" />
     <Compile Include="Objectives.cs" />
     <Compile Include="ObjectiveStatus.cs" />

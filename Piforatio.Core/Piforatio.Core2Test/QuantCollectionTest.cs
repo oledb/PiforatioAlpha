@@ -15,7 +15,7 @@ namespace Piforatio.Core2Test
             //Arrange
             var quantTrue = new Quant()
             {
-                QuantID = 1000,
+                ID = 1000,
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
                 Project = "C# Books",
                 Objective = new Objective()
@@ -97,7 +97,7 @@ namespace Piforatio.Core2Test
             var today = new DateTime(2017, 2, 10);
             var quant = new Quant
             {
-                QuantID = 100,
+                ID = 100,
                 Comment = oldComment,
                 Time = today
             };
@@ -105,7 +105,7 @@ namespace Piforatio.Core2Test
             quantCollection.Add(quant);
 
             //Act
-            var changedId = quantCollection.GetQuants(today)[0].QuantID;
+            var changedId = quantCollection.GetQuants(today)[0].ID;
             var changedQuant = new Quant()
             {
                 Comment = newComment,

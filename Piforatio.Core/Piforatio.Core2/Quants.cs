@@ -30,14 +30,5 @@ namespace Piforatio.Core2
                           select q).ToList();
             return result.AsReadOnly();
         }
-
-        public void Update(int id, Quant @new)
-        {
-            var quant = list.Find(q => q.QuantID == id);
-            quant.Project = @new.Project;
-            quant.Objective = @new.Objective;
-            quant.Comment = @new.Comment;
-            quant.Time = @new.Time;
-        }
     }
 }

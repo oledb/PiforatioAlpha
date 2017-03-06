@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Piforatio.Core2
 {
-    public abstract class BaseArray<T> 
+    public abstract class BaseArray<T> where T : ICoreObject
     {
         protected List<T> list;
 
@@ -23,6 +23,18 @@ namespace Piforatio.Core2
         public int Length
         {
             get { return list.Count; }
+        }
+
+        public void Update(T obj)
+        {
+            var oldObj = list.Find(o => obj.ID == o.ID);
+            oldObj.Update(obj);
+        }
+
+        public void Update(int id, T obj)
+        {
+            obj.ID = id;
+            Update(obj);
         }
     }
 }

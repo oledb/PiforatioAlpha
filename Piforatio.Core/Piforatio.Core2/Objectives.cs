@@ -28,13 +28,5 @@ namespace Piforatio.Core2
 
             return result.AsReadOnly();
         }
-
-        public void Update(int id, Objective newObj)
-        {
-            var obj = list.Find(o => o.ObjectiveID == id);
-            obj.Name = newObj.Name;
-            obj.Project = newObj.Project;
-            obj.Status = newObj.Status;
-        }
     }
 }
