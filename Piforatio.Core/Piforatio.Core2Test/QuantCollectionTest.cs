@@ -9,11 +9,18 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class QuantCollectionTest
     {
+        protected FakeContextFactory factory;
+        [SetUp]
+        public void Recreate()
+        {
+            FakeContextFactory.CreateDb();
+            factory = new FakeContextFactory();
+        }
+        
         [Test]
         public void AddNewQuant()
         {
             //Arrange
-            var factory = new FakeContextFactory();
             var quantTrue = new Quant()
             {
                 ID = 1000,
@@ -28,10 +35,11 @@ namespace Piforatio.Core2Test
             var quantCollection = new Quants(factory);
 
             //Act
-            quantCollection.Add(quantTrue);
+            quantCollection.Create(quantTrue);
+            var list = quantCollection.Read();
 
             //Assert
-            Assert.AreEqual(1, quantCollection.Length);
+            Assert.AreEqual(1, list.Count);
 
         }
 
@@ -44,13 +52,13 @@ namespace Piforatio.Core2Test
             var quant2 = new Quant() { Time = new DateTime(2017, 3, 24, 12, 30, 00) };
             var quantIncorrect = new Quant() { Time = Today };
 
-            var quantCollection = new Quants();
-            quantCollection.Add(quantIncorrect);
-            quantCollection.Add(quant2);
-            quantCollection.Add(quant1);
+            var quantCollection = new Quants(factory);
+            quantCollection.Create(quantIncorrect);
+            quantCollection.Create(quant2);
+            quantCollection.Create(quant1);
 
             //Act
-            var list = quantCollection.GetQuants(new DateTime(2017, 3, 24));
+            var list = quantCollection.Read(new DateTime(2017, 3, 24));
 
             //Assert
 
@@ -64,7 +72,7 @@ namespace Piforatio.Core2Test
         public void GetQuantByWeek()
         {
             //Arrange
-            var quantCollection = new Quants();
+            var quantCollection = new Quants(factory);
             var quant8week = new Quant()
             {
                 Time = new DateTime(2017, 02, 26)
@@ -77,11 +85,11 @@ namespace Piforatio.Core2Test
             {
                 Time = new DateTime(2017, 03, 06)
             };
-            quantCollection.Add(quant8week);
-            quantCollection.Add(quant9week);
+            quantCollection.Create(quant8week);
+            quantCollection.Create(quant9week);
 
             //Act
-            var list = quantCollection.GetQuants(9, 2017);
+            var list = quantCollection.Read(9, 2017);
 
             //Assert
             Assert.AreEqual(1, list.Count);
@@ -101,18 +109,18 @@ namespace Piforatio.Core2Test
                 Comment = oldComment,
                 Time = today
             };
-            var quantCollection = new Quants();
-            quantCollection.Add(quant);
+            var quantCollection = new Quants(factory);
+            quantCollection.Create(quant);
 
             //Act
-            var changedId = quantCollection.GetQuants(today)[0].ID;
+            var changedId = quantCollection.Read(today)[0].ID;
             var changedQuant = new Quant()
             {
                 Comment = newComment,
                 Time = today
             };
-            quantCollection.Update(changedId, changedQuant);
-            quant = quantCollection.GetQuants(today)[0];
+            quantCollection.Update(changedQuant);
+            quant = quantCollection.Read(today)[0];
 
             //Assert
             Assert.AreEqual(newComment, quant.Comment);

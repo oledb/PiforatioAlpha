@@ -21,7 +21,7 @@ namespace Piforatio.Core2
             for (int i = 0; i < 7; i++)
             {
                 var day = weekStartDay.AddDays(i);
-                var list = _quants.GetQuants(day);
+                var list = _quants.Read(day);
                 if (list == null)
                 {
                     dic[day] = 0;
