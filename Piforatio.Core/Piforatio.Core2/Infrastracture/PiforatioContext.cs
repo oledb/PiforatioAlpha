@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Data.Common;
 
 namespace Piforatio.Core2
 {
-    public class PiforatioContext
+    public class PiforatioContext : DbContext
     {
+        public PiforatioContext(DbConnection connection) : base(connection, true) { }
+        public DbSet<Quant> Quants { get; set; }
     }
 }
