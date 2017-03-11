@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalendarTest.cs" />
+    <Compile Include="Fakes\FakeContextFactory.cs" />
     <Compile Include="PlanCollectionTest.cs" />
     <Compile Include="DateTimeWeekTest.cs" />
     <Compile Include="Fakes\ObjectivesFake.cs" />

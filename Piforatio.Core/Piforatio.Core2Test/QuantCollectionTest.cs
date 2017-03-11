@@ -13,6 +13,7 @@ namespace Piforatio.Core2Test
         public void AddNewQuant()
         {
             //Arrange
+            var factory = new FakeContextFactory();
             var quantTrue = new Quant()
             {
                 ID = 1000,
@@ -24,7 +25,7 @@ namespace Piforatio.Core2Test
                 Comment = "Start new",
                 Count = 4
             };
-            var quantCollection = new Quants();
+            var quantCollection = new Quants(factory);
 
             //Act
             quantCollection.Add(quantTrue);

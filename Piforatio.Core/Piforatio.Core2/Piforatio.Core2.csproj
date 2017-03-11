@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Collections\Calendar.cs" />
     <Compile Include="Collections\BaseArray.cs" />
+    <Compile Include="Infrastracture\IContextFactory.cs" />
     <Compile Include="Objects\ICoreObject.cs" />
     <Compile Include="Objects\Objective.cs" />
     <Compile Include="Collections\Objectives.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Objects\ProjectType.cs" />
     <Compile Include="Objects\Plan.cs" />
     <Compile Include="Collections\Plans.cs" />
+    <Compile Include="Infrastracture\PiforatioContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Quant.cs" />
     <Compile Include="Collections\Quants.cs" />

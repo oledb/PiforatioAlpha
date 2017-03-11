@@ -9,6 +9,8 @@ namespace Piforatio.Core2
 {
     public class Quants : BaseArray<Quant>
     {
+        public Quants() { }
+        public Quants(IContextFactory factory) { }
 
         public List<Quant> GetQuants(DateTime date)
         {
