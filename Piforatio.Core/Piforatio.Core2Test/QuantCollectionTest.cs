@@ -23,7 +23,6 @@ namespace Piforatio.Core2Test
             //Arrange
             var quantTrue = new Quant()
             {
-                ID = 1000,
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
                 Objective = new Objective()
                 {
@@ -37,11 +36,39 @@ namespace Piforatio.Core2Test
             //Act
             quantCollection.Create(quantTrue);
             var list = quantCollection.Read();
+            var quant = list[0];
 
             //Assert
             Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(new DateTime(2017, 3, 25, 10, 30, 00), quant.Time);
+            Assert.IsNull(quant.Objective);
 
         }
+
+        [Test]
+        public void DeleteNewQuant()
+        {
+            //Arrange
+            var quantTrue = new Quant()
+            {
+                Time = new DateTime(2017, 3, 25, 10, 30, 00),
+                Comment = "Start new",
+                Count = 4
+            };
+            var quantCollection = new Quants(factory);
+
+            //Act
+            quantCollection.Create(quantTrue);
+            var quant = quantCollection.ReadSingle(d => d.Comment == "Start new");
+            Assert.IsNotNull(quant);
+            quantCollection.Delete(quant);
+            quant = quantCollection.ReadSingle(d => d.Comment == "Start new");
+
+            //Assert
+            Assert.IsNull(quant);
+
+        }
+
 
         [Test]
         public void GetQuantByDate()

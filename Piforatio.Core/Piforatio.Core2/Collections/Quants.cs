@@ -31,7 +31,7 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Quant obj, PiforatioContext context)
         {
-            throw new NotImplementedException();
+            context.Entry(obj).State = EntityState.Deleted;
         }
 
         protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, PiforatioContext context)
