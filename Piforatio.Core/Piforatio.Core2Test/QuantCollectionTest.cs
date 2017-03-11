@@ -64,8 +64,8 @@ namespace Piforatio.Core2Test
 
             Assert.IsTrue(list is List<Quant>);
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual(quant1, list[0]);
-            Assert.AreEqual(quant2, list[1]);
+            Assert.AreEqual(quant1.Time, list[0].Time);
+            Assert.AreEqual(quant2.Time, list[1].Time);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Piforatio.Core2Test
 
             //Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(quant9week, list[0]);
+            Assert.AreEqual(quant9week.Time, list[0].Time);
         }
 
         [Test]
@@ -113,14 +113,10 @@ namespace Piforatio.Core2Test
             quantCollection.Create(quant);
 
             //Act
-            var changedId = quantCollection.Read(today)[0].ID;
-            var changedQuant = new Quant()
-            {
-                Comment = newComment,
-                Time = today
-            };
+            var changedQuant = quantCollection.ReadSingle(d => d.Time == today);
+            changedQuant.Comment = newComment;
             quantCollection.Update(changedQuant);
-            quant = quantCollection.Read(today)[0];
+            quant = quantCollection.ReadSingle(d => d.Time == today);
 
             //Assert
             Assert.AreEqual(newComment, quant.Comment);

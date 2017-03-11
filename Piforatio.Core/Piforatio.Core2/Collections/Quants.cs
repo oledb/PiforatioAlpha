@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using LinqKit;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Piforatio.Core2
 {
@@ -27,7 +26,7 @@ namespace Piforatio.Core2
 
         protected override void createObject(Quant obj, PiforatioContext context)
         {
-            throw new NotImplementedException();
+            context.Quants.Add(obj);
         }
 
         protected override void deleteObject(Quant obj, PiforatioContext context)
@@ -37,12 +36,12 @@ namespace Piforatio.Core2
 
         protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, PiforatioContext context)
         {
-            throw new NotImplementedException();
+            return context.Quants.AsExpandable().Where(isValid);
         }
 
         protected override void updateObject(Quant obj, PiforatioContext context)
         {
-            throw new NotImplementedException();
+            context.Entry(obj).State = EntityState.Modified;
         }
     }
 }
