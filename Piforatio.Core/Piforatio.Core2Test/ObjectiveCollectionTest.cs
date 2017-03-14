@@ -45,7 +45,7 @@ namespace Piforatio.Core2Test
             collection.Create(new Objective() { Name = "Create web site" });
 
             //Act
-            var list = collection.ReadObjectives("mvc");
+            var list = collection.ReadByNameTemplate("mvc");
 
             //Assert
             Assert.AreEqual(1, list.Count);
@@ -96,7 +96,7 @@ namespace Piforatio.Core2Test
             //Act
             objective.Name = newName;
             collection.Update(objective);
-            var list = collection.ReadObjectives(newName);
+            var list = collection.ReadByNameTemplate(newName);
 
             //Assert
             Assert.AreEqual(1, list.Count);

@@ -10,7 +10,7 @@ namespace Piforatio.Core2
     {
         public Objectives(IContextFactory factory) : base(factory) { }
 
-        public List<Objective> ReadObjectives(string template)
+        public List<Objective> ReadByNameTemplate(string template)
         {
             return Read(o => o.Name.IndexOf(template,
                           StringComparison.OrdinalIgnoreCase) >= 0);

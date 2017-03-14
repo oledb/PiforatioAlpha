@@ -7,18 +7,16 @@ namespace Piforatio.Core2Test.Fakes
     public static class QuantsFake
     {
         public static FakeContextFactory factory;
-        public static void Recreate()
+        static QuantsFake()
         {
-            FakeContextFactory.CreateDb();
             factory = new FakeContextFactory();
         }
         public static Quants Create(Objectives obj)
         {
-            Recreate();
-            var learn = obj.ReadObjectives("Read book");
-            var testSite = obj.ReadObjectives("Create test")[0];
-            var findWork = obj.ReadObjectives("Find work")[0];
-            var prepay = obj.ReadObjectives("Receive")[0];
+            var learn = obj.ReadByNameTemplate("Read book")[0];
+            var testSite = obj.ReadByNameTemplate("Create test")[0];
+            var findWork = obj.ReadByNameTemplate("Find work")[0];
+            var prepay = obj.ReadByNameTemplate("Receive")[0];
             var fake = new Quants(factory);
             fake.Create(new Quant()
             {

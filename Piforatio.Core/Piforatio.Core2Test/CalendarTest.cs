@@ -33,6 +33,7 @@ namespace Piforatio.Core2Test
         public void GetCountsWeekInfo()
         {
             //Arrange
+            FakeContextFactory.CreateDb();
             var projects = ProjectsFake.Create();
             var objectives = ObjectivesFake.Create(projects);
             var quants = QuantsFake.Create(objectives);
