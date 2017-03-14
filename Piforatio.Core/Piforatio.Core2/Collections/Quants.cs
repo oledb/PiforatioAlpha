@@ -54,8 +54,8 @@ namespace Piforatio.Core2
             }
             if (old.Objective != null)
             {
-                var manager = (context as IObjectContextAdapter).ObjectContext.ObjectStateManager;
-                manager.ChangeRelationshipState(obj, obj.Objective, "Quants", EntityState.Added);
+                //context.Entry(old.Objective).State = EntityState.Modified;
+                //context.Entry(obj.Objective).State = EntityState.Modified;
             }
             context.Entry(obj).State = EntityState.Modified;
         }
