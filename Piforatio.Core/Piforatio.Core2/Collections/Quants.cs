@@ -45,18 +45,19 @@ namespace Piforatio.Core2
         protected override void updateObject(Quant obj, PiforatioContext context)
         {
             var old = ReadSingle(o => o.QuantID == obj.QuantID);
-            if (obj.Objective != old.Objective)
+            if (obj.Objective != old.Objective && obj.Objective != null)
             {
-                context.Objectives.Attach(obj.Objective);
-                if (obj.Objective.Quants == null)
-                    obj.Objective.Quants = new List<Quant>();
-                obj.Objective.Quants.Add(obj);
+                context.Entry(obj).Reference<Objective>("ObjID").CurrentValue
+                    = obj.Objective;
+                context.Entry(obj.Objective).State = EntityState.Modified;
             }
-            if (old.Objective != null)
-            {
-                //context.Entry(old.Objective).State = EntityState.Modified;
-                //context.Entry(obj.Objective).State = EntityState.Modified;
-            }
+            //if (obj.Objective != old.Objective)
+            //{
+            //    context.Objectives.Attach(obj.Objective);
+            //    if (obj.Objective.Quants == null)
+            //        obj.Objective.Quants = new List<Quant>();
+            //    obj.Objective.Quants.Add(obj);
+            //}
             context.Entry(obj).State = EntityState.Modified;
         }
     }
