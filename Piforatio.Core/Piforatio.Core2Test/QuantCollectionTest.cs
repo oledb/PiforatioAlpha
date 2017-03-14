@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using NUnit.Framework;
 using Piforatio.Core2;
+using Piforatio.Core2Test.Fakes;
 
 namespace Piforatio.Core2Test
 {
@@ -24,10 +24,6 @@ namespace Piforatio.Core2Test
             var quantTrue = new Quant()
             {
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
-                Objective = new Objective()
-                {
-                    Name = "Learn MVC"
-                },
                 Comment = "Start new",
                 Count = 4
             };
@@ -130,7 +126,6 @@ namespace Piforatio.Core2Test
             var today = new DateTime(2017, 2, 10);
             var quant = new Quant
             {
-                ID = 100,
                 Comment = oldComment,
                 Time = today
             };
@@ -145,6 +140,86 @@ namespace Piforatio.Core2Test
 
             //Assert
             Assert.AreEqual(newComment, quant.Comment);
+        }
+
+        //Tests with Objectives
+
+        [Test]
+        public void AddNewQuantWithObjective()
+        {
+            //Arrange
+            var objectives = ObjectivesFake.Create(factory);
+            var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
+            var quants = new Quants(factory);
+
+            //Act
+            quants.Create(new Quant()
+            {
+                Comment = "Create new 1",
+                Objective = objective
+            });
+            //Act
+            quants.Create(new Quant()
+            {
+                Comment = "Create new 2",
+                Objective = objective
+            });
+            var list = quants.Read();
+            var quant = quants.ReadSingle(q => q.Comment == "Create new 1");
+
+            //Assert
+            Assert.IsNotNull(quant);
+            Assert.IsNotNull(quant.Objective);
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual("Read book about Mvc", quant.Objective.Name);
+        }
+
+        [Test]
+        public void AddObjectiveToQuant()
+        {
+            //Arrange
+            var objectives = ObjectivesFake.Create(factory);
+            var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
+            var quants = new Quants(factory);
+            quants.Create(new Quant()
+            {
+                Comment = "Create new"
+            });
+            var quant = quants.ReadSingle(q => q.Comment == "Create new");
+
+            //Act
+            quant.Objective = objective;
+            quants.Update(quant);
+            var output = quants.ReadSingle(q => q.Comment == "Create new");
+
+            //Assert
+            Assert.IsNotNull(output);
+            Assert.IsNotNull(output.Objective, "Objective is null");
+        }
+
+        [Test]
+        public void ChangeObjectiveInQuant()
+        {
+            //Arrange
+            var objectives = ObjectivesFake.Create(factory);
+            var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
+            var objectiveNew = objectives.ReadSingle(o => o.Name == "Find work");
+            var quants = new Quants(factory);
+            quants.Create(new Quant()
+            {
+                Comment = "Create new 1",
+                Objective = objective
+            });
+
+            //Act
+            var quant = quants.ReadSingle(q => q.Comment == "Create new 1");
+            quant.Objective = objectiveNew;
+            quants.Update(quant);
+            var output = quants.ReadSingle(q => q.Comment == "Create new 1");
+
+            //Assert
+            Assert.IsNotNull(output.Objective);
+            Assert.AreEqual("Find work", output.Objective.Name);
         }
     }
 }

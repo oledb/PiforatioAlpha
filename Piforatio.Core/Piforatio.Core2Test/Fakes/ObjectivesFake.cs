@@ -4,11 +4,15 @@ namespace Piforatio.Core2Test.Fakes
 {
     public static class ObjectivesFake
     {
-        public static Objectives Create(Projects projects)
+        public static Objectives Create(FakeContextFactory factory, params Projects[] projects)
         {
-            var factory = new FakeContextFactory();
-            var Mvc = projects.GetSingle(p => p.Name == "MVC");
-            var Upwork = projects.GetSingle(p => p.Name == "Upwork");
+            Projects proj;
+            if (projects.Length == 0)
+                proj = ProjectsFake.Create();
+            else
+                proj = projects[0];
+            var Mvc = proj.GetSingle(p => p.Name == "MVC");
+            var Upwork = proj.GetSingle(p => p.Name == "Upwork");
             var fake = new Objectives(factory);
             fake.Create(new Objective()
             {

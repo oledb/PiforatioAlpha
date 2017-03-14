@@ -9,13 +9,23 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class CalendarTest
     {
+        protected FakeContextFactory factory;
+        [SetUp]
+        public void Recreate()
+        {
+            FakeContextFactory.CreateDb();
+            factory = new FakeContextFactory();
+            var quants = new Quants(factory);
+            var list = quants.Read();
+        }
+
         [Test]
         public void CreateCalendar()
         {
             //Arrange
             var projects = ProjectsFake.Create();
-            var objectives = ObjectivesFake.Create(projects);
-            var quants = QuantsFake.Create(objectives);
+            var objectives = ObjectivesFake.Create(factory, projects);
+            var quants = QuantsFake.Create(factory, objectives);
             var calendar = new Calendar(quants);
 
             //Act
@@ -33,10 +43,10 @@ namespace Piforatio.Core2Test
         public void GetCountsWeekInfo()
         {
             //Arrange
-            FakeContextFactory.CreateDb();
             var projects = ProjectsFake.Create();
-            var objectives = ObjectivesFake.Create(projects);
-            var quants = QuantsFake.Create(objectives);
+            var objectives = ObjectivesFake.Create(factory, projects);
+            var quants = QuantsFake.Create(factory, objectives);
+            var list = quants.Read();
             var calendar = new Calendar(quants);
             var week9 = Date(2017, 2, 27);
             calendar.Add( new Week() { StartDate = week9 });

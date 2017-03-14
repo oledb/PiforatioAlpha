@@ -8,12 +8,21 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class PlanCollectionTest
     {
+        protected FakeContextFactory factory;
+        [SetUp]
+        public void Recreate()
+        {
+            FakeContextFactory.CreateDb();
+            factory = new FakeContextFactory();
+        }
+
+
         [Test]
         public void CreateCalendar()
         {
             //Arrange
             var projects = ProjectsFake.Create();
-            var objectives = ObjectivesFake.Create(projects);
+            var objectives = ObjectivesFake.Create(factory, projects);
             var plan = new Plan()
             {
                 ID = 10,
@@ -34,7 +43,7 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var projects = ProjectsFake.Create();
-            var objectives = ObjectivesFake.Create(projects);
+            var objectives = ObjectivesFake.Create(factory, projects);
             var plans = new Plans();
             plans.Add( new Plan()
             {
@@ -64,7 +73,7 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var projects = ProjectsFake.Create();
-            var objectives = ObjectivesFake.Create(projects);
+            var objectives = ObjectivesFake.Create(factory, projects);
             var plans = new Plans();
             plans.Add(new Plan()
             {

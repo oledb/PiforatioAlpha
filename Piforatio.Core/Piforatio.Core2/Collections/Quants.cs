@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LinqKit;
 using System.Linq;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace Piforatio.Core2
 {
@@ -26,7 +27,9 @@ namespace Piforatio.Core2
 
         protected override void createObject(Quant obj, PiforatioContext context)
         {
-            context.Quants.Add(obj);
+            if (obj.Objective != null)
+                context.Objectives.Attach(obj.Objective);
+            context.Entry(obj).State = EntityState.Added;
         }
 
         protected override void deleteObject(Quant obj, PiforatioContext context)
@@ -36,11 +39,24 @@ namespace Piforatio.Core2
 
         protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, PiforatioContext context)
         {
-            return context.Quants.AsExpandable().Where(isValid);
+            return context.Quants.Include(q => q.Objective).AsExpandable().Where(isValid);
         }
 
         protected override void updateObject(Quant obj, PiforatioContext context)
         {
+            var old = ReadSingle(o => o.QuantID == obj.QuantID);
+            if (obj.Objective != old.Objective)
+            {
+                context.Objectives.Attach(obj.Objective);
+                if (obj.Objective.Quants == null)
+                    obj.Objective.Quants = new List<Quant>();
+                obj.Objective.Quants.Add(obj);
+            }
+            if (old.Objective != null)
+            {
+                var manager = (context as IObjectContextAdapter).ObjectContext.ObjectStateManager;
+                manager.ChangeRelationshipState(obj, obj.Objective, "Quants", EntityState.Added);
+            }
             context.Entry(obj).State = EntityState.Modified;
         }
     }

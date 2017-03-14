@@ -16,7 +16,7 @@ namespace Piforatio.Core2
                           StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        public List<Objective> ReadObjectives(ObjectiveStatus status)
+        public List<Objective> ReadByStatus(ObjectiveStatus status)
         {
             return Read(o => o.Status == status);
         }

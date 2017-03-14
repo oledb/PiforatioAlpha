@@ -20,7 +20,6 @@ namespace Piforatio.Core2Test
             //Arrange
             var obj = new Objective()
             {
-                ID = 100,
                 Project = new Project() { Name = "Learn MVC" },
                 Name = "Read book MVC for professional",
                 Status = ObjectiveStatus.NotStarted,
@@ -65,9 +64,9 @@ namespace Piforatio.Core2Test
                 Status = ObjectiveStatus.NotStarted});
 
             //Act
-            var list1 = collection.ReadObjectives(
+            var list1 = collection.ReadByStatus(
                 ObjectiveStatus.InProgress);
-            var list2 = collection.ReadObjectives(
+            var list2 = collection.ReadByStatus(
                 ObjectiveStatus.NotStarted);
 
             //Arrnage

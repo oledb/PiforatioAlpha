@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Piforatio.Core2
 {
     public class Quant 
     {
-        public int ID { get; set; }
+        public int QuantID { get; set; }
         public DateTime Time { get; set; }
         public Objective Objective { get; set; }
         public string Comment { get; set; }
