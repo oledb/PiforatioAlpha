@@ -7,5 +7,6 @@ namespace Piforatio.Core2
     {
         public PiforatioContext(DbConnection connection) : base(connection, true) { }
         public DbSet<Quant> Quants { get; set; }
+        public DbSet<Objective> Objectives { get; set; }
     }
 }

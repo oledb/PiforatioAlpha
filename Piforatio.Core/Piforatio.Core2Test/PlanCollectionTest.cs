@@ -18,7 +18,7 @@ namespace Piforatio.Core2Test
             {
                 ID = 10,
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.GetObjectives("Read book")[0]
+                Objective = objectives.ReadObjectives("Read book")[0]
             };
             var plans = new Plans();
 
@@ -39,17 +39,17 @@ namespace Piforatio.Core2Test
             plans.Add( new Plan()
             {
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.GetObjectives("Read book")[0]
+                Objective = objectives.ReadObjectives("Read book")[0]
             });
             plans.Add( new Plan()
             {
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.GetObjectives("Create test site")[0]
+                Objective = objectives.ReadObjectives("Create test site")[0]
             });
             plans.Add(new Plan()
             {
                 Date = new DateTime(2017, 3, 4),
-                Objective = objectives.GetObjectives("Create test site")[0]
+                Objective = objectives.ReadObjectives("Create test site")[0]
             });
 
             //Act
@@ -70,7 +70,7 @@ namespace Piforatio.Core2Test
             {
                 ID = 12,
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.GetObjectives("Read book")[0]
+                Objective = objectives.ReadObjectives("Read book")[0]
             });
 
             //Act

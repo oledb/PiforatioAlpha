@@ -66,9 +66,7 @@ namespace Piforatio.Core2Test
 
             //Assert
             Assert.IsNull(quant);
-
         }
-
 
         [Test]
         public void GetQuantByDate()
