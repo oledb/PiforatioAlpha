@@ -12,6 +12,7 @@ namespace Piforatio.Core2
         public string Name { get; set; }
         public ProjectType? Type { get; set; }
         public string Comment { get; set; }
+        public ICollection<Objective> Objectives { get; set; }
 
         public void Update(ICoreObject @new)
         {
