@@ -8,9 +8,7 @@ namespace Piforatio.Core2
 {
     public class Projects : CrudObject<Project>
     {
-        public Projects(IContextFactory contextFactory) : base(contextFactory)
-        {
-        }
+        public Projects(IContextFactory contextFactory) : base(contextFactory) { }
 
         public List<Project> ReadProjectByType(ProjectType type)
         {

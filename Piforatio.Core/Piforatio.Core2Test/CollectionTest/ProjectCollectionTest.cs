@@ -53,11 +53,8 @@ namespace Piforatio.Core2Test
             collection.Create(prj);
 
             //Act
-            var changedPrj = new Project()
-            {
-                Name = newName
-            };
-            collection.Update(changedPrj);
+            prj.Name = newName;
+            collection.Update(prj);
 
             //Assert
             Assert.AreEqual(newName, prj.Name);

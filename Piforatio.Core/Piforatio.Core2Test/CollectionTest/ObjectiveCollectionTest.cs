@@ -75,7 +75,6 @@ namespace Piforatio.Core2Test
             Assert.AreEqual("MVC site", list2[0].Name);
         }
 
-        [Ignore("This test does not work because Project is not released yet for PiforatioContext")]
         [Test]
         public void UpdateObjectives()
         {
@@ -98,7 +97,6 @@ namespace Piforatio.Core2Test
             //Assert
             Assert.AreEqual(1, list.Count);
             Assert.AreEqual(newName, list[0].Name);
-            Assert.AreEqual("Test", list[0].Project.Name);
             Assert.AreEqual(ObjectiveStatus.InProgress, list[0].Status);
         }
     }

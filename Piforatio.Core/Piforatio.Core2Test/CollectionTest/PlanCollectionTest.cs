@@ -16,7 +16,6 @@ namespace Piforatio.Core2Test
             factory = new FakeContextFactory();
         }
 
-
         [Test]
         public void CreateCalendar()
         {
