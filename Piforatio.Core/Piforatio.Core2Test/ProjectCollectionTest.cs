@@ -9,24 +9,32 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class ProjectCollectionTest
     {
+        protected FakeContextFactory factory;
+        [SetUp]
+        public void Recreate()
+        {
+            FakeContextFactory.CreateDb();
+            factory = new FakeContextFactory();
+        }
+
         [Test]
         public void AddNewProjectToCollection()
         {
             //Arrange
             var newProject = new Project()
             {
-                ID = 100,
                 Name = "MVC",
                 Type = ProjectType.Learn,
                 Comment = "Learn MVC and create site"
             };
-            var collection = new Projects();
+            var collection = new Projects(factory);
 
             //Act
-            collection.Add(newProject);
+            collection.Create(newProject);
+            var list = collection.Read();
 
             //Assert
-            Assert.AreEqual(1, collection.Length);
+            Assert.AreEqual(1, list.Count);
         }
 
         [Test]
@@ -37,24 +45,22 @@ namespace Piforatio.Core2Test
             var newName = "MVC";
             var prj = new Project()
             {
-                ID = 10,
                 Name = oldName,
                 Type = ProjectType.Work,
                 Comment = "Learn MVC"
             };
-            var collection = new Projects();
-            collection.Add(prj);
+            var collection = new Projects(factory);
+            collection.Create(prj);
 
             //Act
             var changedPrj = new Project()
             {
                 Name = newName
             };
-            collection.Update(prj.ID, changedPrj);
+            collection.Update(changedPrj);
 
             //Assert
             Assert.AreEqual(newName, prj.Name);
-            Assert.AreEqual(10, prj.ID);
             Assert.AreEqual(ProjectType.Work, prj.Type);
             Assert.AreEqual("Learn MVC", prj.Comment);
         }
@@ -63,15 +69,15 @@ namespace Piforatio.Core2Test
         public void GetProjectByPredicate()
         {
             //Arrange
-            var collection = new Projects();
-            collection.Add(new Project() { Name = "MVC" });
-            collection.Add(new Project() { Name = "JavaScript" });
+            var collection = new Projects(factory);
+            collection.Create(new Project() { Name = "MVC" });
+            collection.Create(new Project() { Name = "JavaScript" });
 
             //Act
-            var project = collection.GetSingle(p => p.Name == "MVC");
+            var project = collection.ReadSingle(p => p.Name == "MVC");
 
             //Assert
-            Assert.AreEqual(typeof(Project), project.GetType());
+            Assert.IsNotNull(project);
             Assert.AreEqual("MVC", project.Name);
         }
 
@@ -79,20 +85,20 @@ namespace Piforatio.Core2Test
         public void GetProjectsByType()
         {
             //Arrange
-            var collection = new Projects();
-            collection.Add(new Project()
+            var collection = new Projects(factory);
+            collection.Create(new Project()
             {
                 Name = "MVC",
                 Type = ProjectType.Learn
             });
-            collection.Add(new Project()
+            collection.Create(new Project()
             {
                 Name = "Java",
                 Type = ProjectType.Work
             });
 
             //Act
-            var list = collection.GetProjects(ProjectType.Learn);
+            var list = collection.ReadProjectByType(ProjectType.Learn);
 
             //Assert
             Assert.AreEqual(1, list.Count);
@@ -103,14 +109,14 @@ namespace Piforatio.Core2Test
         public void GetAllProjects()
         {
             //Arrange
-            var collection = new Projects();
-            collection.Add(new Project());
-            collection.Add(new Project());
-            collection.Add(new Project());
-            collection.Add(new Project());
+            var collection = new Projects(factory);
+            collection.Create(new Project());
+            collection.Create(new Project());
+            collection.Create(new Project());
+            collection.Create(new Project());
 
             //Act
-            var list = collection.GetProjects();
+            var list = collection.Read();
 
             //Assert
             Assert.AreEqual(4, list.Count);

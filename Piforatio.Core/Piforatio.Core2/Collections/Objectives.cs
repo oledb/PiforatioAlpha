@@ -23,7 +23,9 @@ namespace Piforatio.Core2
 
         protected override void createObject(Objective obj, PiforatioContext context)
         {
-            context.Objectives.Add(obj);
+            if (obj.Project != null)
+                context.Projects.Attach(obj.Project);
+            context.Entry(obj).State = EntityState.Added;
         }
 
         protected override void deleteObject(Objective obj, PiforatioContext context)
@@ -38,6 +40,7 @@ namespace Piforatio.Core2
 
         protected override void updateObject(Objective obj, PiforatioContext context)
         {
+            obj.Project_ProjectID = obj.Project?.ProjectID;
             context.Entry(obj).State = EntityState.Modified;
         }
     }

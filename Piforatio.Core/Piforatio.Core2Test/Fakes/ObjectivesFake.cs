@@ -8,11 +8,11 @@ namespace Piforatio.Core2Test.Fakes
         {
             Projects proj;
             if (projects.Length == 0)
-                proj = ProjectsFake.Create();
+                proj = ProjectsFake.Create(factory);
             else
                 proj = projects[0];
-            var Mvc = proj.GetSingle(p => p.Name == "MVC");
-            var Upwork = proj.GetSingle(p => p.Name == "Upwork");
+            var Mvc = proj.ReadSingle(p => p.Name == "MVC");
+            var Upwork = proj.ReadSingle(p => p.Name == "Upwork");
             var fake = new Objectives(factory);
             fake.Create(new Objective()
             {

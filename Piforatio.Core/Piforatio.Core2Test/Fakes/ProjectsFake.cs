@@ -5,20 +5,17 @@ namespace Piforatio.Core2Test.Fakes
 {
     public static class ProjectsFake
     {
-        public static Projects Create()
+        public static Projects Create(FakeContextFactory factory)
         {
-            var fake = new Projects();
-            int id = 0;
-            fake.Add(new Project()
+            var fake = new Projects(factory);
+            fake.Create(new Project()
             {
-                ID = id++,
                 Name = "MVC",
                 Type = ProjectType.Learn,
                 Comment = "Learn MVC, frontend and backend"
             });
-            fake.Add(new Project()
+            fake.Create(new Project()
             {
-                ID = id++,
                 Name = "Upwork",
                 Type = ProjectType.Work,
                 Comment = "Carry out orders"

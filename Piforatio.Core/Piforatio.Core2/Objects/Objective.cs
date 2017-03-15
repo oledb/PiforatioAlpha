@@ -7,8 +7,8 @@ namespace Piforatio.Core2
     {
         public int ObjectiveID { get; set; }
         public string Name { get; set; }
-        public int? Objective_ProjectID { get; set; }
-        [ForeignKey("Objective_ProjectID")]
+        public int? Project_ProjectID { get; set; }
+        [ForeignKey("Project_ProjectID")]
         public Project Project { get; set; }
         public ObjectiveStatus? Status { get; set; }
         public  ICollection<Quant> Quants { get; set; }

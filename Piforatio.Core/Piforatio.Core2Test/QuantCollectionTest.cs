@@ -149,6 +149,7 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var objectives = ObjectivesFake.Create(factory);
+            var l2 = objectives.Read();
             var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
             var quants = new Quants(factory);
 

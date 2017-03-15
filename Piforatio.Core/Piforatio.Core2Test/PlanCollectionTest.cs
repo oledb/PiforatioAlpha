@@ -21,7 +21,7 @@ namespace Piforatio.Core2Test
         public void CreateCalendar()
         {
             //Arrange
-            var projects = ProjectsFake.Create();
+            var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var plan = new Plan()
             {
@@ -42,7 +42,7 @@ namespace Piforatio.Core2Test
         public void GetPlansByDate()
         {
             //Arrange
-            var projects = ProjectsFake.Create();
+            var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var plans = new Plans();
             plans.Add( new Plan()
@@ -72,7 +72,7 @@ namespace Piforatio.Core2Test
         public void UpdatePlan()
         {
             //Arrange
-            var projects = ProjectsFake.Create();
+            var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var plans = new Plans();
             plans.Add(new Plan()
