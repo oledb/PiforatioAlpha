@@ -38,8 +38,8 @@ namespace Piforatio.Core2Test
 
         public PiforatioContext Create()
         {
-            //var context = new PiforatioContext(connection);
-            var context = new PiforatioContext(Created2());
+            var context = new PiforatioContext(connection);
+            //var context = new PiforatioContext(Created2());
             context.Database.CreateIfNotExists();
             context.Database.Log = Write;
             return context;

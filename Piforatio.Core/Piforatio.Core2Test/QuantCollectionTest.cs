@@ -183,7 +183,8 @@ namespace Piforatio.Core2Test
             var quants = new Quants(factory);
             quants.Create(new Quant()
             {
-                Comment = "Create new"
+                Comment = "Create new",
+                Time = DateTime.Now
             });
             var quant = quants.ReadSingle(q => q.Comment == "Create new");
 
@@ -208,7 +209,8 @@ namespace Piforatio.Core2Test
             quants.Create(new Quant()
             {
                 Comment = "Create new 1",
-                Objective = objective
+                Objective = objective,
+                Time = DateTime.Now
             });
 
             //Act
