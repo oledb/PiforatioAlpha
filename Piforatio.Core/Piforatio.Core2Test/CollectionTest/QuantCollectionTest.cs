@@ -72,7 +72,6 @@ namespace Piforatio.Core2Test
             var quant1 = new Quant() { Time = new DateTime(2017, 3, 24, 10, 30, 00) };
             var quant2 = new Quant() { Time = new DateTime(2017, 3, 24, 12, 30, 00) };
             var quantIncorrect = new Quant() { Time = Today };
-
             var quantCollection = new Quants(factory);
             quantCollection.Create(quantIncorrect);
             quantCollection.Create(quant2);
@@ -82,7 +81,6 @@ namespace Piforatio.Core2Test
             var list = quantCollection.Read(new DateTime(2017, 3, 24));
 
             //Assert
-
             Assert.IsTrue(list is List<Quant>);
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual(quant1.Time, list[0].Time);

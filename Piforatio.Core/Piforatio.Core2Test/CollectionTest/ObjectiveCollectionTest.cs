@@ -20,7 +20,6 @@ namespace Piforatio.Core2Test
             //Arrange
             var obj = new Objective()
             {
-                Project = new Project() { Name = "Learn MVC" },
                 Name = "Read book MVC for professional",
                 Status = ObjectiveStatus.NotStarted,
             };
@@ -87,7 +86,6 @@ namespace Piforatio.Core2Test
             var objective = new Objective()
             {
                 Name = oldName,
-                Project = new Project() { Name = "Test" },
                 Status = ObjectiveStatus.InProgress
             };
             collection.Create(objective);
