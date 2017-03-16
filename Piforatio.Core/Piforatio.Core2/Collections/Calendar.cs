@@ -1,15 +1,39 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Piforatio.Core2
 {
-    public class Calendar : BaseArray<Week>
+    public class Calendar : CrudObject<Week>
     {
         private Quants _quants;
 
-        public Calendar(Quants quants) : base()
+        public Calendar(Quants quants, IContextFactory factory) : base(factory)
         {
             _quants = quants;
+        }
+
+        protected override void createObject(Week obj, PiforatioContext context)
+        {
+            // Do nothing.
+        }
+
+        protected override void deleteObject(Week obj, PiforatioContext context)
+        {
+            // Do nothing.
+        }
+
+        protected override IEnumerable<Week> readObject(Func<Week, bool> isValid, PiforatioContext context)
+        {
+            return context.Calendar
+                .AsExpandable()
+                .Where(isValid); 
+        }
+
+        protected override void updateObject(Week obj, PiforatioContext context)
+        {
+            // Do nothing.
         }
 
         public WeekInfo GetWeekInfo(DateTime weekStartDay)
@@ -17,7 +41,7 @@ namespace Piforatio.Core2
             var dic = new Dictionary<DateTime, int>();
             int total = 0;
             double aver = 0;
-
+            
             for (int i = 0; i < 7; i++)
             {
                 var day = weekStartDay.AddDays(i);

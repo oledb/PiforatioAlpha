@@ -26,17 +26,17 @@ namespace Piforatio.Core2Test
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var quants = QuantsFake.Create(factory, objectives);
-            var calendar = new Calendar(quants);
+            var calendar = new Calendar(quants, factory);
 
             //Act
-            calendar.Add(new Week()
+            calendar.Create(new Week()
             {
-                ID = 19,
                 StartDate = Date(2017, 2, 27)
             });
+            var allWeeks = calendar.Read();
 
             //Assert
-            Assert.AreEqual(1, calendar.Length);
+            Assert.AreEqual(1, allWeeks.Count);
         }
 
         [Test]
@@ -47,9 +47,9 @@ namespace Piforatio.Core2Test
             var objectives = ObjectivesFake.Create(factory, projects);
             var quants = QuantsFake.Create(factory, objectives);
             var list = quants.Read();
-            var calendar = new Calendar(quants);
+            var calendar = new Calendar(quants, factory);
             var week9 = Date(2017, 2, 27);
-            calendar.Add( new Week() { StartDate = week9 });
+            calendar.Create( new Week() { StartDate = week9 });
 
             //Act
             WeekInfo info = calendar.GetWeekInfo(week9);

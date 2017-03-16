@@ -10,5 +10,6 @@ namespace Piforatio.Core2
         public DbSet<Objective> Objectives { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<Week> Calendar { get; set; }
     }
 }
