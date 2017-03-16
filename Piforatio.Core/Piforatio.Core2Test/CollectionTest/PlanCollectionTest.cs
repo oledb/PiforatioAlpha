@@ -1,6 +1,7 @@
 ﻿using System;
 using Piforatio.Core2Test.Fakes;
 using NUnit.Framework;
+using System.Linq;
 using Piforatio.Core2;
 
 namespace Piforatio.Core2Test
@@ -17,24 +18,27 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void CreateCalendar()
+        public void CreatePlans()
         {
             //Arrange
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var plan = new Plan()
             {
-                ID = 10,
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.ReadByNameTemplate("Read book")[0]
+                Objective = objectives.ReadByNameTemplate("Read book").FirstOrDefault()
             };
-            var plans = new Plans();
+            var collection = new Plans(factory);
 
             //Act
-            plans.Add(plan);
+            collection.Create(plan);
+            var allPlans = collection.Read();
 
             //Assert
-            Assert.AreEqual(1, plans.Length);
+            Assert.AreEqual(1, allPlans.Count);
+            Assert.AreEqual(new DateTime(2017, 3, 3), allPlans[0].Date);
+            Assert.IsNotNull(allPlans[0].Objective);
+            Assert.IsNotNull(allPlans[0].Objective.Project);
         }
 
         [Test]
@@ -43,25 +47,25 @@ namespace Piforatio.Core2Test
             //Arrange
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
-            var plans = new Plans();
-            plans.Add( new Plan()
+            var collection = new Plans(factory);
+            collection.Create( new Plan()
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book")[0]
             });
-            plans.Add( new Plan()
+            collection.Create( new Plan()
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Create test site")[0]
             });
-            plans.Add(new Plan()
+            collection.Create(new Plan()
             {
                 Date = new DateTime(2017, 3, 4),
                 Objective = objectives.ReadByNameTemplate("Create test site")[0]
             });
 
             //Act
-            var list = plans.GetPlans(new DateTime(2017, 3, 3));
+            var list = collection.ReadByDate(new DateTime(2017, 3, 3));
 
             //Assert
             Assert.AreEqual(2, list.Count);
@@ -73,22 +77,21 @@ namespace Piforatio.Core2Test
             //Arrange
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
-            var plans = new Plans();
-            plans.Add(new Plan()
+            var collection = new Plans(factory);
+            collection.Create(new Plan()
             {
-                ID = 12,
                 Date = new DateTime(2017, 3, 3),
-                Objective = objectives.ReadByNameTemplate("Read book")[0]
+                Objective = objectives.ReadByNameTemplate("Read book").FirstOrDefault()
             });
 
             //Act
-            plans.Update(12, new Plan() { Date = new DateTime(2017, 3, 5) });
-            var list = plans.GetPlans(new DateTime(2017, 3, 5));
+            var plan = collection.ReadByDate(new DateTime(2017, 3, 3)).FirstOrDefault();
+            plan.Date = new DateTime(2017, 3, 5);
+            collection.Update(plan);
+            var list = collection.ReadByDate(new DateTime(2017, 3, 5));
 
             //Assert
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(12, list[0].ID);
-            Assert.AreEqual(1, plans.Length);
         }
     }
 }

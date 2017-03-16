@@ -11,6 +11,7 @@ namespace Piforatio.Core2
         [ForeignKey("Project_ProjectID")]
         public Project Project { get; set; }
         public ObjectiveStatus? Status { get; set; }
-        public  ICollection<Quant> Quants { get; set; }
+        public ICollection<Quant> Quants { get; set; }
+        public ICollection<Plan> Plans { get; set; }
     }
 }

@@ -37,7 +37,10 @@ namespace Piforatio.Core2
 
         protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, PiforatioContext context)
         {
-            return context.Quants.Include(q => q.Objective).AsExpandable().Where(isValid);
+            return context.Quants
+                .Include(q => q.Objective)
+                .AsExpandable()
+                .Where(isValid);
         }
 
         protected override void updateObject(Quant obj, PiforatioContext context)

@@ -1,20 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Piforatio.Core2
 {
-    public class Plan : ICoreObject
+    public class Plan
     {
-        public int ID { get; set; }
+        public int PlanID { get; set; }
         public DateTime Date { get; set; }
+        public int? Objective_ObjectiveID { get; set; }
+        [ForeignKey("Objective_ObjectiveID")]
         public Objective Objective { get; set; }
-
-        public void Update(ICoreObject @new)
-        {
-            var plan = @new as Plan;
-            if (plan.Date != default(DateTime))
-                Date = plan.Date;
-            if (plan.Objective != null)
-                Objective = plan.Objective; 
-        }
     }
 }
