@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace Piforatio.Core2
 {
@@ -32,6 +33,7 @@ namespace Piforatio.Core2
             using (var context = factory.Create())
             {
                 createObject(obj, context);
+                context.Entry(obj).State = EntityState.Added;
                 context.SaveChanges();
             }
         }
@@ -61,6 +63,7 @@ namespace Piforatio.Core2
             using (var context = factory.Create())
             {
                 updateObject(obj, context);
+                context.Entry(obj).State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
@@ -69,7 +72,7 @@ namespace Piforatio.Core2
         {
             using (var context = factory.Create())
             {
-                deleteObject(obj, context);
+                context.Entry(obj).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }

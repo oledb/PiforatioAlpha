@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using LinqKit;
 
 namespace Piforatio.Core2
@@ -17,12 +16,12 @@ namespace Piforatio.Core2
 
         protected override void createObject(Project obj, PiforatioContext context)
         {
-            context.Projects.Add(obj);
+            // Do nothing.
         }
 
         protected override void deleteObject(Project obj, PiforatioContext context)
         {
-            context.Entry(obj).State = EntityState.Deleted;
+            // Do nothing.
         }
 
         protected override IEnumerable<Project> readObject(Func<Project, bool> isValid, PiforatioContext context)
@@ -32,7 +31,7 @@ namespace Piforatio.Core2
 
         protected override void updateObject(Project obj, PiforatioContext context)
         {
-            context.Entry(obj).State = EntityState.Modified;
+            // Do nothing.
         }
     }
 }

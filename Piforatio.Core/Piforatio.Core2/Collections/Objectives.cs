@@ -1,19 +1,20 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using LinqKit;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Piforatio.Core2
 {
     public class Objectives : CrudObject<Objective>
     {
+        const int firstChar = 0;
         public Objectives(IContextFactory factory) : base(factory) { }
 
         public List<Objective> ReadByNameTemplate(string template)
         {
             return Read(o => o.Name.IndexOf(template,
-                          StringComparison.OrdinalIgnoreCase) >= 0);
+                          StringComparison.OrdinalIgnoreCase) >= firstChar);
         }
 
         public List<Objective> ReadByStatus(ObjectiveStatus status)
@@ -25,12 +26,11 @@ namespace Piforatio.Core2
         {
             if (obj.Project != null)
                 context.Projects.Attach(obj.Project);
-            context.Entry(obj).State = EntityState.Added;
         }
 
         protected override void deleteObject(Objective obj, PiforatioContext context)
         {
-            context.Entry(obj).State = EntityState.Deleted;
+            // Do nothing.
         }
 
         protected override IEnumerable<Objective> readObject(Func<Objective, bool> isValid, PiforatioContext context)
@@ -41,7 +41,6 @@ namespace Piforatio.Core2
         protected override void updateObject(Objective obj, PiforatioContext context)
         {
             obj.Project_ProjectID = obj.Project?.ProjectID;
-            context.Entry(obj).State = EntityState.Modified;
         }
     }
 }

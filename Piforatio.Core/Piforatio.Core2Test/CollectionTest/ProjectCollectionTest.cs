@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Piforatio.Core2;
 
 namespace Piforatio.Core2Test
@@ -21,7 +18,7 @@ namespace Piforatio.Core2Test
         public void AddNewProjectToCollection()
         {
             //Arrange
-            var newProject = new Project()
+            var project = new Project()
             {
                 Name = "MVC",
                 Type = ProjectType.Learn,
@@ -30,52 +27,30 @@ namespace Piforatio.Core2Test
             var collection = new Projects(factory);
 
             //Act
-            collection.Create(newProject);
-            var list = collection.Read();
+            collection.Create(project);
+            var allProjects = collection.Read();
 
             //Assert
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, allProjects.Count);
+            Assert.AreEqual("MVC", allProjects[0].Name);
+            Assert.AreEqual(ProjectType.Learn, allProjects[0].Type);
         }
 
         [Test]
-        public void UpdateProject()
-        {
-            //Arrange
-            var oldName = "MCV";
-            var newName = "MVC";
-            var prj = new Project()
-            {
-                Name = oldName,
-                Type = ProjectType.Work,
-                Comment = "Learn MVC"
-            };
-            var collection = new Projects(factory);
-            collection.Create(prj);
-
-            //Act
-            prj.Name = newName;
-            collection.Update(prj);
-
-            //Assert
-            Assert.AreEqual(newName, prj.Name);
-            Assert.AreEqual(ProjectType.Work, prj.Type);
-            Assert.AreEqual("Learn MVC", prj.Comment);
-        }
-
-        [Test]
-        public void GetProjectByPredicate()
+        public void GetAllProjects()
         {
             //Arrange
             var collection = new Projects(factory);
-            collection.Create(new Project() { Name = "MVC" });
-            collection.Create(new Project() { Name = "JavaScript" });
+            collection.Create(new Project());
+            collection.Create(new Project());
+            collection.Create(new Project());
+            collection.Create(new Project());
 
             //Act
-            var project = collection.ReadSingle(p => p.Name == "MVC");
+            var allProjects = collection.Read();
 
             //Assert
-            Assert.IsNotNull(project);
-            Assert.AreEqual("MVC", project.Name);
+            Assert.AreEqual(4, allProjects.Count);
         }
 
         [Test]
@@ -95,28 +70,39 @@ namespace Piforatio.Core2Test
             });
 
             //Act
-            var list = collection.ReadProjectByType(ProjectType.Learn);
+            var learnProjects = collection.ReadProjectByType(ProjectType.Learn);
 
             //Assert
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("MVC", list[0].Name);
+            Assert.AreEqual(1, learnProjects.Count);
+            Assert.AreEqual("MVC", learnProjects[0].Name);
         }
-        
+
         [Test]
-        public void GetAllProjects()
+        public void UpdateProject()
         {
             //Arrange
+            var oldName = "M C V";
+            var newName = "MVC";
+            var project = new Project()
+            {
+                Name = oldName,
+                Type = ProjectType.Work,
+                Comment = "Learn MVC"
+            };
             var collection = new Projects(factory);
-            collection.Create(new Project());
-            collection.Create(new Project());
-            collection.Create(new Project());
-            collection.Create(new Project());
+            collection.Create(project);
 
             //Act
-            var list = collection.Read();
+            project.Name = newName;
+            collection.Update(project);
+            var result = collection.ReadSingle(p => p.Name == newName);
 
             //Assert
-            Assert.AreEqual(4, list.Count);
+            Assert.AreEqual(newName, result.Name);
+            Assert.AreEqual(ProjectType.Work, result.Type);
+            Assert.AreEqual("Learn MVC", result.Comment);
         }
+
+        
     }
 }

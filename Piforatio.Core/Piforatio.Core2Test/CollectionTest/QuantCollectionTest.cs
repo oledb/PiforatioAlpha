@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Piforatio.Core2;
 using Piforatio.Core2Test.Fakes;
+using System;
+using System.Collections.Generic;
 
 namespace Piforatio.Core2Test
 {
@@ -38,28 +38,6 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(1, allQuants.Count);
             Assert.AreEqual(new DateTime(2017, 3, 25, 10, 30, 00), output.Time);
             Assert.IsNull(quant.Objective);
-
-        }
-
-        [Test]
-        public void DeleteNewQuant()
-        {
-            //Arrange
-            var collection = new Quants(factory);
-            collection.Create(new Quant()
-            {
-                Time = new DateTime(2017, 3, 25, 10, 30, 00),
-                Comment = "Start new",
-                Count = 4
-            });
-
-            //Act
-            var quant = collection.ReadSingle(d => d.Comment == "Start new");
-            collection.Delete(quant);
-            quant = collection.ReadSingle(d => d.Comment == "Start new");
-
-            //Assert
-            Assert.IsNull(quant);
         }
 
         [Test]
@@ -137,7 +115,28 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(newComment, result.Comment);
         }
 
-        //Tests with Objectives
+        [Test]
+        public void DeleteNewQuant()
+        {
+            //Arrange
+            var collection = new Quants(factory);
+            collection.Create(new Quant()
+            {
+                Time = new DateTime(2017, 3, 25, 10, 30, 00),
+                Comment = "Start new",
+                Count = 4
+            });
+
+            //Act
+            var quant = collection.ReadSingle(d => d.Comment == "Start new");
+            collection.Delete(quant);
+            quant = collection.ReadSingle(d => d.Comment == "Start new");
+
+            //Assert
+            Assert.IsNull(quant);
+        }
+
+        // Tests with Objectives.
 
         [Test]
         public void AddNewQuantWithObjective()
