@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
-using System.Threading.Tasks;
 
 namespace Piforatio.Core2
-{// this code is borrowed from http://stackoverflow.com/questions/19901666/get-date-of-first-and-last-day-of-week-knowing-week-number
+{
+    // This code is borrowed from http://stackoverflow.com/questions/19901666/get-date-of-first-and-last-day-of-week-knowing-week-number
     public static class WeekNumber
     {
         private static int GetIso8601WeekOfYear(DateTime time)

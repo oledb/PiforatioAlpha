@@ -1,12 +1,11 @@
 ﻿using LinqKit;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace Piforatio.Core2
 {
-    public class Objectives : CrudObject<Objective>
+    public class Objectives : EntityCollection<Objective>
     {
         const int firstChar = 0;
         public Objectives(IContextFactory factory) : base(factory) { }
@@ -28,12 +27,10 @@ namespace Piforatio.Core2
                 context.Projects.Attach(obj.Project);
         }
 
-        protected override void deleteObject(Objective obj, PiforatioContext context)
-        {
-            // Do nothing.
-        }
+        protected override void deleteObject(Objective obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Objective> readObject(Func<Objective, bool> isValid, PiforatioContext context)
+        protected override IEnumerable<Objective> readObject(Func<Objective, bool> isValid, 
+            PiforatioContext context)
         {
             return context.Objectives.AsExpandable().Where(isValid);
         }

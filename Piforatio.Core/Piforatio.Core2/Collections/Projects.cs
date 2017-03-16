@@ -5,7 +5,7 @@ using LinqKit;
 
 namespace Piforatio.Core2
 {
-    public class Projects : CrudObject<Project>
+    public class Projects : EntityCollection<Project>
     {
         public Projects(IContextFactory contextFactory) : base(contextFactory) { }
 
@@ -14,24 +14,15 @@ namespace Piforatio.Core2
             return Read(p => p.Type == type);
         }
 
-        protected override void createObject(Project obj, PiforatioContext context)
-        {
-            // Do nothing.
-        }
+        protected override void createObject(Project obj, PiforatioContext context) { }
 
-        protected override void deleteObject(Project obj, PiforatioContext context)
-        {
-            // Do nothing.
-        }
+        protected override void deleteObject(Project obj, PiforatioContext context) { }
 
         protected override IEnumerable<Project> readObject(Func<Project, bool> isValid, PiforatioContext context)
         {
             return context.Projects.AsExpandable().Where(isValid);
         }
 
-        protected override void updateObject(Project obj, PiforatioContext context)
-        {
-            // Do nothing.
-        }
+        protected override void updateObject(Project obj, PiforatioContext context) { }
     }
 }

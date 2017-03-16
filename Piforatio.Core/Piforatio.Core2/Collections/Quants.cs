@@ -6,13 +6,14 @@ using System.Linq;
 
 namespace Piforatio.Core2
 {
-    public class Quants : CrudObject<Quant>
+    public class Quants : EntityCollection<Quant>
     {
         public Quants(IContextFactory factory) : base(factory) { }
 
         public List<Quant> Read(DateTime date)
         {
-            return Read(q => DateTime.Compare(q.Time.Date, date.Date) == 0).OrderBy(qs => qs.Time)
+            return Read(q => DateTime.Compare(q.Time.Date, date.Date) == 0)
+                .OrderBy(qs => qs.Time)
                 .ToList();
         }
 
@@ -30,12 +31,10 @@ namespace Piforatio.Core2
                 context.Objectives.Attach(obj.Objective);
         }
 
-        protected override void deleteObject(Quant obj, PiforatioContext context)
-        {
-            // Do nothing.
-        }
+        protected override void deleteObject(Quant obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, PiforatioContext context)
+        protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, 
+            PiforatioContext context)
         {
             return context.Quants
                 .Include(q => q.Objective)
