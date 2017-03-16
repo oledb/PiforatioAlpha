@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Calendar.cs" />
-    <Compile Include="Collections\CrudObject.cs" />
+    <Compile Include="Collections\EntityCollection.cs" />
     <Compile Include="Infrastracture\IContextFactory.cs" />
     <Compile Include="Objects\Objective.cs" />
     <Compile Include="Collections\Objectives.cs" />

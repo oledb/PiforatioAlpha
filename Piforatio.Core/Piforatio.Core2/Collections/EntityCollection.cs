@@ -5,10 +5,10 @@ using System.Data.Entity;
 
 namespace Piforatio.Core2
 {
-    public abstract class CrudObject<T> where T : class
+    public abstract class EntityCollection<T> where T : class
     {
         protected IContextFactory factory;
-        internal CrudObject(IContextFactory contextFactory)
+        internal EntityCollection(IContextFactory contextFactory)
         {
             factory = contextFactory;
         }

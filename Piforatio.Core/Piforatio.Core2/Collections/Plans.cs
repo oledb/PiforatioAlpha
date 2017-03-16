@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Piforatio.Core2
 {
-    public class Plans : CrudObject<Plan>
+    public class Plans : EntityCollection<Plan>
     {
         public Plans(IContextFactory contextFactory) : base(contextFactory) { }
 
@@ -21,10 +21,7 @@ namespace Piforatio.Core2
                 context.Objectives.Attach(obj.Objective);
         }
 
-        protected override void deleteObject(Plan obj, PiforatioContext context)
-        {
-            throw new NotImplementedException();
-        }
+        protected override void deleteObject(Plan obj, PiforatioContext context) { }
 
         protected override IEnumerable<Plan> readObject(Func<Plan, bool> isValid, 
             PiforatioContext context)
