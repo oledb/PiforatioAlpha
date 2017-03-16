@@ -18,7 +18,7 @@ namespace Piforatio.Core2Test
         public void AddObjectiveToCollection()
         {
             //Arrange
-            var obj = new Objective()
+            var objective = new Objective()
             {
                 Name = "Read book MVC for professional",
                 Status = ObjectiveStatus.NotStarted,
@@ -26,11 +26,11 @@ namespace Piforatio.Core2Test
             var collection = new Objectives(factory);
 
             //Act
-            collection.Create(obj);
-            var list = collection.Read();
+            collection.Create(objective);
+            var allObjectives = collection.Read();
 
             //Assert
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, allObjectives.Count);
         }
 
         [Test]
@@ -43,11 +43,11 @@ namespace Piforatio.Core2Test
             collection.Create(new Objective() { Name = "Create web site" });
 
             //Act
-            var list = collection.ReadByNameTemplate("mvc");
+            var mvcObjectives = collection.ReadByNameTemplate("mvc");
 
             //Assert
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("Read MVC book", list[0].Name);
+            Assert.AreEqual(1, mvcObjectives.Count);
+            Assert.AreEqual("Read MVC book", mvcObjectives[0].Name);
         }
 
         [Test]
@@ -63,16 +63,16 @@ namespace Piforatio.Core2Test
                 Status = ObjectiveStatus.NotStarted});
 
             //Act
-            var list1 = collection.ReadByStatus(
+            var inProgressList = collection.ReadByStatus(
                 ObjectiveStatus.InProgress);
-            var list2 = collection.ReadByStatus(
+            var notStartedList = collection.ReadByStatus(
                 ObjectiveStatus.NotStarted);
 
             //Arrnage
-            Assert.AreEqual(1, list1.Count);
-            Assert.AreEqual("Create Mvc test", list1[0].Name);
-            Assert.AreEqual(1, list2.Count);
-            Assert.AreEqual("MVC site", list2[0].Name);
+            Assert.AreEqual(1, inProgressList.Count);
+            Assert.AreEqual("Create Mvc test", inProgressList[0].Name);
+            Assert.AreEqual(1, notStartedList.Count);
+            Assert.AreEqual("MVC site", notStartedList[0].Name);
         }
 
         [Test]
@@ -92,12 +92,12 @@ namespace Piforatio.Core2Test
             //Act
             objective.Name = newName;
             collection.Update(objective);
-            var list = collection.ReadByNameTemplate(newName);
+            var allObjectives = collection.ReadByNameTemplate(newName);
 
             //Assert
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(newName, list[0].Name);
-            Assert.AreEqual(ObjectiveStatus.InProgress, list[0].Status);
+            Assert.AreEqual(1, allObjectives.Count);
+            Assert.AreEqual(newName, allObjectives[0].Name);
+            Assert.AreEqual(ObjectiveStatus.InProgress, allObjectives[0].Status);
         }
     }
 }
