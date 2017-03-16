@@ -54,10 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Calendar.cs" />
-    <Compile Include="Collections\BaseArray.cs" />
     <Compile Include="Collections\CrudObject.cs" />
     <Compile Include="Infrastracture\IContextFactory.cs" />
-    <Compile Include="Objects\ICoreObject.cs" />
     <Compile Include="Objects\Objective.cs" />
     <Compile Include="Collections\Objectives.cs" />
     <Compile Include="Objects\ObjectiveStatus.cs" />
