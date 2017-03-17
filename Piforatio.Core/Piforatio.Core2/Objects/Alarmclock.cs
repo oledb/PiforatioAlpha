@@ -8,8 +8,13 @@ namespace Piforatio.Core2
         private bool _isRun = false;
         private bool _isPause = false;
         private bool _isWaitable = false;
+        private int _intervalCount = 1;
+        private double _interval = -1d;
         private double _totalTime;
         private double _waitTime;
+
+        public event Action<Alarmclock, EventArgs> OnClockStop;
+        public event Action<Alarmclock, EventArgs> OnIntervalReach;
 
         public bool IsRun
         {
@@ -38,12 +43,12 @@ namespace Piforatio.Core2
             }
         }
 
-        public void Pause(DateTime now)
+        private void initialize()
         {
-            if (_isPause)
-                return;
-            setTotalSeconds(now);
-            _isPause = true;
+            _isRun = false;
+            _isPause = false;
+            _interval = -1d;
+            _intervalCount = 1;
         }
 
         public void Start(DateTime now)
@@ -61,10 +66,23 @@ namespace Piforatio.Core2
             Start(today);
         }
 
+        public void Start(DateTime today, double wait, double interval)
+        {
+            _interval = interval;
+            Start(today, wait);
+        }
+
+        public void Pause(DateTime now)
+        {
+            if (_isPause)
+                return;
+            setTotalSeconds(now);
+            _isPause = true;
+        }
+
         public void Reset()
         {
-            _isRun = false;
-            _isPause = false;
+            initialize();
         }
 
         private void setTotalSeconds(DateTime now)
@@ -78,7 +96,19 @@ namespace Piforatio.Core2
                 return;
             setTotalSeconds(now);
             if (_isWaitable && WaitSecodns <= 0)
-                Reset();
+            {
+                OnClockStop?.Invoke(this, new EventArgs());
+                initialize();
+                return;
+            }
+            if (_isWaitable && _interval > 0)
+            {
+                if(_interval * _intervalCount >= _totalTime)
+                {
+                    _intervalCount++;
+                    OnIntervalReach?.Invoke(this, new EventArgs());
+                }
+            }
         }
     }
 }

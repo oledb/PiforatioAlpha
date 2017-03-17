@@ -17,14 +17,13 @@ namespace Piforatio.Core2Test
 
         [TestCase(1)]
         [TestCase(5)]
-        public void StartAndStopTimer(double wait)
+        public void StartAndResetTimer(double wait)
         {
             //Arrange
             Alarmclock clock = new Alarmclock();
 
             //Act
             clock.Start(today);
-            clock.Execute(today);
             clock.Reset();
             clock.Execute(Wait(wait));
             var totalSeconds = clock.TotalSeconds;
@@ -106,7 +105,7 @@ namespace Piforatio.Core2Test
         }
 
         [TestCase(3600)]
-        public void StartAndWaitWhenStop(double wait)
+        public void StartAndWaitingWhenStopped(double wait)
         {
             //Arrange
             Alarmclock clock = new Alarmclock();
@@ -121,6 +120,50 @@ namespace Piforatio.Core2Test
             //Assert
             Assert.IsTrue(run);
             Assert.IsFalse(stop);
+        }
+
+        [TestCase(3600)]
+        public void ExecuteEventWhenStop(double wait)
+        {
+            //Arrange
+            bool isStopped = false;
+            Alarmclock clock = new Alarmclock();
+            clock.OnClockStop += (e, f) => 
+            {
+                isStopped = true;
+            };
+
+            //Act
+            clock.Start(today, wait * 2);
+            clock.Execute(Wait(wait));
+            Assert.IsFalse(isStopped);
+            clock.Execute(Wait(wait * 2));
+
+            //Assert
+            Assert.IsTrue(isStopped);
+        }
+
+        [TestCase(3600, 900)]
+        [TestCase(400, 100)]
+        public void ExecuteEventWhenIntervalIsReached(double wait, double interval)
+        {
+            //Arrange
+            int value = 0;
+            Alarmclock clock = new Alarmclock();
+            clock.OnIntervalReach += (e, f) => 
+            {
+                value++;
+            };
+            clock.Start(today, wait, interval);
+
+            //Act
+            clock.Execute(Wait(interval));
+            clock.Execute(Wait(interval * 2));
+            clock.Execute(Wait(interval * 3));
+            clock.Execute(Wait(interval * 4));
+
+            //Assert
+            Assert.AreEqual(3, value);
         }
 
         public DateTime Wait(double count)
