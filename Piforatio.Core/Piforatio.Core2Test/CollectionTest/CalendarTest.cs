@@ -20,7 +20,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void CreateCalendar()
+        public void AddNewWeek()
         {
             //Arrange
             var projects = ProjectsFake.Create(factory);

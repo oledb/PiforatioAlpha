@@ -41,7 +41,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void GetQuantByDate()
+        public void GetQuantsByDate()
         {
             //Arrange
             var today = new DateTime(2017, 3, 25);
@@ -64,7 +64,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void GetQuantByWeek()
+        public void GetQuantsByWeek()
         {
             //Arrange
             var collection = new Quants(factory);
@@ -116,7 +116,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void DeleteNewQuant()
+        public void DeleteQuant()
         {
             //Arrange
             var collection = new Quants(factory);

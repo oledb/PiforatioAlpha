@@ -15,7 +15,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void AddObjectiveToCollection()
+        public void AddNewObjective()
         {
             //Arrange
             var objective = new Objective()
@@ -76,7 +76,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void UpdateObjectives()
+        public void UpdateObjective()
         {
             //Arrange
             var oldName = "Crate Mvc stie";

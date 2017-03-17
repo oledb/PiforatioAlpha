@@ -18,7 +18,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void CreatePlans()
+        public void AddNewPlan()
         {
             //Arrange
             var projects = ProjectsFake.Create(factory);

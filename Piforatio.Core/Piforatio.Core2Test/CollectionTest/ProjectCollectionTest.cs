@@ -15,7 +15,7 @@ namespace Piforatio.Core2Test
         }
 
         [Test]
-        public void AddNewProjectToCollection()
+        public void AddNewProject()
         {
             //Arrange
             var project = new Project()
@@ -34,23 +34,6 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(1, allProjects.Count);
             Assert.AreEqual("MVC", allProjects[0].Name);
             Assert.AreEqual(ProjectType.Learn, allProjects[0].Type);
-        }
-
-        [Test]
-        public void GetAllProjects()
-        {
-            //Arrange
-            var collection = new Projects(factory);
-            collection.Create(new Project());
-            collection.Create(new Project());
-            collection.Create(new Project());
-            collection.Create(new Project());
-
-            //Act
-            var allProjects = collection.Read();
-
-            //Assert
-            Assert.AreEqual(4, allProjects.Count);
         }
 
         [Test]
