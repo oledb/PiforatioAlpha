@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tasks>
+  <item>
+    <text>Создать таймер</text>
+    <finished>false</finished>
+  </item>
+  <item>
+    <text>Таймер должен запускаться, преостанавливаться, сбрасываться и завершаться по окончанию времени</text>
+    <finished>false</finished>
+  </item>
+  <item>
+    <text>Таймер должен идти как от задоного времени к нулю, так и от нуля до бесконечности</text>
+    <finished>false</finished>
+  </item>
+  <item>
+    <text>Таймер должен выдавать оставшееся\пройденное время как в секундах, так и в строке формата 00:00:00</text>
+    <finished>false</finished>
+  </item>
+</Tasks>

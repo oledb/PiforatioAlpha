@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmclockTest.cs" />
     <Compile Include="CollectionTest\CalendarTest.cs" />
     <Compile Include="Fakes\FakeContextFactory.cs" />
     <Compile Include="CollectionTest\PlanCollectionTest.cs" />

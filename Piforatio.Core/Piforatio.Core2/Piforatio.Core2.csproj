@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarmclock.cs" />
     <Compile Include="Collections\Calendar.cs" />
     <Compile Include="Collections\EntityCollection.cs" />
     <Compile Include="Infrastracture\IContextFactory.cs" />
