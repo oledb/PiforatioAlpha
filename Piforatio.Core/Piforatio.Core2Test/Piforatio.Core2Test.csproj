@@ -95,6 +95,7 @@
     <Compile Include="CollectionTest\ProjectCollectionTest.cs" />
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundPlayerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Piforatio.Core2\Piforatio.Core2.csproj">

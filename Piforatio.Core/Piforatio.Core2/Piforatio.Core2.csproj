@@ -53,11 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmclockFormatExtentsion.cs" />
-    <Compile Include="Objects\Alarmclock.cs" />
+    <Compile Include="IFileSystem.cs" />
+    <Compile Include="Interactive\AlarmclockFormatExtentsion.cs" />
+    <Compile Include="Interactive\Alarmclock.cs" />
     <Compile Include="Collections\Calendar.cs" />
     <Compile Include="Collections\EntityCollection.cs" />
     <Compile Include="Infrastracture\IContextFactory.cs" />
+    <Compile Include="ISound.cs" />
     <Compile Include="Objects\Objective.cs" />
     <Compile Include="Collections\Objectives.cs" />
     <Compile Include="Objects\ObjectiveStatus.cs" />
@@ -73,14 +75,13 @@
     <Compile Include="Objects\Week.cs" />
     <Compile Include="Objects\WeekInfo.cs" />
     <Compile Include="Objects\WeekNumber.cs" />
+    <Compile Include="SoundPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interactive\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

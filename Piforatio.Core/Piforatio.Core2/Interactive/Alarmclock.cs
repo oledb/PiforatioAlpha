@@ -59,17 +59,17 @@ namespace Piforatio.Core2
             _isPause = false;
         }
 
-        public void Start(DateTime today, double wait)
+        public void Start(DateTime now, double wait)
         {
             _waitTime = wait;
             _isWaitable = true;
-            Start(today);
+            Start(now);
         }
 
-        public void Start(DateTime today, double wait, double interval)
+        public void Start(DateTime now, double wait, double interval)
         {
             _interval = interval;
-            Start(today, wait);
+            Start(now, wait);
         }
 
         public void Pause(DateTime now)

@@ -1,2 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Tasks />
+<Tasks>
+  <item>
+    <text>Создать класс, который сможет воспроизводить различные звуки</text>
+    <finished>false</finished>
+  </item>
+  <item>
+    <text>Класс должен воспроизводить различные типы звуков (wav, mp3, wma и т.д.)</text>
+    <finished>false</finished>
+  </item>
+  <item>
+    <text>У класса должно быть ограничение по умолчанию по длительности звучания</text>
+    <finished>false</finished>
+  </item>
+</Tasks>

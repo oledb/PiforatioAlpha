@@ -123,7 +123,7 @@ namespace Piforatio.Core2Test
         }
 
         [TestCase(3600)]
-        public void ExecuteEventWhenStop(double wait)
+        public void InvokeEventWhenStop(double wait)
         {
             //Arrange
             bool isStopped = false;
@@ -145,7 +145,7 @@ namespace Piforatio.Core2Test
 
         [TestCase(3600, 900)]
         [TestCase(400, 100)]
-        public void ExecuteEventWhenIntervalIsReached(double wait, double interval)
+        public void InvokeEventWhenIntervalIsReached(double wait, double interval)
         {
             //Arrange
             int value = 0;
