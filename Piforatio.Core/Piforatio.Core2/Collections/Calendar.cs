@@ -18,11 +18,11 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Week obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Week> readObject(Func<Week, bool> isValid, PiforatioContext context)
+        protected override IEnumerable<Week> readObject(Func<Week, bool> predicate, PiforatioContext context)
         {
             return context.Calendar
                 .AsExpandable()
-                .Where(isValid); 
+                .Where(predicate); 
         }
 
         protected override void updateObject(Week obj, PiforatioContext context) { }

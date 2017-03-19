@@ -23,14 +23,14 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Plan obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Plan> readObject(Func<Plan, bool> isValid, 
+        protected override IEnumerable<Plan> readObject(Func<Plan, bool> predicate, 
             PiforatioContext context)
         {
             return context.Plans
                 .Include(p => p.Objective)
                 .Include(p => p.Objective.Project)
                 .AsExpandable()
-                .Where(isValid);
+                .Where(predicate);
         }
 
         protected override void updateObject(Plan obj, PiforatioContext context)

@@ -38,6 +38,4 @@ namespace Piforatio.Core2Test
             mockSound.Verify(p => p.PlaySound("Error.wav"));
         }
     }
-
-    
 }

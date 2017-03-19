@@ -29,10 +29,10 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Objective obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Objective> readObject(Func<Objective, bool> isValid, 
+        protected override IEnumerable<Objective> readObject(Func<Objective, bool> predicate, 
             PiforatioContext context)
         {
-            return context.Objectives.AsExpandable().Where(isValid);
+            return context.Objectives.AsExpandable().Where(predicate);
         }
 
         protected override void updateObject(Objective obj, PiforatioContext context)

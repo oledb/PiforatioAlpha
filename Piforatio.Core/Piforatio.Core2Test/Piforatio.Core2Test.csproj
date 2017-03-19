@@ -82,7 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmclockFormatTest.cs" />
+    <Compile Include="InteractiveTest\AlarmclockFormatTest.cs" />
     <Compile Include="InteractiveTest\AlarmclockTest.cs" />
     <Compile Include="CollectionTest\CalendarTest.cs" />
     <Compile Include="Fakes\FakeContextFactory.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="CollectionTest\ProjectCollectionTest.cs" />
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoundPlayerTest.cs" />
+    <Compile Include="InteractiveTest\SoundPlayerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Piforatio.Core2\Piforatio.Core2.csproj">

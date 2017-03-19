@@ -33,13 +33,13 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Quant obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Quant> readObject(Func<Quant, bool> isValid, 
+        protected override IEnumerable<Quant> readObject(Func<Quant, bool> predicate, 
             PiforatioContext context)
         {
             return context.Quants
                 .Include(q => q.Objective)
                 .AsExpandable()
-                .Where(isValid);
+                .Where(predicate);
         }
 
         protected override void updateObject(Quant obj, PiforatioContext context)

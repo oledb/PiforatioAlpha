@@ -18,9 +18,9 @@ namespace Piforatio.Core2
 
         protected override void deleteObject(Project obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Project> readObject(Func<Project, bool> isValid, PiforatioContext context)
+        protected override IEnumerable<Project> readObject(Func<Project, bool> predicate, PiforatioContext context)
         {
-            return context.Projects.AsExpandable().Where(isValid);
+            return context.Projects.AsExpandable().Where(predicate);
         }
 
         protected override void updateObject(Project obj, PiforatioContext context) { }

@@ -53,13 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFileSystem.cs" />
+    <Compile Include="Interactive\IFileSystem.cs" />
     <Compile Include="Interactive\AlarmclockFormatExtentsion.cs" />
     <Compile Include="Interactive\Alarmclock.cs" />
     <Compile Include="Collections\Calendar.cs" />
     <Compile Include="Collections\EntityCollection.cs" />
     <Compile Include="Infrastracture\IContextFactory.cs" />
-    <Compile Include="ISound.cs" />
+    <Compile Include="Interactive\ISound.cs" />
     <Compile Include="Objects\Objective.cs" />
     <Compile Include="Collections\Objectives.cs" />
     <Compile Include="Objects\ObjectiveStatus.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Objects\Week.cs" />
     <Compile Include="Objects\WeekInfo.cs" />
     <Compile Include="Objects\WeekNumber.cs" />
-    <Compile Include="SoundPlayer.cs" />
+    <Compile Include="Interactive\SoundPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

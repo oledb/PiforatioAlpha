@@ -23,7 +23,7 @@ namespace Piforatio.Core2
         }
 
         protected abstract void createObject(T obj, PiforatioContext context);
-        protected abstract IEnumerable<T> readObject(Func<T, bool> isValid,
+        protected abstract IEnumerable<T> readObject(Func<T, bool> pridicate,
             PiforatioContext context);
         protected abstract void updateObject(T obj, PiforatioContext context);
         protected abstract void deleteObject(T obj, PiforatioContext context);
@@ -46,16 +46,16 @@ namespace Piforatio.Core2
             }
         }
 
-        public List<T> Read(Func<T, bool> isValid)
+        public List<T> Read(Func<T, bool> predicate)
         {
             using (var context = factory.Create())
-                return readObject(isValid, context).ToList();
+                return readObject(predicate, context).ToList();
         }
 
-        public T ReadSingle(Func<T, bool> isValid)
+        public T ReadSingle(Func<T, bool> predicate)
         {
             using (var context = factory.Create())
-                return readObject(isValid, context).SingleOrDefault();
+                return readObject(predicate, context).SingleOrDefault();
         }
 
         public void Update(T obj)
