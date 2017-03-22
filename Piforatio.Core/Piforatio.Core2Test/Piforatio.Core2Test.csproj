@@ -96,11 +96,16 @@
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InteractiveTest\SoundPlayerTest.cs" />
+    <Compile Include="WPF\TimerViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Piforatio.Core2\Piforatio.Core2.csproj">
       <Project>{5da60de3-5461-441c-8d6e-b4fbd034842d}</Project>
       <Name>Piforatio.Core2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Piforatio.WPF\Piforatio.WPF.csproj">
+      <Project>{06b04258-91bc-4ca6-aa0a-588c84f86c2d}</Project>
+      <Name>Piforatio.WPF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +115,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WPF\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
