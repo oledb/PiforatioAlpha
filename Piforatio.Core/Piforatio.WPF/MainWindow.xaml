@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piforatio.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="640"
-        MinHeight="480" MinWidth="640">
+        Title="MainWindow" Height="480" Width="800"
+        MinHeight="480" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,14 +14,16 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <!-- Timer -->
             <Grid Name="TimerGrid" Grid.Row="0" >
-                <Label Content="Timer"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                <local:TimerControl BorderThickness="0.3">
+                    <local:TimerControl.BorderBrush>
+                        <SolidColorBrush  Color="Black"/>
+                    </local:TimerControl.BorderBrush>
+                </local:TimerControl>
             </Grid>
             <!-- Plan -->
             <Grid Name="PlanGrid" Grid.Row="1" >
