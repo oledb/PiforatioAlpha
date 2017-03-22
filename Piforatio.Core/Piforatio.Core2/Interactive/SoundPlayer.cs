@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Piforatio.Core2
+﻿namespace Piforatio.Core2
 {
     public class SoundPlayer
     {
