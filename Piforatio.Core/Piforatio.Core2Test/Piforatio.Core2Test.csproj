@@ -85,12 +85,12 @@
     <Compile Include="InteractiveTest\AlarmclockFormatTest.cs" />
     <Compile Include="InteractiveTest\AlarmclockTest.cs" />
     <Compile Include="CollectionTest\CalendarTest.cs" />
-    <Compile Include="Fakes\FakeContextFactory.cs" />
+    <Compile Include="CoreFakes\FakeContextFactory.cs" />
     <Compile Include="CollectionTest\PlanCollectionTest.cs" />
     <Compile Include="CollectionTest\DateTimeWeekTest.cs" />
-    <Compile Include="Fakes\ObjectivesFake.cs" />
-    <Compile Include="Fakes\ProjectsFake.cs" />
-    <Compile Include="Fakes\QuantsFake.cs" />
+    <Compile Include="CoreFakes\ObjectivesFake.cs" />
+    <Compile Include="CoreFakes\ProjectsFake.cs" />
+    <Compile Include="CoreFakes\QuantsFake.cs" />
     <Compile Include="CollectionTest\ObjectiveCollectionTest.cs" />
     <Compile Include="CollectionTest\ProjectCollectionTest.cs" />
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />

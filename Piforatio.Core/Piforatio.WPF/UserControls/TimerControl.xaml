@@ -8,32 +8,25 @@
              d:DesignHeight="200" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120*"/>
+            <RowDefinition Height="60*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         <!-- Timer -->
         <Grid Name="timerControlGrid"  Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="70*"/>
                 <ColumnDefinition Width="30*"/>
             </Grid.ColumnDefinitions>
             <!-- time labels -->
-            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                <Label Name="endYear" Content="0000" FontSize="38"/>
-                <Label Name="timerValue" Content="00:00:00" FontSize="22"/>
-            </StackPanel>
-            <!-- time count control -->
-            <StackPanel Grid.Column="1">
-                <Label Content="Макс. времени"/>
-                <Label Name="maxTime" Content="120 мин"/>
-                <Slider Minimum="0" Maximum="8" SmallChange="1" Value="8" 
-                        TickPlacement="BottomRight"
-                        Margin="4"/>
+            <StackPanel Grid.Column="0" 
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <Label Name="endYear" Content="0000" FontSize="30"/>
+                <Label Name="timerValue" Content="00:00:00" FontSize="30"/>
             </StackPanel>
             <!-- Start Stop Pause buttons-->
-            <StackPanel Grid.Column="2" Margin="4">
+            <StackPanel Grid.Column="1" Margin="4">
                 <Button Content="Старт"/>
                 <Button Content="Стоп" Margin="0 4 0 0"/>
             </StackPanel>
