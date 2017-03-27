@@ -6,10 +6,18 @@ namespace Piforatio.WPF
     public class TimerViewModel
     {
         IDateTime _dateTime;
+        private Alarmclock _workClock;
 
         public TimerViewModel(IDateTime dateTime)
         {
             _dateTime = dateTime;
+            _workClock = new Alarmclock();
+        }
+
+        public TimerViewModel(IDateTime dateTime, int maxWorkTime)
+            : this(dateTime)
+        {
+            //Do nothing
         }
 
         public object CurrentObjective
@@ -17,12 +25,13 @@ namespace Piforatio.WPF
             get { return null; }
         }
 
-        public string EndYear
+        public bool IsStarted
         {
-            get { return getEndYear(); }
+            get
+            {
+                return _workClock.IsRun;
+            }
         }
-
-        public bool IsStarted { get; private set; }
 
         public object TimePause
         {
@@ -31,16 +40,17 @@ namespace Piforatio.WPF
 
         public string TimeWork
         {
-            get { return "00:00:00"; }
+            get { return _workClock.TotalSeconds.ToTimerFormat(); }
         }
 
-        private string getEndYear()
+        public void Start()
         {
-            var date = _dateTime.Now;
-            var nextYear = date.Year + 1;
-            var nextDate = new DateTime(nextYear, 1, 1, 0, 0, 0);
-            var totalHours = (nextDate - date).TotalHours;
-            return Convert.ToInt32(totalHours).ToString() ;
+            _workClock.Start(_dateTime.Now,3600,900);
+        }
+
+        public void Execute()
+        {
+            _workClock.Execute(_dateTime.Now);
         }
     }
 }

@@ -3,14 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Piforatio.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="128" Width="400"
-        MinHeight="128" MinWidth="400" Background="#FF181818">
+        Title="MainWindow" Height="256" Width="400"
+        MinHeight="256" MinWidth="400" Background="White">
 
     <Grid Margin="4">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="84"/>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         <Grid Name="timerGrid" Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -20,8 +23,16 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="00:00:00" FontSize="50" 
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Grid.Column="1" Margin="4" Content=">" FontSize="50"/>
-            <Button Grid.Column="2" Margin="4" Content="*" FontSize="50"/>
+            <Button Grid.Column="1" Margin="4" Content="&#xF04B;" FontSize="45"
+                    FontFamily="/Piforatio.WPF;component/#FontAwesome"/>
+            <Button Grid.Column="2" Margin="4" Content="&#xF04D;" FontSize="45"
+                    FontFamily="/Piforatio.WPF;component/#FontAwesome"/>
         </Grid>
+        <Label Grid.Row="1" Content="Hello"/>
+        <ComboBox Name="commandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
+            <sys:String>Задача</sys:String>
+            <sys:String>Настройки</sys:String>
+        </ComboBox>
+
     </Grid>
 </Window>
