@@ -7,6 +7,7 @@ namespace Piforatio.WPF
     {
         IDateTime _dateTime;
         private Alarmclock _workClock;
+        private Alarmclock _pauseClock;
         private int _maxWorkTime = 3600;
         private const int intervalTime = 900;
 
@@ -31,16 +32,27 @@ namespace Piforatio.WPF
         {
             get
             {
-                return _workClock.IsRun;
+                return _workClock.IsStarted;
             }
         }
 
-        public object TimePause
+        public bool IsPaused
         {
-            get { return null; }
+            get
+            {
+                return _workClock.IsPaused;
+            }
         }
 
-        public string TimeWork
+        public string PauseTime
+        {
+            get
+            {
+                return _pauseClock?.WaitSecodns.ToTimerFormat();
+            }
+        }
+
+        public string WorkTime
         {
             get
             {
@@ -48,21 +60,42 @@ namespace Piforatio.WPF
             }
         }
 
+        public int MaxPauseTime { get; set; } = 900;
+
         public void Start()
         {
             _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
-            isStartedChanged();
+            NotifyPropertyChanged("IsStarted");
         }
 
         public void Execute()
         {
-            _workClock.Execute(_dateTime.Now);
-            NotifyPropertyChanged("TimeWork");
+            var now = _dateTime.Now;
+            if (!IsPaused)
+            {
+                _workClock.Execute(now);
+                NotifyPropertyChanged("TimeWork");
+            }
+            else
+            {
+                _pauseClock.Execute(now);
+                NotifyPropertyChanged("PauseTime");
+            }
         }
 
-        private void isStartedChanged()
+        public void Pause()
         {
-            NotifyPropertyChanged("IsStarted");
+            var now = _dateTime.Now;
+            _workClock.Pause(now);
+            _pauseClock = new Alarmclock();
+            _pauseClock.Start(now, MaxPauseTime);
+            _pauseClock.OnClockStop += (obj, arg) => Stop();
+        }
+
+        public void Stop()
+        {
+            _workClock.Reset();
+            NotifyPropertyChanged("TimeWork");
         }
     }
 }

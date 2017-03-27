@@ -112,10 +112,10 @@ namespace Piforatio.Core2Test
 
             //Act
             clock.Start(today, wait);
-            bool run = clock.IsRun;
+            bool run = clock.IsStarted;
             today = Wait(wait);
             clock.Execute(today);
-            bool stop = clock.IsRun;
+            bool stop = clock.IsStarted;
 
             //Assert
             Assert.IsTrue(run);
@@ -164,6 +164,29 @@ namespace Piforatio.Core2Test
 
             //Assert
             Assert.AreEqual(3, value);
+        }
+
+        [TestCase(400, 100, 50)]
+        public void TwoTimeExecuteInOrderToReachInterval(double wait, double interval, 
+            double executeInterval)
+        {
+            //Arrange
+            int value = 0;
+            Alarmclock clock = new Alarmclock();
+            clock.OnIntervalReach += (e, f) =>
+            {
+                value++;
+            };
+            clock.Start(today, wait, interval);
+
+            //Act
+            clock.Execute(Wait(executeInterval));
+            clock.Execute(Wait(executeInterval * 2));
+            clock.Execute(Wait(executeInterval * 3));
+            clock.Execute(Wait(executeInterval * 4));
+
+            //Assert
+            Assert.AreEqual(2, value);
         }
 
         public DateTime Wait(double count)

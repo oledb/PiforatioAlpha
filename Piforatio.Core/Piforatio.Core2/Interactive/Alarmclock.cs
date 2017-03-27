@@ -5,8 +5,8 @@ namespace Piforatio.Core2
     public class Alarmclock
     {
         private DateTime _StartTime;
-        private bool _isRun = false;
-        private bool _isPause = false;
+        private bool _isStarted = false;
+        private bool _isPaused = false;
         private bool _isWaitable = false;
         private int _intervalCount = 1;
         private double _interval = -1d;
@@ -16,16 +16,24 @@ namespace Piforatio.Core2
         public event Action<Alarmclock, EventArgs> OnClockStop;
         public event Action<Alarmclock, EventArgs> OnIntervalReach;
 
-        public bool IsRun
+        public bool IsStarted
         {
-            get { return _isRun; }
+            get { return _isStarted; }
+        }
+
+        public bool IsPaused
+        {
+            get
+            {
+                return _isPaused;
+            }
         }
 
         public double TotalSeconds
         {
             get
             {
-                if (_isRun)
+                if (_isStarted)
                     return _totalTime;
                 else
                     return 0;
@@ -45,18 +53,18 @@ namespace Piforatio.Core2
 
         private void initialize()
         {
-            _isRun = false;
-            _isPause = false;
+            _isStarted = false;
+            _isPaused = false;
             _interval = -1d;
             _intervalCount = 1;
         }
 
         public void Start(DateTime now)
         {
-            if (!_isPause)
+            if (!_isPaused)
                 _StartTime = now;
-            _isRun = true;
-            _isPause = false;
+            _isStarted = true;
+            _isPaused = false;
         }
 
         public void Start(DateTime now, double wait)
@@ -74,10 +82,10 @@ namespace Piforatio.Core2
 
         public void Pause(DateTime now)
         {
-            if (_isPause)
+            if (_isPaused)
                 return;
             setTotalSeconds(now);
-            _isPause = true;
+            _isPaused = true;
         }
 
         public void Reset()
@@ -92,7 +100,7 @@ namespace Piforatio.Core2
 
         public void Execute(DateTime now)
         {
-            if (_isRun && _isPause)
+            if (_isStarted && _isPaused)
                 return;
             setTotalSeconds(now);
             if (_isWaitable && WaitSecodns <= 0)
@@ -103,7 +111,7 @@ namespace Piforatio.Core2
             }
             if (_isWaitable && _interval > 0)
             {
-                if(_interval * _intervalCount >= _totalTime)
+                if(_interval * _intervalCount <= _totalTime)
                 {
                     _intervalCount++;
                     OnIntervalReach?.Invoke(this, new EventArgs());
