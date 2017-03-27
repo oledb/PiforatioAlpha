@@ -3,7 +3,7 @@ using Piforatio.Core2;
 
 namespace Piforatio.WPF
 {
-    public class TimerViewModel
+    public class TimerViewModel : Notifier
     {
         IDateTime _dateTime;
         private Alarmclock _workClock;
@@ -42,17 +42,27 @@ namespace Piforatio.WPF
 
         public string TimeWork
         {
-            get { return _workClock.TotalSeconds.ToTimerFormat(); }
+            get
+            {
+                return _workClock.TotalSeconds.ToTimerFormat();
+            }
         }
 
         public void Start()
         {
             _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
+            isStartedChanged();
         }
 
         public void Execute()
         {
             _workClock.Execute(_dateTime.Now);
+            NotifyPropertyChanged("TimeWork");
+        }
+
+        private void isStartedChanged()
+        {
+            NotifyPropertyChanged("IsStarted");
         }
     }
 }

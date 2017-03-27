@@ -34,6 +34,12 @@ namespace Piforatio.Core2Test.WPF
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 1);
             TimerViewModel timer = new TimerViewModel(dateTime);
+            bool isStarted = false;
+            timer.PropertyChanged += (obj, args) =>
+            {
+                if (args.PropertyName == "IsStarted")
+                    isStarted = true;
+            };
 
             //Act
             timer.Start();
@@ -42,25 +48,39 @@ namespace Piforatio.Core2Test.WPF
             //Assert
             Assert.AreEqual("00:00:01", timer.TimeWork);
             Assert.IsTrue(timer.IsStarted);
+            Assert.IsTrue(isStarted);
         }
 
         [Test]
-        public void StartTimerAndEndIfMaxTime()
+        public void StartTimerAndEndWhenMaxTimeReached()
         {
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 3600);
             TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            var timeWorkList = new List<string>();
+            timer.PropertyChanged += (obj, args) =>
+            {
+                if (args.PropertyName == "TimeWork")
+                    timeWorkList.Add(timer.TimeWork);
+            };
+            bool isStarted = true;
+            timer.PropertyChanged += (obj, args) =>
+            {
+                if (args.PropertyName == "IsStarted")
+                    isStarted = false;
+            };
 
             //Act
             timer.Start();
             timer.Execute();
-            Assert.AreEqual("01:00:00", timer.TimeWork);
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:00:00", timer.TimeWork);
-
+            Assert.AreEqual(2, timeWorkList.Count);
+            Assert.AreEqual("01:00:00", timeWorkList[0]);
+            Assert.AreEqual("00:00:00", timeWorkList[1]);
+            Assert.IsFalse(isStarted);
         }
     }
 

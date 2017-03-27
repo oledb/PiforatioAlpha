@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Notifer.cs" />
     <Compile Include="ViewModels\IDateTime.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Page Include="MainWindow.xaml">
