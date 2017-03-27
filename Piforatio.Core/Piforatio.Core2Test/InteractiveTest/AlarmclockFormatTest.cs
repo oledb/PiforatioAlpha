@@ -8,8 +8,8 @@ namespace Piforatio.Core2Test
     class AlarmclockFormatTest
     {
         [TestCase(59d, 0)]
-        [TestCase(60d, 1)]
-        [TestCase(119d, 1)]
+        [TestCase(3660, 1)]
+        [TestCase(7200d, 0)]
         public void ConvertTotalSecondsToMinute(double total, int minutes)
         {
             //Arrange, Act, Assert
@@ -18,7 +18,7 @@ namespace Piforatio.Core2Test
 
         [TestCase(3599d, 0)]
         [TestCase(3600d, 1)]
-        [TestCase(7199d, 1)]
+        [TestCase(7200d, 2)]
         public void ConvertTotalSecondsToHour(double total, int hours)
         {
             //Arrange, Act, Assert

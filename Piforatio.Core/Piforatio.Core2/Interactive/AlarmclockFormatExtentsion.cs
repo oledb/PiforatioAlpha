@@ -7,7 +7,7 @@ namespace Piforatio.Core2
     {
         public static int ToMinutes(this double total)
         {
-            return ToInt32(Truncate(total / 60));
+            return ToInt32(Truncate(total / 60)) % 60;
         }
 
         public static int ToHours(this double total)

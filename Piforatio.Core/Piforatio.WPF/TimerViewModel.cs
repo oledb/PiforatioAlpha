@@ -7,6 +7,8 @@ namespace Piforatio.WPF
     {
         IDateTime _dateTime;
         private Alarmclock _workClock;
+        private int _maxWorkTime = 3600;
+        private const int intervalTime = 900;
 
         public TimerViewModel(IDateTime dateTime)
         {
@@ -17,7 +19,7 @@ namespace Piforatio.WPF
         public TimerViewModel(IDateTime dateTime, int maxWorkTime)
             : this(dateTime)
         {
-            //Do nothing
+            _maxWorkTime = maxWorkTime;
         }
 
         public object CurrentObjective
@@ -45,7 +47,7 @@ namespace Piforatio.WPF
 
         public void Start()
         {
-            _workClock.Start(_dateTime.Now,3600,900);
+            _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
         }
 
         public void Execute()
