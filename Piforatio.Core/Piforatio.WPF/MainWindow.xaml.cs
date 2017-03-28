@@ -14,12 +14,23 @@ namespace Piforatio.WPF
         private Timer timer;
 
         public MainWindow()
+        {  
+            InitializeComponent();
+            initializeTimer();
+        }
+
+        private void initializeTimer()
         {
             timerViewModel = new TimerViewModel(new MyDateTime());
-            InitializeComponent();
             timerLabel.DataContext = timerViewModel;
             timer = new Timer(100);
             timer.Elapsed += (obj, args) => timerViewModel.Execute();
+            timerViewModel.OnTimerEnd += (obj, args) =>
+            {
+                timer.Stop();
+                Dispatcher.Invoke( () => playButton.Content = playChar.ToString());
+            };
+            timerViewModel.OnIntervalReached += (obj, args) => MessageBox.Show("hello");
         }
 
         private void StartAndPauseCommand_Execute(object sender, ExecutedRoutedEventArgs args)

@@ -106,8 +106,8 @@ namespace Piforatio.Core2
             setTotalSeconds(now);
             if (_isWaitable && WaitSecodns <= 0)
             {
-                OnClockStop?.Invoke(this, new EventArgs());
                 initialize();
+                OnClockStop?.Invoke(this, new EventArgs());
                 return;
             }
             if (_isWaitable && _interval > 0)

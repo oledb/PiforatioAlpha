@@ -124,7 +124,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:13:20", timer.ClockFace);
+            Assert.AreEqual("00:13:19", timer.ClockFace);
             Assert.IsTrue(timer.IsPaused);
             
         }
@@ -144,7 +144,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:14:58", timer.ClockFace);
+            Assert.AreEqual("00:14:57", timer.ClockFace);
         }
 
         [Test]
@@ -197,8 +197,56 @@ namespace Piforatio.Core2Test.WPF
             //Assert
             Assert.AreEqual("00:00:20",timer.ClockFace);
         }
+
+        /// 
+        /// Events test
+        /// 
+        [Test]
+        public void EventOfPauseTimeEnded()
+        {
+            //Arrange
+            var time = new DateTime(636258836307637505, DateTimeKind.Local);
+            IDateTime dateTime = new TodayFakeIncrement(time, 450);
+            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            var list = new List<string>();
+            timer.OnTimerEnd += (obj, args) =>
+            {
+                list.Add("Pause, reset");
+            };
+
+            //Act
+            timer.Start();
+            timer.Pause();
+            timer.Execute();
+            timer.Execute();
+            timer.Execute();
+
+            //Assert
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual("Pause, reset", list[0]);
+        }
+
+        [Test]
+        public void IntervalIsReached()
+        {
+            //Arrange
+            var time = new DateTime(636258836307637505, DateTimeKind.Local);
+            IDateTime dateTime = new TodayFakeIncrement(time, 450);
+            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            int index = 0;
+            timer.OnIntervalReached += (obj, args) => index++;
+
+            //Act
+            timer.Start();
+            for (int i = 0; i < 8; i++)
+                timer.Execute();
+
+            //Assert
+            Assert.AreEqual(4, index);
+        }
     }
 
+    /// Subsidiary classes
     public class TodayStub : IDateTime
     {
         protected DateTime _now;
