@@ -8,7 +8,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="256" Width="400"
         MinHeight="256" MinWidth="400" Background="White">
-
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.StartAndPauseCommand}"
+                        Executed="StartAndPauseCommand_Execute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.StopCommand}" 
+                        Executed="StopCommand_Execute"/>
+    </Window.CommandBindings>
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="84"/>
@@ -24,13 +29,17 @@
             <Label Name="timerLabel"  Grid.Column="0" FontSize="50" 
                    VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label.Content>
-                    <Binding Path="WorkTime"/>
+                    <Binding Path="ClockFace"/>
                 </Label.Content>
             </Label>
-            <Button Grid.Column="1" Margin="4" Content="&#xF04B;" FontSize="45"
-                    FontFamily="/Piforatio.WPF;component/#FontAwesome"/>
-            <Button Grid.Column="2" Margin="4" Content="&#xF04D;" FontSize="45"
-                    FontFamily="/Piforatio.WPF;component/#FontAwesome"/>
+            <Button Name="playButton" Grid.Column="1" Margin="4" 
+                    Content="&#xF04B;" FontSize="45"
+                    FontFamily="/Piforatio.WPF;component/#FontAwesome"
+                    Command="{x:Static local:MainWindow.StartAndPauseCommand}"/>
+            <Button Name="stopButton"  Grid.Column="2" Margin="4" 
+                    Content="&#xF04D;" FontSize="45"
+                    FontFamily="/Piforatio.WPF;component/#FontAwesome"
+                    Command="{x:Static local:MainWindow.StopCommand}"/>
         </Grid>
         <Label Grid.Row="1" Content="Hello"/>
         <ComboBox Name="commandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
