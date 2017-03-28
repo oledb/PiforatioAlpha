@@ -79,15 +79,16 @@ namespace Piforatio.Core2Test
             clock.Execute(Wait(wait));
             clock.Pause(Wait(wait));
             // Wait and press Pause againg.
-            clock.Execute(Wait(wait * 2));
-            clock.Pause(Wait(wait * 2));
-            clock.Execute(Wait(wait * 4));
+            clock.Execute(Wait(wait * 12));
+            clock.Pause(Wait(wait * 14));
+            clock.Execute(Wait(wait * 16));
             var result = clock.TotalSeconds;
 
             //Assert
             Assert.AreEqual(wait, result);
         }
 
+        [TestCase(100)]
         public void StartAndPauseSomeTimes(double wait)
         {
             //Arrange
@@ -96,8 +97,8 @@ namespace Piforatio.Core2Test
 
             //Arrange
             clock.Pause(Wait(wait * 1));
-            clock.Start(Wait(wait * 2));
-            clock.Pause(Wait(wait * 4));
+            clock.Start(Wait(wait * 14));
+            clock.Pause(Wait(wait * 16));
             var result = clock.TotalSeconds;
 
             //Assert

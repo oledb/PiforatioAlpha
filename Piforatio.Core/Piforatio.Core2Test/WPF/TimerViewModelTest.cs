@@ -190,11 +190,12 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
             timer.Execute();
             timer.Execute();
+            timer.Execute();
             timer.Start();
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:00:30",timer.WorkTime);
+            Assert.AreEqual("00:00:20",timer.WorkTime);
         }
     }
 

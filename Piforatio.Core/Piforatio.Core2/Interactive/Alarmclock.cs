@@ -61,8 +61,7 @@ namespace Piforatio.Core2
 
         public void Start(DateTime now)
         {
-            if (!_isPaused)
-                _StartTime = now;
+            _StartTime = now;
             _isStarted = true;
             _isPaused = false;
         }
@@ -95,7 +94,8 @@ namespace Piforatio.Core2
 
         private void setTotalSeconds(DateTime now)
         {
-            _totalTime = (now - _StartTime).TotalSeconds;
+            _totalTime += (now - _StartTime).TotalSeconds;
+            _StartTime = now;
         }
 
         public void Execute(DateTime now)

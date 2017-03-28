@@ -64,7 +64,10 @@ namespace Piforatio.WPF
 
         public void Start()
         {
-            _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
+            if (IsPaused)
+                _workClock.Start(_dateTime.Now);
+            else
+                _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
             NotifyPropertyChanged("IsStarted");
         }
 
