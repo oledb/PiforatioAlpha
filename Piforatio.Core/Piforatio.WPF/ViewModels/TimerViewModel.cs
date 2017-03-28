@@ -44,19 +44,14 @@ namespace Piforatio.WPF
             }
         }
 
-        public string PauseTime
+        public string ClockFace
         {
             get
             {
-                return _pauseClock?.WaitSecodns.ToTimerFormat();
-            }
-        }
-
-        public string WorkTime
-        {
-            get
-            {
-                return _workClock.TotalSeconds.ToTimerFormat();
+                if (_pauseClock != null)
+                    return _pauseClock.WaitSecodns.ToTimerFormat();
+                else
+                    return _workClock.TotalSeconds.ToTimerFormat();
             }
         }
 
@@ -68,6 +63,7 @@ namespace Piforatio.WPF
                 _workClock.Start(_dateTime.Now);
             else
                 _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
+            _pauseClock = null;
             NotifyPropertyChanged("IsStarted");
         }
 
@@ -77,12 +73,12 @@ namespace Piforatio.WPF
             if (!IsPaused)
             {
                 _workClock.Execute(now);
-                NotifyPropertyChanged("TimeWork");
+                NotifyPropertyChanged("ClockFace");
             }
             else
             {
                 _pauseClock.Execute(now);
-                NotifyPropertyChanged("PauseTime");
+                NotifyPropertyChanged("ClockFace");
             }
         }
 
@@ -98,7 +94,8 @@ namespace Piforatio.WPF
         public void Stop()
         {
             _workClock.Reset();
-            NotifyPropertyChanged("TimeWork");
+            _pauseClock = null;
+            NotifyPropertyChanged("ClockFace");
         }
     }
 }

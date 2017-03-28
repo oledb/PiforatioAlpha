@@ -20,8 +20,7 @@ namespace Piforatio.Core2Test.WPF
             TimerViewModel timer = new TimerViewModel(dateTime);
 
             //Assert
-            Assert.AreEqual("00:00:00", timer.WorkTime);
-            Assert.IsNull(timer.PauseTime);
+            Assert.AreEqual("00:00:00", timer.ClockFace);
             Assert.IsFalse(timer.IsStarted);
             Assert.IsFalse(timer.IsPaused);
             Assert.IsNull(timer.CurrentObjective);
@@ -46,7 +45,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:00:01", timer.WorkTime);
+            Assert.AreEqual("00:00:01", timer.ClockFace);
             Assert.IsTrue(timer.IsStarted);
             Assert.IsTrue(isStarted);
         }
@@ -61,8 +60,8 @@ namespace Piforatio.Core2Test.WPF
             var timeWorkList = new List<string>();
             timer.PropertyChanged += (obj, args) =>
             {
-                if (args.PropertyName == "TimeWork")
-                    timeWorkList.Add(timer.WorkTime);
+                if (args.PropertyName == "ClockFace")
+                    timeWorkList.Add(timer.ClockFace);
             };
             bool isStarted = true;
             timer.PropertyChanged += (obj, args) =>
@@ -93,8 +92,8 @@ namespace Piforatio.Core2Test.WPF
             var timeWorkList = new List<string>();
             timer.PropertyChanged += (obj, args) =>
             {
-                if (args.PropertyName == "TimeWork")
-                    timeWorkList.Add(timer.WorkTime);
+                if (args.PropertyName == "ClockFace")
+                    timeWorkList.Add(timer.ClockFace);
             };
 
             //Act
@@ -125,7 +124,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:03:20", timer.WorkTime);
+            Assert.AreEqual("00:13:20", timer.ClockFace);
             Assert.IsTrue(timer.IsPaused);
             
         }
@@ -145,7 +144,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:14:58", timer.PauseTime);
+            Assert.AreEqual("00:14:58", timer.ClockFace);
         }
 
         [Test]
@@ -159,8 +158,8 @@ namespace Piforatio.Core2Test.WPF
             var pauseTimeList = new List<string>();
             timer.PropertyChanged += (obj, args) =>
             {
-                if (args.PropertyName == "PauseTime")
-                    pauseTimeList.Add(timer.PauseTime);
+                if (args.PropertyName == "ClockFace")
+                    pauseTimeList.Add(timer.ClockFace);
             };
 
             //Action
@@ -171,7 +170,7 @@ namespace Piforatio.Core2Test.WPF
 
             //Assert
             Assert.IsFalse(timer.IsStarted);
-            Assert.AreEqual(2, pauseTimeList.Count);
+            Assert.AreEqual(3, pauseTimeList.Count);
             Assert.AreEqual("00:00:10", pauseTimeList[0]);
             Assert.AreEqual("00:00:00", pauseTimeList[1]);
         }
@@ -195,7 +194,7 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:00:20",timer.WorkTime);
+            Assert.AreEqual("00:00:20",timer.ClockFace);
         }
     }
 

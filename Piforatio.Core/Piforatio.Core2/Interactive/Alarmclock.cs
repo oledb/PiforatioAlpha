@@ -55,6 +55,7 @@ namespace Piforatio.Core2
         {
             _isStarted = false;
             _isPaused = false;
+            _totalTime = 0;
             _interval = -1d;
             _intervalCount = 1;
         }
