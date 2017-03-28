@@ -8,7 +8,7 @@ namespace Piforatio.WPF
         IDateTime _dateTime;
         private Alarmclock _workClock;
         private Alarmclock _pauseClock;
-        private int _maxWorkTime = 3600;
+        private int _maxWorkTime = 7200;
         private const int intervalTime = 900;
 
         public TimerViewModel(IDateTime dateTime)
@@ -55,7 +55,7 @@ namespace Piforatio.WPF
             }
         }
 
-        public int MaxPauseTime { get; set; } = 900;
+        public int MaxPauseTime { get; set; } = 899;
 
         public void Start()
         {
@@ -65,21 +65,16 @@ namespace Piforatio.WPF
                 _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
             _pauseClock = null;
             NotifyPropertyChanged("IsStarted");
+            NotifyPropertyChanged("IsPaused");
         }
 
         public void Execute()
         {
             var now = _dateTime.Now;
-            if (!IsPaused)
-            {
-                _workClock.Execute(now);
-                NotifyPropertyChanged("ClockFace");
-            }
-            else
-            {
+            _workClock.Execute(now);
+            if (IsPaused)
                 _pauseClock.Execute(now);
-                NotifyPropertyChanged("ClockFace");
-            }
+            NotifyPropertyChanged("ClockFace");
         }
 
         public void Pause()
@@ -89,6 +84,8 @@ namespace Piforatio.WPF
             _pauseClock = new Alarmclock();
             _pauseClock.Start(now, MaxPauseTime);
             _pauseClock.OnClockStop += (obj, arg) => Stop();
+            NotifyPropertyChanged("ClockFace");
+            NotifyPropertyChanged("IsPaused");
         }
 
         public void Stop()
