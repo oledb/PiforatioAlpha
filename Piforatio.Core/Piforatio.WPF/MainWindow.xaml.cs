@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Timers;
+using System.IO;
 
 namespace Piforatio.WPF
 {
@@ -12,6 +13,10 @@ namespace Piforatio.WPF
         private const char stopChar = '\uF04D';
         private const char pauseChar = '\uF04C';
         private Timer timer;
+        private const string soundsFolder = "D:\\Sounds";
+        private string startSound = Path.Combine(soundsFolder, "Start.wav");
+        private string stopSound = Path.Combine(soundsFolder, "Stop.wav");
+        private string intervalSound = Path.Combine(soundsFolder, "Interval.wav");
 
         public MainWindow()
         {  
@@ -28,19 +33,24 @@ namespace Piforatio.WPF
             timerViewModel.OnTimerEnd += (obj, args) =>
             {
                 timer.Stop();
-                Dispatcher.Invoke( () => playButton.Content = playChar.ToString());
+                Dispatcher.Invoke( () =>
+                {
+                    Player.Play(stopSound);
+                    playButton.Content = playChar.ToString();
+                });
             };
-            timerViewModel.OnIntervalReached += (obj, args) => MessageBox.Show("hello");
+            timerViewModel.OnIntervalReached += (obj, args) => Player.Play(intervalSound);
         }
 
         private void StartAndPauseCommand_Execute(object sender, ExecutedRoutedEventArgs args)
-        {
+        {   
             string symbol = (string)playButton.Content;
             if (symbol[0] == playChar)
             {
                 playButton.Content = pauseChar.ToString();
                 timerViewModel.Start();
                 timer.Start();
+                Player.Play(startSound);
             }
             else
             {
@@ -51,6 +61,8 @@ namespace Piforatio.WPF
 
         private void StopCommand_Execute(object sender, ExecutedRoutedEventArgs args)
         {
+            if (timerViewModel.IsStarted)
+                Player.Play(stopSound);
             playButton.Content = playChar.ToString();
             timerViewModel.Stop();
             timer.Stop();

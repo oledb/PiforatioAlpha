@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="MyDateTime.cs" />
     <Compile Include="Notifer.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="ViewModels\IDateTime.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Page Include="MainWindow.xaml">

@@ -95,7 +95,6 @@
     <Compile Include="CollectionTest\ProjectCollectionTest.cs" />
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InteractiveTest\SoundPlayerTest.cs" />
     <Compile Include="WPF\TimerViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>

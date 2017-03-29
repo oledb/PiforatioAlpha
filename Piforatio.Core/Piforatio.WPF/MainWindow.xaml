@@ -14,6 +14,15 @@
         <CommandBinding Command="{x:Static local:MainWindow.StopCommand}" 
                         Executed="StopCommand_Execute"/>
     </Window.CommandBindings>
+    <Window.Resources>
+        <Style x:Key="pauseStyle" TargetType="{x:Type Label}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPaused}" Value="True">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="84"/>
@@ -27,7 +36,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Label Name="timerLabel"  Grid.Column="0" FontSize="50" 
-                   VerticalAlignment="Center" HorizontalAlignment="Center">
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Style="{StaticResource pauseStyle}">
                 <Label.Content>
                     <Binding Path="ClockFace"/>
                 </Label.Content>
