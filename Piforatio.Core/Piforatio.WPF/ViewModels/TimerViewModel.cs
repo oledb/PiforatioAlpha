@@ -8,7 +8,7 @@ namespace Piforatio.WPF
         IDateTime _dateTime;
         private Alarmclock _workClock;
         private Alarmclock _pauseClock;
-        private int _maxWorkTime = 7201; // 2 hours + 1 sec
+        private int _maxWorkTime = 7; // 2 hours + 1 sec
         private const int intervalTime = 900; // 15 minutes
 
         public event Action<TimerViewModel, EventArgs> OnTimerEnd;
@@ -96,7 +96,7 @@ namespace Piforatio.WPF
 
         public void Stop()
         {
-            _workClock.Reset();
+            _workClock.Stop();
             _pauseClock = null;
             NotifyPropertyChanged("ClockFace");
         }

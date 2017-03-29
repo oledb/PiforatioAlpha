@@ -24,7 +24,7 @@ namespace Piforatio.Core2Test
 
             //Act
             clock.Start(today);
-            clock.Reset();
+            clock.Stop();
             clock.Execute(Wait(wait));
             var totalSeconds = clock.TotalSeconds;
 

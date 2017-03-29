@@ -31,14 +31,7 @@ namespace Piforatio.WPF
             timer = new Timer(100);
             timer.Elapsed += (obj, args) => timerViewModel.Execute();
             timerViewModel.OnTimerEnd += (obj, args) =>
-            {
-                timer.Stop();
-                Dispatcher.Invoke( () =>
-                {
-                    Player.Play(stopSound);
-                    playButton.Content = playChar.ToString();
-                });
-            };
+                Dispatcher.Invoke( () => StopCommand_Execute(this, null));
             timerViewModel.OnIntervalReached += (obj, args) => Player.Play(intervalSound);
         }
 
@@ -47,10 +40,10 @@ namespace Piforatio.WPF
             string symbol = (string)playButton.Content;
             if (symbol[0] == playChar)
             {
+                Player.Play(startSound);
                 playButton.Content = pauseChar.ToString();
                 timerViewModel.Start();
                 timer.Start();
-                Player.Play(startSound);
             }
             else
             {

@@ -33,10 +33,7 @@ namespace Piforatio.Core2
         {
             get
             {
-                if (_isStarted)
-                    return _totalTime;
-                else
-                    return 0;
+                return IsStarted ? _totalTime : 0;
             }
         }
         
@@ -44,20 +41,8 @@ namespace Piforatio.Core2
         {
             get
             {
-                if (_isWaitable)
-                    return _waitTime - _totalTime;
-                else
-                    return 0;
+                return _isWaitable ? _waitTime - _totalTime : 0;
             }
-        }
-
-        private void initialize()
-        {
-            _isStarted = false;
-            _isPaused = false;
-            _totalTime = 0;
-            _interval = -1d;
-            _intervalCount = 1;
         }
 
         public void Start(DateTime now)
@@ -88,9 +73,13 @@ namespace Piforatio.Core2
             _isPaused = true;
         }
 
-        public void Reset()
+        public void Stop()
         {
-            initialize();
+            _isStarted = false;
+            _isPaused = false;
+            _totalTime = 0;
+            _interval = -1d;
+            _intervalCount = 1;
         }
 
         private void setTotalSeconds(DateTime now)
@@ -106,8 +95,8 @@ namespace Piforatio.Core2
             setTotalSeconds(now);
             if (_isWaitable && WaitSecodns <= 0)
             {
-                initialize();
                 OnClockStop?.Invoke(this, new EventArgs());
+                Stop();
                 return;
             }
             if (_isWaitable && _interval > 0)
