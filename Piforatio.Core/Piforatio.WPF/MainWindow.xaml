@@ -51,7 +51,7 @@
                     FontFamily="/Piforatio.WPF;component/#FontAwesome"
                     Command="{x:Static local:MainWindow.StopCommand}"/>
         </Grid>
-        <Label Grid.Row="1" Content="Hello"/>
+        <Label Name="infoLabel" Grid.Row="1" Content="{Binding Path=Message}"/>
         <ComboBox Name="commandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
             <sys:String>Задача</sys:String>
             <sys:String>Настройки</sys:String>

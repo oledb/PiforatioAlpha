@@ -9,6 +9,7 @@ namespace Piforatio.WPF
     public partial class MainWindow : Window
     {
         private TimerViewModel timerViewModel;
+        private MessageMaker messageMaker;
         private const char playChar = '\uF04B';
         private const char stopChar = '\uF04D';
         private const char pauseChar = '\uF04C';
@@ -22,6 +23,7 @@ namespace Piforatio.WPF
         {  
             InitializeComponent();
             initializeTimer();
+            initializeMessageMaker();
         }
 
         private void initializeTimer()
@@ -33,6 +35,19 @@ namespace Piforatio.WPF
             timerViewModel.OnTimerEnd += (obj, args) =>
                 Dispatcher.Invoke( () => StopCommand_Execute(this, null));
             timerViewModel.OnIntervalReached += (obj, args) => Player.Play(intervalSound);
+        }
+
+        private void initializeMessageMaker()
+        {
+            messageMaker = new MessageMaker();
+            infoLabel.DataContext = messageMaker;
+            string endMessage = $"Last work was ended at ";
+            timerViewModel.OnTimerEnd += (obj, args) =>
+                messageMaker.Send(endMessage + DateTime.Now);
+            timerViewModel.OnTimerStop += (obj, args) =>
+                messageMaker.Send(endMessage + DateTime.Now);
+            timerViewModel.OnTimerStart += (obj, args) =>
+                messageMaker.Send("Work, work, hard work");
         }
 
         private void StartAndPauseCommand_Execute(object sender, ExecutedRoutedEventArgs args)
