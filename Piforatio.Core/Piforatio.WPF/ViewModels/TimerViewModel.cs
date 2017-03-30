@@ -8,7 +8,7 @@ namespace Piforatio.WPF
         IDateTime _dateTime;
         private Alarmclock _workClock;
         private Alarmclock _pauseClock;
-        private int _maxWorkTime = 7201; // 2 hours + 1 sec
+        private int _maxWorkTime = 10801; // 3 hours + 1 sec
         private const int intervalTime = 900; // 15 minutes
 
         public virtual event Action<TimerViewModel, EventArgs> OnTimerEnd;
@@ -85,6 +85,8 @@ namespace Piforatio.WPF
 
         public virtual void Execute()
         {
+            if (!IsStarted)
+                return;
             var now = _dateTime.Now;
             _workClock.Execute(now);
             if (IsPaused)
@@ -97,6 +99,12 @@ namespace Piforatio.WPF
             var now = _dateTime?.Now ?? default(DateTime);
             _workClock.Pause(now);
             _pauseClock = new Alarmclock();
+            _pauseClock.OnClockStop += (obj, args) =>
+            {
+                OnTimerEnd?.Invoke(this, new EventArgs());
+                Stop();
+                NotifyPropertyChanged("IsPaused");
+            };
             _pauseClock.Start(now, MaxPauseTime);
             NotifyPropertyChanged("ClockFace");
             NotifyPropertyChanged("IsPaused");

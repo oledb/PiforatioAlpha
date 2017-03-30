@@ -165,13 +165,13 @@ namespace Piforatio.Core2Test.WPF
             //Action
             timer.Start();
             timer.Pause();
-            timer.Execute();
-            timer.Execute();
+            for (int i = 0; i < 10; i++)
+                timer.Execute();
 
             //Assert
-            Assert.IsTrue(timer.IsStarted);
-            Assert.IsTrue(timer.IsPaused);
-            Assert.AreEqual(3, pauseTimeList.Count);
+            Assert.IsFalse(timer.IsStarted);
+            Assert.IsFalse(timer.IsPaused);
+            Assert.AreEqual(4, pauseTimeList.Count);
             Assert.AreEqual("00:00:20", pauseTimeList[0]);
             Assert.AreEqual("00:00:10", pauseTimeList[1]);
         }
