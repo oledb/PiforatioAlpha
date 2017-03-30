@@ -94,7 +94,8 @@
     <Compile Include="CollectionTest\ObjectiveCollectionTest.cs" />
     <Compile Include="CollectionTest\ProjectCollectionTest.cs" />
     <Compile Include="CollectionTest\QuantCollectionTest.cs" />
-    <Compile Include="MessageMakerTest.cs" />
+    <Compile Include="TimerMessagerTest.cs" />
+    <Compile Include="WPF\MessageMakerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WPF\TimerViewModelTest.cs" />
   </ItemGroup>

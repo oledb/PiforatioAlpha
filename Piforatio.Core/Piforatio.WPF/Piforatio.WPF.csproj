@@ -67,7 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MessageMaker.cs" />
+    <Compile Include="Misc\MessageSender.cs" />
+    <Compile Include="TimerMessager.cs" />
     <Compile Include="ViewModels\MyDateTime.cs" />
     <Compile Include="Misc\Notifer.cs" />
     <Compile Include="Misc\Player.cs" />

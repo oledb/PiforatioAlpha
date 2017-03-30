@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Piforatio.WPF
+﻿namespace Piforatio.WPF
 {
-    public class MessageMaker : Notifier
+    public class MessageSender : Notifier
     {
         private string _message;
 
-        public MessageMaker()
+        public MessageSender()
         {
             Message = "Hello, user!";
         }
 
-        public void Send(string message)
+        public virtual void Send(string message)
         {
             Message = message;      
         }

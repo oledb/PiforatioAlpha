@@ -11,19 +11,22 @@ namespace Piforatio.WPF
         private int _maxWorkTime = 7201; // 2 hours + 1 sec
         private const int intervalTime = 900; // 15 minutes
 
-        public event Action<TimerViewModel, EventArgs> OnTimerEnd;
-        public event Action<TimerViewModel, EventArgs> OnTimerStop;
-        public event Action<TimerViewModel, EventArgs> OnTimerStart;
-        public event Action<TimerViewModel, EventArgs> OnIntervalReached;
+        public virtual event Action<TimerViewModel, EventArgs> OnTimerEnd;
+        public virtual event Action<TimerViewModel, EventArgs> OnTimerStop;
+        public virtual event Action<TimerViewModel, EventArgs> OnTimerStart;
+        public virtual event Action<TimerViewModel, EventArgs> OnIntervalReached;
 
-        public TimerViewModel(IDateTime dateTime)
+        public TimerViewModel()
         {
-            _dateTime = dateTime;
             _workClock = new Alarmclock();
             _workClock.OnIntervalReach += (obj, args) => OnIntervalReached?.Invoke(this, args);
             _workClock.OnClockStop += (obj, args) => OnTimerEnd?.Invoke(this, args);
             MaxPauseTime = 899;
-            
+        }
+
+        public TimerViewModel(IDateTime dateTime) : this()
+        {
+            _dateTime = dateTime;
         }
 
         public TimerViewModel(IDateTime dateTime, int maxWorkTime)
@@ -66,13 +69,13 @@ namespace Piforatio.WPF
 
         public int MaxPauseTime { get; set; }
 
-        public void Start()
+        public virtual void Start()
         {
             if (IsPaused)
-                _workClock.Start(_dateTime.Now);
+                _workClock.Start(_dateTime?.Now ?? default(DateTime));
             else
             {
-                _workClock.Start(_dateTime.Now, _maxWorkTime, intervalTime);
+                _workClock.Start(_dateTime?.Now ?? default(DateTime), _maxWorkTime, intervalTime);
                 OnTimerStart?.Invoke(this, new EventArgs());
             }
             _pauseClock = null;
@@ -80,7 +83,7 @@ namespace Piforatio.WPF
             NotifyPropertyChanged("IsPaused");
         }
 
-        public void Execute()
+        public virtual void Execute()
         {
             var now = _dateTime.Now;
             _workClock.Execute(now);
@@ -89,9 +92,9 @@ namespace Piforatio.WPF
             NotifyPropertyChanged("ClockFace");
         }
 
-        public void Pause()
+        public virtual void Pause()
         {
-            var now = _dateTime.Now;
+            var now = _dateTime?.Now ?? default(DateTime);
             _workClock.Pause(now);
             _pauseClock = new Alarmclock();
             _pauseClock.Start(now, MaxPauseTime);
@@ -99,7 +102,7 @@ namespace Piforatio.WPF
             NotifyPropertyChanged("IsPaused");
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             _workClock.Stop();
             _pauseClock = null;

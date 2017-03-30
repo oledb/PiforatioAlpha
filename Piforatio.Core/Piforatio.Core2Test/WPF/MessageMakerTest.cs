@@ -11,7 +11,7 @@ namespace Piforatio.Core2Test
         public void CreateMessageMaker()
         {
             //Arrange
-            MessageMaker maker = new MessageMaker();
+            MessageSender maker = new MessageSender();
 
             //Act, Assert
             Assert.AreEqual("Hello, user!", maker.Message);
@@ -21,7 +21,7 @@ namespace Piforatio.Core2Test
         public void SendMessage()
         {
             //Arrange
-            MessageMaker maker = new MessageMaker();
+            MessageSender maker = new MessageSender();
             string outMessage = "";
             maker.PropertyChanged += (obj, args) =>
             {
