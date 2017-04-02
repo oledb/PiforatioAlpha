@@ -35,6 +35,7 @@ namespace Piforatio.Core2Test
         }
 
         [TestCase(59d, "00:00:59")]
+        [TestCase(119.7d, "00:01:59")]
         [TestCase(119d, "00:01:59")]
         public void ConvertTotalSecodsToTimerString(double total, string format)
         {
@@ -42,7 +43,7 @@ namespace Piforatio.Core2Test
             string result = total.ToTimerFormat();
 
             //Assert
-            Assert.AreEqual(format, result);
+            Assert.AreEqual(format, result);  
         }
     }
 }

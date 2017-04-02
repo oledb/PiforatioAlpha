@@ -36,7 +36,6 @@ namespace Piforatio.WPF
             timerViewModel.OnTimerEnd += (obj, args) =>
                 Dispatcher.Invoke( () => StopCommand_Execute(this, null));
             timerViewModel.OnIntervalReached += (obj, args) => Player.Play(intervalSound);
-            timerViewModel.MaxPauseTime = 3;
         }
 
         private void initializeMessageMaker()
