@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Piforatio.Core2;
 
 namespace Piforatio.Core2Test.Fakes
@@ -16,7 +15,7 @@ namespace Piforatio.Core2Test.Fakes
             var list = fake.Read();
             if (list.Count > 0)
                 throw new IndexOutOfRangeException("fake must be empty");
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 2, 28, 12, 00, 00),
                 Objective = learn,
@@ -24,7 +23,7 @@ namespace Piforatio.Core2Test.Fakes
                 Count = 4
             });
             list = fake.Read();
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 2, 28, 13, 10, 00),
                 Objective = learn,
@@ -32,35 +31,35 @@ namespace Piforatio.Core2Test.Fakes
                 Count = 4
             });
             list = fake.Read();
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 1, 10, 15, 00),
                 Objective = testSite,
                 Comment = "Create new empty site",
                 Count = 1
             });
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 1, 11, 25, 00),
                 Objective = findWork,
                 Comment = "try to find work",
                 Count = 4
             });
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 1, 14, 25, 00),
                 Objective = findWork,
                 Comment = "try to find work in the upwork",
                 Count = 4
             });
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 2, 10, 45, 00),
                 Objective = findWork,
                 Comment = "try to find in the internet",
                 Count = 2
             });
-            fake.Create(new Quant()
+            fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 2, 11, 25, 00),
                 Objective = prepay,

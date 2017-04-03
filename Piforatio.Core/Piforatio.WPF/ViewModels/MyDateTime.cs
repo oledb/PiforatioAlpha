@@ -4,12 +4,6 @@ namespace Piforatio.WPF
 {
     public class MyDateTime : IDateTime
     {
-        public DateTime Now
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-        }
+        public DateTime Now => DateTime.Now;
     }
 }

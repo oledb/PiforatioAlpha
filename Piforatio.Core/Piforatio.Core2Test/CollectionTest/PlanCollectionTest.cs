@@ -1,8 +1,8 @@
 ﻿using System;
-using Piforatio.Core2Test.Fakes;
-using NUnit.Framework;
 using System.Linq;
+using NUnit.Framework;
 using Piforatio.Core2;
+using Piforatio.Core2Test.Fakes;
 
 namespace Piforatio.Core2Test
 {
@@ -23,7 +23,7 @@ namespace Piforatio.Core2Test
             //Arrange
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
-            var plan = new Plan()
+            var plan = new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book").FirstOrDefault()
@@ -48,17 +48,17 @@ namespace Piforatio.Core2Test
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var collection = new Plans(factory);
-            collection.Create( new Plan()
+            collection.Create( new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book")[0]
             });
-            collection.Create( new Plan()
+            collection.Create( new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Create test site")[0]
             });
-            collection.Create(new Plan()
+            collection.Create(new Plan
             {
                 Date = new DateTime(2017, 3, 4),
                 Objective = objectives.ReadByNameTemplate("Create test site")[0]
@@ -78,7 +78,7 @@ namespace Piforatio.Core2Test
             var projects = ProjectsFake.Create(factory);
             var objectives = ObjectivesFake.Create(factory, projects);
             var collection = new Plans(factory);
-            collection.Create(new Plan()
+            collection.Create(new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book").FirstOrDefault()

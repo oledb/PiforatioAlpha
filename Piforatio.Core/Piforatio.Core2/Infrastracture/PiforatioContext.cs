@@ -1,5 +1,5 @@
-﻿using System.Data.Entity;
-using System.Data.Common;
+﻿using System.Data.Common;
+using System.Data.Entity;
 
 namespace Piforatio.Core2
 {

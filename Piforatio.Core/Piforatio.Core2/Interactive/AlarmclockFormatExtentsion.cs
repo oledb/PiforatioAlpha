@@ -23,10 +23,7 @@ namespace Piforatio.Core2
         public static string ToTimerFormat(this double total)
         {
             total = Truncate(total);
-            return string.Format("{0}:{1}:{2}",
-                total.ToHours().ToDigit(), 
-                total.ToMinutes().ToDigit(), 
-                total.ToSeconds().ToDigit());
+            return $"{total.ToHours().ToDigit()}:{total.ToMinutes().ToDigit()}:{total.ToSeconds().ToDigit()}";
         }
 
         private static string ToDigit(this int value)

@@ -1,8 +1,8 @@
-﻿using LinqKit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using LinqKit;
 
 namespace Piforatio.Core2
 {
@@ -25,15 +25,15 @@ namespace Piforatio.Core2
             return result;
         }
 
-        protected override void createObject(Quant obj, PiforatioContext context)
+        protected override void CreateObject(Quant obj, PiforatioContext context)
         {
             if (obj.Objective != null)
                 context.Objectives.Attach(obj.Objective);
         }
 
-        protected override void deleteObject(Quant obj, PiforatioContext context) { }
+        protected override void DeleteObject(Quant obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Quant> readObject(Func<Quant, bool> predicate, 
+        protected override IEnumerable<Quant> ReadObject(Func<Quant, bool> predicate, 
             PiforatioContext context)
         {
             return context.Quants
@@ -42,7 +42,7 @@ namespace Piforatio.Core2
                 .Where(predicate);
         }
 
-        protected override void updateObject(Quant obj, PiforatioContext context)
+        protected override void UpdateObject(Quant obj, PiforatioContext context)
         {
             obj.Objective_ObjectiveID = obj.Objective?.ObjectiveID;
         }

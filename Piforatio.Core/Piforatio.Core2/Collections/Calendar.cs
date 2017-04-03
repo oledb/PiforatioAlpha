@@ -1,31 +1,31 @@
-﻿using LinqKit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinqKit;
 
 namespace Piforatio.Core2
 {
     public class Calendar : EntityCollection<Week>
     {
-        private Quants _quants;
+        private readonly Quants _quants;
 
         public Calendar(Quants quants, IContextFactory factory) : base(factory)
         {
             _quants = quants;
         }
 
-        protected override void createObject(Week obj, PiforatioContext context) { }
+        protected override void CreateObject(Week obj, PiforatioContext context) { }
 
-        protected override void deleteObject(Week obj, PiforatioContext context) { }
+        protected override void DeleteObject(Week obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Week> readObject(Func<Week, bool> predicate, PiforatioContext context)
+        protected override IEnumerable<Week> ReadObject(Func<Week, bool> predicate, PiforatioContext context)
         {
             return context.Calendar
                 .AsExpandable()
                 .Where(predicate); 
         }
 
-        protected override void updateObject(Week obj, PiforatioContext context) { }
+        protected override void UpdateObject(Week obj, PiforatioContext context) { }
 
         public WeekInfo GetWeekInfo(DateTime weekStartDay)
         {
@@ -59,14 +59,13 @@ namespace Piforatio.Core2
             var b = d - a;
             if (b <= 0.125)
                 return a;
-            else if (b > 0.125 && b <= 0.375)
+            if (b > 0.125 && b <= 0.375)
                 return a + 0.25;
-            else if (b > 0.375 && b <= 0.625)
+            if (b > 0.375 && b <= 0.625)
                 return a + 0.5;
-            else if (b > 0.625 && b <= 0.875)
+            if (b > 0.625 && b <= 0.875)
                 return a + 0.75;
-            else
-                return a + 1;
+            return a + 1;
         }
     }
 }

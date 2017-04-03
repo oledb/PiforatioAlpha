@@ -1,8 +1,7 @@
 ﻿using System;
-using Piforatio.WPF;
-using NUnit.Framework;
-using System.Collections.Generic;
 using Moq;
+using NUnit.Framework;
+using Piforatio.WPF;
 
 namespace Piforatio.Core2Test
 {

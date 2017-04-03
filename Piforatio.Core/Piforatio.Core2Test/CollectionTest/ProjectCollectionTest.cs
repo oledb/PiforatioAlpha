@@ -18,7 +18,7 @@ namespace Piforatio.Core2Test
         public void AddNewProject()
         {
             //Arrange
-            var project = new Project()
+            var project = new Project
             {
                 Name = "MVC",
                 Type = ProjectType.Learn,
@@ -41,12 +41,12 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Projects(factory);
-            collection.Create(new Project()
+            collection.Create(new Project
             {
                 Name = "MVC",
                 Type = ProjectType.Learn
             });
-            collection.Create(new Project()
+            collection.Create(new Project
             {
                 Name = "Java",
                 Type = ProjectType.Work
@@ -66,7 +66,7 @@ namespace Piforatio.Core2Test
             //Arrange
             var oldName = "M C V";
             var newName = "MVC";
-            var project = new Project()
+            var project = new Project
             {
                 Name = oldName,
                 Type = ProjectType.Work,

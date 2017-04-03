@@ -1,29 +1,29 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Piforatio.Core2;
-using System;
 
 namespace Piforatio.Core2Test
 {
     [TestFixture]
-    class AlarmclockTest
+    internal class AlarmclockTest
     {
-        DateTime today;
-
         [SetUp]
         public void SetToday()
         {
-           today = new DateTime(2017, 3, 3, 13, 20, 00);
+            _today = new DateTime(2017, 3, 3, 13, 20, 00);
         }
+
+        private DateTime _today;
 
         [TestCase(1)]
         [TestCase(5)]
         public void StartAndResetTimer(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
+            var clock = new Alarmclock();
 
             //Act
-            clock.Start(today);
+            clock.Start(_today);
             clock.Stop();
             clock.Execute(Wait(wait));
             var totalSeconds = clock.TotalSeconds;
@@ -37,10 +37,10 @@ namespace Piforatio.Core2Test
         public void StartAndGetTotalSeconds(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
+            var clock = new Alarmclock();
 
             //Act
-            clock.Start(today);
+            clock.Start(_today);
             clock.Execute(Wait(wait));
             var totalSeconds = clock.TotalSeconds;
 
@@ -53,14 +53,14 @@ namespace Piforatio.Core2Test
         public void StartAndPause(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
+            var clock = new Alarmclock();
 
             //Act
-            clock.Start(today);
-            today = Wait(wait);
-            clock.Pause(today);
+            clock.Start(_today);
+            _today = Wait(wait);
+            clock.Pause(_today);
             var a = clock.TotalSeconds;
-            today = Wait(wait);
+            _today = Wait(wait);
             var b = clock.TotalSeconds;
 
             //Assert
@@ -72,8 +72,8 @@ namespace Piforatio.Core2Test
         public void StartAndPauseAndExecuteSomeTimes(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
-            clock.Start(today);
+            var clock = new Alarmclock();
+            clock.Start(_today);
 
             //Act
             clock.Execute(Wait(wait));
@@ -92,8 +92,8 @@ namespace Piforatio.Core2Test
         public void StartAndPauseSomeTimes(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
-            clock.Start(today);
+            var clock = new Alarmclock();
+            clock.Start(_today);
 
             //Arrange
             clock.Pause(Wait(wait * 1));
@@ -109,14 +109,14 @@ namespace Piforatio.Core2Test
         public void StartAndWaitingWhenStopped(double wait)
         {
             //Arrange
-            Alarmclock clock = new Alarmclock();
+            var clock = new Alarmclock();
 
             //Act
-            clock.Start(today, wait);
-            bool run = clock.IsStarted;
-            today = Wait(wait);
-            clock.Execute(today);
-            bool stop = clock.IsStarted;
+            clock.Start(_today, wait);
+            var run = clock.IsStarted;
+            _today = Wait(wait);
+            clock.Execute(_today);
+            var stop = clock.IsStarted;
 
             //Assert
             Assert.IsTrue(run);
@@ -127,15 +127,12 @@ namespace Piforatio.Core2Test
         public void InvokeEventWhenStop(double wait)
         {
             //Arrange
-            bool isStopped = false;
-            Alarmclock clock = new Alarmclock();
-            clock.OnClockStop += (e, f) => 
-            {
-                isStopped = true;
-            };
+            var isStopped = false;
+            var clock = new Alarmclock();
+            clock.OnClockStop += (e, f) => { isStopped = true; };
 
             //Act
-            clock.Start(today, wait * 2);
+            clock.Start(_today, wait * 2);
             clock.Execute(Wait(wait));
             Assert.IsFalse(isStopped);
             clock.Execute(Wait(wait * 2));
@@ -149,13 +146,10 @@ namespace Piforatio.Core2Test
         public void InvokeEventWhenIntervalIsReached(double wait, double interval)
         {
             //Arrange
-            int value = 0;
-            Alarmclock clock = new Alarmclock();
-            clock.OnIntervalReach += (e, f) => 
-            {
-                value++;
-            };
-            clock.Start(today, wait, interval);
+            var value = 0;
+            var clock = new Alarmclock();
+            clock.OnIntervalReach += (e, f) => { value++; };
+            clock.Start(_today, wait, interval);
 
             //Act
             clock.Execute(Wait(interval));
@@ -168,17 +162,14 @@ namespace Piforatio.Core2Test
         }
 
         [TestCase(400, 100, 50)]
-        public void TwoTimeExecuteInOrderToReachInterval(double wait, double interval, 
+        public void TwoTimeExecuteInOrderToReachInterval(double wait, double interval,
             double executeInterval)
         {
             //Arrange
-            int value = 0;
-            Alarmclock clock = new Alarmclock();
-            clock.OnIntervalReach += (e, f) =>
-            {
-                value++;
-            };
-            clock.Start(today, wait, interval);
+            var value = 0;
+            var clock = new Alarmclock();
+            clock.OnIntervalReach += (e, f) => { value++; };
+            clock.Start(_today, wait, interval);
 
             //Act
             clock.Execute(Wait(executeInterval));
@@ -192,7 +183,7 @@ namespace Piforatio.Core2Test
 
         public DateTime Wait(double count)
         {
-            return today.AddSeconds(count);
+            return _today.AddSeconds(count);
         }
     }
 }

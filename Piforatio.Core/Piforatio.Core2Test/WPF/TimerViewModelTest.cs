@@ -1,7 +1,7 @@
 ﻿using System;
-using Piforatio.WPF;
-using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework;
+using Piforatio.WPF;
 
 namespace Piforatio.Core2Test.WPF
 {
@@ -257,16 +257,13 @@ namespace Piforatio.Core2Test.WPF
             _now = now;
         }
 
-        public virtual DateTime Now
-        {
-            get { return _now; }
-        }
+        public virtual DateTime Now => _now;
     }
 
     public class TodayFakeIncrement : TodayStub
     {
-        private int _index = 0;
-        private int _interval = 0;
+        private int _index;
+        private readonly int _interval;
 
         public TodayFakeIncrement(DateTime now, int interval) : base(now)
         {

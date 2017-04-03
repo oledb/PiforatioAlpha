@@ -14,15 +14,15 @@ namespace Piforatio.Core2
             return Read(p => p.Type == type);
         }
 
-        protected override void createObject(Project obj, PiforatioContext context) { }
+        protected override void CreateObject(Project obj, PiforatioContext context) { }
 
-        protected override void deleteObject(Project obj, PiforatioContext context) { }
+        protected override void DeleteObject(Project obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Project> readObject(Func<Project, bool> predicate, PiforatioContext context)
+        protected override IEnumerable<Project> ReadObject(Func<Project, bool> predicate, PiforatioContext context)
         {
             return context.Projects.AsExpandable().Where(predicate);
         }
 
-        protected override void updateObject(Project obj, PiforatioContext context) { }
+        protected override void UpdateObject(Project obj, PiforatioContext context) { }
     }
 }

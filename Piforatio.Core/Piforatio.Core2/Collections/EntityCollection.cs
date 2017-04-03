@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Piforatio.Core2
 {
     public abstract class EntityCollection<T> where T : class
     {
-        protected IContextFactory factory;
+        protected IContextFactory Factory;
         internal EntityCollection(IContextFactory contextFactory)
         {
-            factory = contextFactory;
+            Factory = contextFactory;
         }
 
-        protected void useContext(Action<PiforatioContext> use)
+        protected void UseContext(Action<PiforatioContext> use)
         {
-            using (var context = factory.Create())
+            using (var context = Factory.Create())
             {
                 use(context);
                 context.SaveChanges();
             }
         }
 
-        protected abstract void createObject(T obj, PiforatioContext context);
-        protected abstract IEnumerable<T> readObject(Func<T, bool> pridicate,
+        protected abstract void CreateObject(T obj, PiforatioContext context);
+        protected abstract IEnumerable<T> ReadObject(Func<T, bool> pridicate,
             PiforatioContext context);
-        protected abstract void updateObject(T obj, PiforatioContext context);
-        protected abstract void deleteObject(T obj, PiforatioContext context);
+        protected abstract void UpdateObject(T obj, PiforatioContext context);
+        protected abstract void DeleteObject(T obj, PiforatioContext context);
 
         public void Create(T obj)
         {
-            using (var context = factory.Create())
+            using (var context = Factory.Create())
             {
-                createObject(obj, context);
+                CreateObject(obj, context);
                 context.Entry(obj).State = EntityState.Added;
                 context.SaveChanges();
             }
@@ -40,29 +40,29 @@ namespace Piforatio.Core2
 
         public List<T> Read()
         {
-            using (var context = factory.Create())
+            using (var context = Factory.Create())
             {
-                return readObject(o => true, context).ToList();
+                return ReadObject(o => true, context).ToList();
             }
         }
 
         public List<T> Read(Func<T, bool> predicate)
         {
-            using (var context = factory.Create())
-                return readObject(predicate, context).ToList();
+            using (var context = Factory.Create())
+                return ReadObject(predicate, context).ToList();
         }
 
         public T ReadSingle(Func<T, bool> predicate)
         {
-            using (var context = factory.Create())
-                return readObject(predicate, context).SingleOrDefault();
+            using (var context = Factory.Create())
+                return ReadObject(predicate, context).SingleOrDefault();
         }
 
         public void Update(T obj)
         {
-            using (var context = factory.Create())
+            using (var context = Factory.Create())
             {
-                updateObject(obj, context);
+                UpdateObject(obj, context);
                 context.Entry(obj).State = EntityState.Modified;
                 context.SaveChanges();
             }
@@ -70,7 +70,7 @@ namespace Piforatio.Core2
 
         public void Delete(T obj)
         {
-            using (var context = factory.Create())
+            using (var context = Factory.Create())
             {
                 context.Entry(obj).State = EntityState.Deleted;
                 context.SaveChanges();

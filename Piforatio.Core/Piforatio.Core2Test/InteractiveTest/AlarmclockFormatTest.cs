@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Piforatio.Core2;
-using System;
 
 namespace Piforatio.Core2Test
 {

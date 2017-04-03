@@ -4,52 +4,29 @@ namespace Piforatio.Core2
 {
     public class Alarmclock
     {
-        private DateTime _StartTime;
-        private bool _isStarted = false;
-        private bool _isPaused = false;
+        private DateTime _startTime;
         private int _intervalCount = 1;
         private double _interval = -1d;
         private double _totalTime;
         private double _waitTime;
-
-        public event Action<Alarmclock, EventArgs> OnClockStop;
-        public event Action<Alarmclock, EventArgs> OnIntervalReach;
-
-        public bool IsStarted
-        {
-            get { return _isStarted; }
-        }
-
-        public bool IsPaused
-        {
-            get
-            {
-                return _isPaused;
-            }
-        }
-
-        public double TotalSeconds
-        {
-            get
-            {
-                return IsStarted ? _totalTime : 0;
-            }
-        }
         
-        public double WaitSecodns
-        {
-            get
-            {
-                return IsStarted ? _waitTime - _totalTime : 0;
-            }
-        }
+        public event EventHandler OnClockStop;
+        public event EventHandler OnIntervalReach;
+
+        public bool IsStarted { get; private set; }
+
+        public bool IsPaused { get; private set; }
+
+        public double TotalSeconds => IsStarted ? _totalTime : 0;
+
+        public double WaitSecodns => IsStarted ? _waitTime - _totalTime : 0;
 
         public void Start(DateTime now)
         {
-            _waitTime = _waitTime <= 0 ? Int32.MaxValue : _waitTime;
-            _StartTime = now;
-            _isStarted = true;
-            _isPaused = false;
+            _waitTime = _waitTime <= 0 ? int.MaxValue : _waitTime;
+            _startTime = now;
+            IsStarted = true;
+            IsPaused = false;
         }
 
         public void Start(DateTime now, double wait)
@@ -66,46 +43,40 @@ namespace Piforatio.Core2
 
         public void Pause(DateTime now)
         {
-            if (_isPaused)
+            if (IsPaused)
                 return;
-            setTotalSeconds(now);
-            _isPaused = true;
+            SetTotalSeconds(now);
+            IsPaused = true;
         }
 
         public void Stop()
         {
-            _isStarted = false;
-            _isPaused = false;
+            IsStarted = false;
+            IsPaused = false;
             _totalTime = 0;
             _interval = -1d;
             _intervalCount = 1;
         }
 
-        private void setTotalSeconds(DateTime now)
+        private void SetTotalSeconds(DateTime now)
         {
-            _totalTime += (now - _StartTime).TotalSeconds;
-            _StartTime = now;
+            _totalTime += (now - _startTime).TotalSeconds;
+            _startTime = now;
         }
 
         public void Execute(DateTime now)
         {
-            if (_isStarted && _isPaused)
-                return;
-            setTotalSeconds(now);
+            if (IsStarted && IsPaused) return;
+            SetTotalSeconds(now);
             if (WaitSecodns <= 0)
             {
                 OnClockStop?.Invoke(this, new EventArgs());
                 Stop();
                 return;
             }
-            if (_interval > 0)
-            {
-                if(_interval * _intervalCount <= _totalTime)
-                {
-                    _intervalCount++;
-                    OnIntervalReach?.Invoke(this, new EventArgs());
-                }
-            }
+            if (!(_interval > 0 && _interval * _intervalCount <= _totalTime)) return;
+            _intervalCount++;
+            OnIntervalReach?.Invoke(this, new EventArgs());
         }
     }
 }

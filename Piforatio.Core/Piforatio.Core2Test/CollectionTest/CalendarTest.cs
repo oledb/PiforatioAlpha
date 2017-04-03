@@ -1,6 +1,6 @@
 ﻿using System;
-using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework;
 using Piforatio.Core2;
 using Piforatio.Core2Test.Fakes;
 
@@ -29,7 +29,7 @@ namespace Piforatio.Core2Test
             var calendar = new Calendar(quants, factory);
 
             //Act
-            calendar.Create(new Week()
+            calendar.Create(new Week
             {
                 StartDate = Date(2017, 2, 27)
             });
@@ -49,7 +49,7 @@ namespace Piforatio.Core2Test
             var list = quants.Read();
             var calendar = new Calendar(quants, factory);
             var week9 = Date(2017, 2, 27);
-            calendar.Create( new Week() { StartDate = week9 });
+            calendar.Create( new Week { StartDate = week9 });
 
             //Act
             WeekInfo info = calendar.GetWeekInfo(week9);

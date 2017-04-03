@@ -4,36 +4,31 @@ namespace Piforatio.WPF
 {
     public class TimerMessager
     {
-        private MessageSender _sender;
-        private TimerViewModel _viewModel;
-        private int quantCount;
+        private readonly MessageSender _sender;
+        private int _quantCount;
         public TimerMessager(MessageSender sender, TimerViewModel viewModel)
         {
             _sender = sender;
-            _viewModel = viewModel;
-            _viewModel.OnTimerStart += TimerStart;
-            _viewModel.OnTimerEnd += TimerStop;
-            _viewModel.OnTimerStop += TimerStop;
-            _viewModel.OnIntervalReached += TimerExecute;
+            viewModel.OnTimerStart += TimerStart;
+            viewModel.OnTimerEnd += TimerStop;
+            viewModel.OnTimerStop += TimerStop;
+            viewModel.OnIntervalReached += TimerExecute;
         }
 
         public void TimerStart(object obj, EventArgs args)
         {
             _sender.Send("Timer is started");
-            quantCount = 0;
+            _quantCount = 0;
         }
 
         public void TimerExecute(object obj, EventArgs args)
         {
-            quantCount++;
+            _quantCount++;
         }
 
         public void TimerStop(object obj, EventArgs args)
         {
-            if (quantCount == 0)
-                _sender.Send("No quants was completed");
-            else
-                _sender.Send($"{quantCount} quants was completed");
+            _sender.Send(_quantCount == 0 ? "No quants was completed" : $"{_quantCount} quants was completed");
         }
     }
 }

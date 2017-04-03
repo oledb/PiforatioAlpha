@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 using Piforatio.Core2;
 using Piforatio.Core2Test.Fakes;
-using System;
-using System.Collections.Generic;
 
 namespace Piforatio.Core2Test
 {
@@ -21,7 +21,7 @@ namespace Piforatio.Core2Test
         public void AddNewQuant()
         {
             //Arrange
-            var quant = new Quant()
+            var quant = new Quant
             {
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
                 Comment = "Start new",
@@ -45,9 +45,9 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var today = new DateTime(2017, 3, 25);
-            var quant2410 = new Quant() { Time = new DateTime(2017, 3, 24, 10, 30, 00) };
-            var quatn2412 = new Quant() { Time = new DateTime(2017, 3, 24, 12, 30, 00) };
-            var quant25 = new Quant() { Time = today };
+            var quant2410 = new Quant { Time = new DateTime(2017, 3, 24, 10, 30, 00) };
+            var quatn2412 = new Quant { Time = new DateTime(2017, 3, 24, 12, 30, 00) };
+            var quant25 = new Quant { Time = today };
             var collection = new Quants(factory);
             collection.Create(quant25);
             collection.Create(quatn2412);
@@ -68,15 +68,15 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Quants(factory);
-            var quant8week = new Quant()
+            var quant8week = new Quant
             {
                 Time = new DateTime(2017, 02, 26)
             };
-            var quant9week = new Quant()
+            var quant9week = new Quant
             {
                 Time = new DateTime(2017, 02, 27)
             };
-            var quant10week = new Quant()
+            var quant10week = new Quant
             {
                 Time = new DateTime(2017, 03, 06)
             };
@@ -120,7 +120,7 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Quants(factory);
-            collection.Create(new Quant()
+            collection.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 25, 10, 30, 00),
                 Comment = "Start new",
@@ -145,12 +145,12 @@ namespace Piforatio.Core2Test
             var objectives = ObjectivesFake.Create(factory);
             var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
             var collection = new Quants(factory);
-            collection.Create(new Quant()
+            collection.Create(new Quant
             {
                 Comment = "Create new 1",
                 Objective = objective
             });
-            collection.Create(new Quant()
+            collection.Create(new Quant
             {
                 Comment = "Create new 2",
                 Objective = objective
@@ -175,7 +175,7 @@ namespace Piforatio.Core2Test
             var objectives = ObjectivesFake.Create(factory);
             var objective = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
             var collection = new Quants(factory);
-            collection.Create(new Quant()
+            collection.Create(new Quant
             {
                 Comment = "Create new",
                 Time = DateTime.Now
@@ -200,7 +200,7 @@ namespace Piforatio.Core2Test
             var objectiveOld = objectives.ReadSingle(o => o.Name == "Read book about Mvc");
             var objectiveNew = objectives.ReadSingle(o => o.Name == "Find work");
             var collection = new Quants(factory);
-            collection.Create(new Quant()
+            collection.Create(new Quant
             {
                 Comment = "Create new 1",
                 Objective = objectiveOld,

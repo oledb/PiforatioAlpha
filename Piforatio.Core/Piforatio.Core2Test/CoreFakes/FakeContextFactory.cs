@@ -1,33 +1,32 @@
-﻿using Effort;
-using Piforatio.Core2;
-using System;
+﻿using System;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using Effort;
+using Piforatio.Core2;
 
 namespace Piforatio.Core2Test
 {
     public class FakeContextFactory : IContextFactory
     {
-        static private DbConnection connection;
-        static long index = DateTime.Now.Ticks;
-        static string conn = $@"Data Source=(LocalDb)\v11.0;
-        Integrated Security=SSPI;
-        AttachDBFilename=D:\db\Test{index}.mdf";
+        private static DbConnection _connection;
+        private static long _index = DateTime.Now.Ticks;
+        private static readonly string Conn = $@"Data Source=(LocalDb)\v11.0;Integrated Security=SSPI;AttachDBFilename=D:\db\Test{_index}.mdf";
 
-        static public void CreateDb()
+        public static void CreateDb()
         {
-            connection = Created();
+            _connection = Created();
         }
 
-        static DbConnection Created()
+        private static DbConnection Created()
         {
-            return DbConnectionFactory.CreatePersistent(index++.ToString());
+            return DbConnectionFactory.CreatePersistent(_index++.ToString());
         }
 
-        static DbConnection Created2()
+        // ReSharper disable once UnusedMember.Local
+        private static DbConnection Created2()
         {
-            var connection = new SqlConnection(conn);
+            var connection = new SqlConnection(Conn);
             return connection;
         }
 
@@ -38,7 +37,7 @@ namespace Piforatio.Core2Test
 
         public PiforatioContext Create()
         {
-            var context = new PiforatioContext(connection);
+            var context = new PiforatioContext(_connection);
             //var context = new PiforatioContext(Created2());
             context.Database.CreateIfNotExists();
             context.Database.Log = Write;

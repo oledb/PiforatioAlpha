@@ -5,16 +5,16 @@ namespace Piforatio.WPF
 {
     public class TimerViewModel : Notifier
     {
-        IDateTime _dateTime;
-        private Alarmclock _workClock;
+        readonly IDateTime _dateTime;
+        private readonly Alarmclock _workClock;
         private Alarmclock _pauseClock;
-        private int _maxWorkTime = 10801; // 3 hours + 1 sec
-        private const int intervalTime = 900; // 15 minutes
+        private readonly int _maxWorkTime = 10801; // 3 hours + 1 sec
+        private const int IntervalTime = 900; // 15 minutes
 
-        public virtual event Action<TimerViewModel, EventArgs> OnTimerEnd;
-        public virtual event Action<TimerViewModel, EventArgs> OnTimerStop;
-        public virtual event Action<TimerViewModel, EventArgs> OnTimerStart;
-        public virtual event Action<TimerViewModel, EventArgs> OnIntervalReached;
+        public virtual event EventHandler OnTimerEnd;
+        public virtual event EventHandler OnTimerStop;
+        public virtual event EventHandler OnTimerStart;
+        public virtual event EventHandler OnIntervalReached;
 
         public TimerViewModel()
         {
@@ -35,37 +35,13 @@ namespace Piforatio.WPF
             _maxWorkTime = maxWorkTime;
         }
 
-        public Objective CurrentObjective
-        {
-            get { return null; }
-        }
+        public Objective CurrentObjective => null;
 
-        public bool IsStarted
-        {
-            get
-            {
-                return _workClock.IsStarted;
-            }
-        }
+        public bool IsStarted => _workClock.IsStarted;
 
-        public bool IsPaused
-        {
-            get
-            {
-                return _workClock.IsPaused;
-            }
-        }
+        public bool IsPaused => _workClock.IsPaused;
 
-        public string ClockFace
-        {
-            get
-            {
-                if (_pauseClock != null)
-                    return _pauseClock.WaitSecodns.ToTimerFormat();
-                else
-                    return _workClock.TotalSeconds.ToTimerFormat();
-            }
-        }
+        public string ClockFace => _pauseClock != null ? _pauseClock.WaitSecodns.ToTimerFormat() : _workClock.TotalSeconds.ToTimerFormat();
 
         public int MaxPauseTime { get; set; }
 
@@ -75,7 +51,7 @@ namespace Piforatio.WPF
                 _workClock.Start(_dateTime?.Now ?? default(DateTime));
             else
             {
-                _workClock.Start(_dateTime?.Now ?? default(DateTime), _maxWorkTime, intervalTime);
+                _workClock.Start(_dateTime?.Now ?? default(DateTime), _maxWorkTime, IntervalTime);
                 OnTimerStart?.Invoke(this, new EventArgs());
             }
             _pauseClock = null;
@@ -101,6 +77,7 @@ namespace Piforatio.WPF
             _pauseClock = new Alarmclock();
             _pauseClock.OnClockStop += (obj, args) =>
             {
+                // TODO: Used 2 events instead of 1
                 OnTimerEnd?.Invoke(this, new EventArgs());
                 Stop();
                 NotifyPropertyChanged("IsPaused");

@@ -18,10 +18,10 @@ namespace Piforatio.Core2Test
         public void AddNewObjective()
         {
             //Arrange
-            var objective = new Objective()
+            var objective = new Objective
             {
                 Name = "Read book MVC for professional",
-                Status = ObjectiveStatus.NotStarted,
+                Status = ObjectiveStatus.NotStarted
             };
             var collection = new Objectives(factory);
 
@@ -38,9 +38,9 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Objectives(factory);
-            collection.Create(new Objective() { Name = "Test Objective" });
-            collection.Create(new Objective() { Name = "Read MVC book" });
-            collection.Create(new Objective() { Name = "Create web site" });
+            collection.Create(new Objective { Name = "Test Objective" });
+            collection.Create(new Objective { Name = "Read MVC book" });
+            collection.Create(new Objective { Name = "Create web site" });
 
             //Act
             var mvcObjectives = collection.ReadByNameTemplate("mvc");
@@ -55,11 +55,14 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Objectives(factory);
-            collection.Create(new Objective() { Name = "Read mvc-book",
+            collection.Create(new Objective
+            { Name = "Read mvc-book",
                 Status = ObjectiveStatus.Completed });
-            collection.Create(new Objective() { Name = "Create Mvc test",
+            collection.Create(new Objective
+            { Name = "Create Mvc test",
                 Status = ObjectiveStatus.InProgress});
-            collection.Create(new Objective() { Name = "MVC site",
+            collection.Create(new Objective
+            { Name = "MVC site",
                 Status = ObjectiveStatus.NotStarted});
 
             //Act
@@ -82,7 +85,7 @@ namespace Piforatio.Core2Test
             var oldName = "Crate Mvc stie";
             var newName = "Create Mvc site";
             var collection = new Objectives(factory);
-            var objective = new Objective()
+            var objective = new Objective
             {
                 Name = oldName,
                 Status = ObjectiveStatus.InProgress

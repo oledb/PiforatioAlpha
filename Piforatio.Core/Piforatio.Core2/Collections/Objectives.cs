@@ -1,7 +1,7 @@
-﻿using LinqKit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinqKit;
 
 namespace Piforatio.Core2
 {
@@ -21,21 +21,21 @@ namespace Piforatio.Core2
             return Read(o => o.Status == status);
         }
 
-        protected override void createObject(Objective obj, PiforatioContext context)
+        protected override void CreateObject(Objective obj, PiforatioContext context)
         {
             if (obj.Project != null)
                 context.Projects.Attach(obj.Project);
         }
 
-        protected override void deleteObject(Objective obj, PiforatioContext context) { }
+        protected override void DeleteObject(Objective obj, PiforatioContext context) { }
 
-        protected override IEnumerable<Objective> readObject(Func<Objective, bool> predicate, 
+        protected override IEnumerable<Objective> ReadObject(Func<Objective, bool> predicate, 
             PiforatioContext context)
         {
             return context.Objectives.AsExpandable().Where(predicate);
         }
 
-        protected override void updateObject(Objective obj, PiforatioContext context)
+        protected override void UpdateObject(Objective obj, PiforatioContext context)
         {
             obj.Project_ProjectID = obj.Project?.ProjectID;
         }
