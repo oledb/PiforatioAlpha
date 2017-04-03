@@ -214,12 +214,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Piforatio.Core\Piforatio.Core.csproj">
-      <Project>{4e493174-a8dc-4eaf-80ca-bf05e4de3edd}</Project>
-      <Name>Piforatio.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="time.ico" />
   </ItemGroup>
   <ItemGroup>
