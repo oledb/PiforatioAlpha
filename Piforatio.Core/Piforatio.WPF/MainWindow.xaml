@@ -18,7 +18,7 @@
         <Style x:Key="pauseStyle" TargetType="{x:Type Label}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsPaused}" Value="True">
-                    <Setter Property="Foreground" Value="Red"></Setter>
+                    <Setter Property="Foreground" Value="#FFFFDC00"></Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -51,8 +51,8 @@
                     FontFamily="/Piforatio.WPF;component/#FontAwesome"
                     Command="{x:Static local:MainWindow.StopCommand}"/>
         </Grid>
-        <Label Name="infoLabel" Grid.Row="1" Content="{Binding Path=Message}"/>
-        <ComboBox Name="commandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
+        <Label Name="InfoLabel" Grid.Row="1" Content="{Binding Path=Message}"/>
+        <ComboBox Name="CommandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
             <sys:String>Задача</sys:String>
             <sys:String>Настройки</sys:String>
         </ComboBox>

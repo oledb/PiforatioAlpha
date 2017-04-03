@@ -77,7 +77,7 @@ namespace Piforatio.WPF
             _pauseClock = new Alarmclock();
             _pauseClock.OnClockStop += (obj, args) =>
             {
-                // TODO: Used 2 events instead of 1
+                // TODO: Should use 1 events instead of 2
                 OnTimerEnd?.Invoke(this, new EventArgs());
                 Stop();
                 NotifyPropertyChanged("IsPaused");

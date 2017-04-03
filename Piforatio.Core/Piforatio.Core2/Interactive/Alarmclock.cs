@@ -9,7 +9,7 @@ namespace Piforatio.Core2
         private double _interval = -1d;
         private double _totalTime;
         private double _waitTime;
-        
+
         public event EventHandler OnClockStop;
         public event EventHandler OnIntervalReach;
 

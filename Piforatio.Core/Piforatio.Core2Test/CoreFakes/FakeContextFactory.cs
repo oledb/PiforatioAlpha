@@ -23,7 +23,6 @@ namespace Piforatio.Core2Test
             return DbConnectionFactory.CreatePersistent(_index++.ToString());
         }
 
-        // ReSharper disable once UnusedMember.Local
         private static DbConnection Created2()
         {
             var connection = new SqlConnection(Conn);
@@ -44,7 +43,7 @@ namespace Piforatio.Core2Test
             return context;
         }
 
-        static void Write(string value)
+        private static void Write(string value)
         {
             Debug.Write(value, "SQL Output");
         }

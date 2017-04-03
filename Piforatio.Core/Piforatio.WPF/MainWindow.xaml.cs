@@ -10,10 +10,12 @@ namespace Piforatio.WPF
     {
         private TimerViewModel _timerViewModel;
         private MessageSender _messageMaker;
+        // ReSharper disable once NotAccessedField.Local
         private TimerMessager _timerMessager;
         private const char PlayChar = '\uF04B';
         private const char PauseChar = '\uF04C';
         private Timer _timer;
+        // TODO: Used hardcoded file pathes
         private const string SoundsFolder = "D:\\Sounds";
         private readonly string _startSound = Path.Combine(SoundsFolder, "Start.wav");
         private readonly string _stopSound = Path.Combine(SoundsFolder, "Stop.wav");
@@ -40,7 +42,7 @@ namespace Piforatio.WPF
         private void InitializeMessageMaker()
         {
             _messageMaker = new MessageSender();
-            infoLabel.DataContext = _messageMaker;
+            InfoLabel.DataContext = _messageMaker;
             _timerMessager = new TimerMessager(_messageMaker, _timerViewModel);
         }
 
@@ -70,8 +72,10 @@ namespace Piforatio.WPF
             _timer.Stop();
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public static RoutedUICommand StartAndPauseCommand { get; } = new RoutedUICommand("", "StartAndPause", typeof(Window));
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public static RoutedUICommand StopCommand { get; } = new RoutedUICommand("", "StartAndPause", typeof(Window));
     }
 }

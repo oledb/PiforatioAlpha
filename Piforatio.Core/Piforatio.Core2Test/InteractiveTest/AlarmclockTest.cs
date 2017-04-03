@@ -78,7 +78,6 @@ namespace Piforatio.Core2Test
             //Act
             clock.Execute(Wait(wait));
             clock.Pause(Wait(wait));
-            // Wait and press Pause againg.
             clock.Execute(Wait(wait * 12));
             clock.Pause(Wait(wait * 14));
             clock.Execute(Wait(wait * 16));
@@ -162,8 +161,7 @@ namespace Piforatio.Core2Test
         }
 
         [TestCase(400, 100, 50)]
-        public void TwoTimeExecuteInOrderToReachInterval(double wait, double interval,
-            double executeInterval)
+        public void TwoTimeExecuteInOrderToReachInterval(double wait, double interval, double executeInterval)
         {
             //Arrange
             var value = 0;

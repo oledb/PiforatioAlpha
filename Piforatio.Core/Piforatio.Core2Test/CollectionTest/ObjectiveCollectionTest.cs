@@ -7,6 +7,7 @@ namespace Piforatio.Core2Test
     public class ObjectiveCollectionTest
     {
         protected FakeContextFactory factory;
+
         [SetUp]
         public void Recreate()
         {
@@ -38,9 +39,9 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             var collection = new Objectives(factory);
-            collection.Create(new Objective { Name = "Test Objective" });
-            collection.Create(new Objective { Name = "Read MVC book" });
-            collection.Create(new Objective { Name = "Create web site" });
+            collection.Create(new Objective {Name = "Test Objective"});
+            collection.Create(new Objective {Name = "Read MVC book"});
+            collection.Create(new Objective {Name = "Create web site"});
 
             //Act
             var mvcObjectives = collection.ReadByNameTemplate("mvc");
@@ -56,14 +57,20 @@ namespace Piforatio.Core2Test
             //Arrange
             var collection = new Objectives(factory);
             collection.Create(new Objective
-            { Name = "Read mvc-book",
-                Status = ObjectiveStatus.Completed });
+            {
+                Name = "Read mvc-book",
+                Status = ObjectiveStatus.Completed
+            });
             collection.Create(new Objective
-            { Name = "Create Mvc test",
-                Status = ObjectiveStatus.InProgress});
+            {
+                Name = "Create Mvc test",
+                Status = ObjectiveStatus.InProgress
+            });
             collection.Create(new Objective
-            { Name = "MVC site",
-                Status = ObjectiveStatus.NotStarted});
+            {
+                Name = "MVC site",
+                Status = ObjectiveStatus.NotStarted
+            });
 
             //Act
             var inProgressList = collection.ReadByStatus(

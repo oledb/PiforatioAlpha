@@ -6,7 +6,7 @@ using Piforatio.WPF;
 namespace Piforatio.Core2Test.WPF
 {
     [TestFixture]
-    class TimerViewModelTest
+    internal class TimerViewModelTest
     {
                   //3.22.2017 6.16pm
         [TestCase(636258034072347780)]
@@ -17,7 +17,7 @@ namespace Piforatio.Core2Test.WPF
             //Arrange, Act
             var time = new DateTime(today, DateTimeKind.Local);
             IDateTime dateTime = new TodayStub(time);
-            TimerViewModel timer = new TimerViewModel(dateTime);
+            var timer = new TimerViewModel(dateTime);
 
             //Assert
             Assert.AreEqual("00:00:00", timer.ClockFace);
@@ -32,8 +32,8 @@ namespace Piforatio.Core2Test.WPF
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 1);
-            TimerViewModel timer = new TimerViewModel(dateTime);
-            bool isStarted = false;
+            var timer = new TimerViewModel(dateTime);
+            var isStarted = false;
             timer.PropertyChanged += (obj, args) =>
             {
                 if (args.PropertyName == "IsStarted")
@@ -56,14 +56,14 @@ namespace Piforatio.Core2Test.WPF
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 3600);
-            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            var timer = new TimerViewModel(dateTime, 7200);
             var timeWorkList = new List<string>();
             timer.PropertyChanged += (obj, args) =>
             {
                 if (args.PropertyName == "ClockFace")
                     timeWorkList.Add(timer.ClockFace);
             };
-            bool isStarted = true;
+            var isStarted = true;
             timer.PropertyChanged += (obj, args) =>
             {
                 if (args.PropertyName == "IsStarted")
@@ -88,7 +88,7 @@ namespace Piforatio.Core2Test.WPF
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 10);
-            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            var timer = new TimerViewModel(dateTime, 7200);
             var timeWorkList = new List<string>();
             timer.PropertyChanged += (obj, args) =>
             {
@@ -251,13 +251,13 @@ namespace Piforatio.Core2Test.WPF
     /// Subsidiary classes
     public class TodayStub : IDateTime
     {
-        protected DateTime _now;
+        protected DateTime TodayTime;
         public TodayStub(DateTime now)
         {
-            _now = now;
+            TodayTime = now;
         }
 
-        public virtual DateTime Now => _now;
+        public virtual DateTime Now => TodayTime;
     }
 
     public class TodayFakeIncrement : TodayStub
@@ -275,7 +275,7 @@ namespace Piforatio.Core2Test.WPF
             get
             {
                 _index += _interval;
-                return _now.AddSeconds(_index);
+                return TodayTime.AddSeconds(_index);
             }
         }
     }

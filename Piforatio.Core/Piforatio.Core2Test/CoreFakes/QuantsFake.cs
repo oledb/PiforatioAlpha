@@ -22,7 +22,6 @@ namespace Piforatio.Core2Test.Fakes
                 Comment = "25 page out of 256",
                 Count = 4
             });
-            list = fake.Read();
             fake.Create(new Quant
             {
                 Time = new DateTime(2017, 2, 28, 13, 10, 00),
@@ -30,7 +29,6 @@ namespace Piforatio.Core2Test.Fakes
                 Comment = "60 page out of 256",
                 Count = 4
             });
-            list = fake.Read();
             fake.Create(new Quant
             {
                 Time = new DateTime(2017, 3, 1, 10, 15, 00),
@@ -66,7 +64,6 @@ namespace Piforatio.Core2Test.Fakes
                 Comment = "try to get prepay",
                 Count = 4
             });
-            var list2 = fake.Read();
             return fake;
         }
     }

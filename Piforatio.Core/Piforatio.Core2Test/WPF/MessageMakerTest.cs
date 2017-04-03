@@ -5,13 +5,13 @@ using Piforatio.WPF;
 namespace Piforatio.Core2Test
 {
     [TestFixture]
-    class MessageMakerTest
+    internal class MessageMakerTest
     {
         [Test]
         public void CreateMessageMaker()
         {
             //Arrange
-            MessageSender maker = new MessageSender();
+            var maker = new MessageSender();
 
             //Act, Assert
             Assert.AreEqual("Hello, user!", maker.Message);
@@ -21,8 +21,8 @@ namespace Piforatio.Core2Test
         public void SendMessage()
         {
             //Arrange
-            MessageSender maker = new MessageSender();
-            string outMessage = "";
+            var maker = new MessageSender();
+            var outMessage = "";
             maker.PropertyChanged += (obj, args) =>
             {
                 outMessage = maker.Message;

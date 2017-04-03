@@ -9,26 +9,27 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class PlanCollectionTest
     {
-        protected FakeContextFactory factory;
+        private FakeContextFactory _factory;
+
         [SetUp]
         public void Recreate()
         {
             FakeContextFactory.CreateDb();
-            factory = new FakeContextFactory();
+            _factory = new FakeContextFactory();
         }
 
         [Test]
         public void AddNewPlan()
         {
             //Arrange
-            var projects = ProjectsFake.Create(factory);
-            var objectives = ObjectivesFake.Create(factory, projects);
+            var projects = ProjectsFake.Create(_factory);
+            var objectives = ObjectivesFake.Create(_factory, projects);
             var plan = new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book").FirstOrDefault()
             };
-            var collection = new Plans(factory);
+            var collection = new Plans(_factory);
 
             //Act
             collection.Create(plan);
@@ -45,15 +46,15 @@ namespace Piforatio.Core2Test
         public void GetPlansByDate()
         {
             //Arrange
-            var projects = ProjectsFake.Create(factory);
-            var objectives = ObjectivesFake.Create(factory, projects);
-            var collection = new Plans(factory);
-            collection.Create( new Plan
+            var projects = ProjectsFake.Create(_factory);
+            var objectives = ObjectivesFake.Create(_factory, projects);
+            var collection = new Plans(_factory);
+            collection.Create(new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Read book")[0]
             });
-            collection.Create( new Plan
+            collection.Create(new Plan
             {
                 Date = new DateTime(2017, 3, 3),
                 Objective = objectives.ReadByNameTemplate("Create test site")[0]
@@ -75,9 +76,9 @@ namespace Piforatio.Core2Test
         public void UpdatePlan()
         {
             //Arrange
-            var projects = ProjectsFake.Create(factory);
-            var objectives = ObjectivesFake.Create(factory, projects);
-            var collection = new Plans(factory);
+            var projects = ProjectsFake.Create(_factory);
+            var objectives = ObjectivesFake.Create(_factory, projects);
+            var collection = new Plans(_factory);
             collection.Create(new Plan
             {
                 Date = new DateTime(2017, 3, 3),
@@ -86,8 +87,11 @@ namespace Piforatio.Core2Test
 
             //Act
             var plan = collection.ReadByDate(new DateTime(2017, 3, 3)).FirstOrDefault();
-            plan.Date = new DateTime(2017, 3, 5);
-            collection.Update(plan);
+            if (plan != null)
+            {
+                plan.Date = new DateTime(2017, 3, 5);
+                collection.Update(plan);
+            }
             var list = collection.ReadByDate(new DateTime(2017, 3, 5));
 
             //Assert

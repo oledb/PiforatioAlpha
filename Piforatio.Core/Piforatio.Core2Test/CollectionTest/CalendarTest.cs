@@ -9,24 +9,23 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class CalendarTest
     {
-        protected FakeContextFactory factory;
+        private FakeContextFactory _factory;
+
         [SetUp]
         public void Recreate()
         {
             FakeContextFactory.CreateDb();
-            factory = new FakeContextFactory();
-            var quants = new Quants(factory);
-            var list = quants.Read();
+            _factory = new FakeContextFactory();
         }
 
         [Test]
         public void AddNewWeek()
         {
             //Arrange
-            var projects = ProjectsFake.Create(factory);
-            var objectives = ObjectivesFake.Create(factory, projects);
-            var quants = QuantsFake.Create(factory, objectives);
-            var calendar = new Calendar(quants, factory);
+            var projects = ProjectsFake.Create(_factory);
+            var objectives = ObjectivesFake.Create(_factory, projects);
+            var quants = QuantsFake.Create(_factory, objectives);
+            var calendar = new Calendar(quants, _factory);
 
             //Act
             calendar.Create(new Week
@@ -43,19 +42,18 @@ namespace Piforatio.Core2Test
         public void GetCountsWeekInfo()
         {
             //Arrange
-            var projects = ProjectsFake.Create(factory);
-            var objectives = ObjectivesFake.Create(factory, projects);
-            var quants = QuantsFake.Create(factory, objectives);
-            var list = quants.Read();
-            var calendar = new Calendar(quants, factory);
+            var projects = ProjectsFake.Create(_factory);
+            var objectives = ObjectivesFake.Create(_factory, projects);
+            var quants = QuantsFake.Create(_factory, objectives);
+            var calendar = new Calendar(quants, _factory);
             var week9 = Date(2017, 2, 27);
-            calendar.Create( new Week { StartDate = week9 });
+            calendar.Create(new Week {StartDate = week9});
 
             //Act
-            WeekInfo info = calendar.GetWeekInfo(week9);
-            Dictionary<DateTime, int> days = info.Days;
-            int total = info.TotalCount;
-            double aver = info.AverageCount;
+            var info = calendar.GetWeekInfo(week9);
+            var days = info.Days;
+            var total = info.TotalCount;
+            var aver = info.AverageCount;
 
             //Assert
             Assert.AreEqual(7, days.Count);

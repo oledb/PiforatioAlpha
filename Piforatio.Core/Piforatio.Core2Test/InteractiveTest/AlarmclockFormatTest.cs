@@ -4,7 +4,7 @@ using Piforatio.Core2;
 namespace Piforatio.Core2Test
 {
     [TestFixture]
-    class AlarmclockFormatTest
+    internal class AlarmclockFormatTest
     {
         [TestCase(59d, 0)]
         [TestCase(3660, 1)]
@@ -39,10 +39,10 @@ namespace Piforatio.Core2Test
         public void ConvertTotalSecodsToTimerString(double total, string format)
         {
             //Arrange, Act
-            string result = total.ToTimerFormat();
+            var result = total.ToTimerFormat();
 
             //Assert
-            Assert.AreEqual(format, result);  
+            Assert.AreEqual(format, result);
         }
     }
 }

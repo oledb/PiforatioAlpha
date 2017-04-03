@@ -6,12 +6,13 @@ namespace Piforatio.Core2Test
     [TestFixture]
     public class ProjectCollectionTest
     {
-        protected FakeContextFactory factory;
+        private FakeContextFactory _factory;
+
         [SetUp]
         public void Recreate()
         {
             FakeContextFactory.CreateDb();
-            factory = new FakeContextFactory();
+            _factory = new FakeContextFactory();
         }
 
         [Test]
@@ -24,7 +25,7 @@ namespace Piforatio.Core2Test
                 Type = ProjectType.Learn,
                 Comment = "Learn MVC and create site"
             };
-            var collection = new Projects(factory);
+            var collection = new Projects(_factory);
 
             //Act
             collection.Create(project);
@@ -40,7 +41,7 @@ namespace Piforatio.Core2Test
         public void GetProjectsByType()
         {
             //Arrange
-            var collection = new Projects(factory);
+            var collection = new Projects(_factory);
             collection.Create(new Project
             {
                 Name = "MVC",
@@ -72,7 +73,7 @@ namespace Piforatio.Core2Test
                 Type = ProjectType.Work,
                 Comment = "Learn MVC"
             };
-            var collection = new Projects(factory);
+            var collection = new Projects(_factory);
             collection.Create(project);
 
             //Act
@@ -85,7 +86,5 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(ProjectType.Work, result.Type);
             Assert.AreEqual("Learn MVC", result.Comment);
         }
-
-        
     }
 }
