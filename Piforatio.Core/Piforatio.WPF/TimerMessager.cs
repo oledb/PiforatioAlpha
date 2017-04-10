@@ -10,7 +10,6 @@ namespace Piforatio.WPF
         {
             _sender = sender;
             viewModel.OnTimerStart += TimerStart;
-            viewModel.OnTimerEnd += TimerStop;
             viewModel.OnTimerStop += TimerStop;
             viewModel.OnIntervalReached += TimerExecute;
         }

@@ -12,13 +12,14 @@
         <CommandBinding Command="{x:Static local:MainWindow.StartAndPauseCommand}"
                         Executed="StartAndPauseCommand_Execute"/>
         <CommandBinding Command="{x:Static local:MainWindow.StopCommand}" 
-                        Executed="StopCommand_Execute"/>
+                        Executed="StopCommand_Execute"
+                        CanExecute="StopCommand_CanExecute"/>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="pauseStyle" TargetType="{x:Type Label}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsPaused}" Value="True">
-                    <Setter Property="Foreground" Value="#FFFFDC00"></Setter>
+                    <Setter Property="Foreground" Value="#FF0023FF"></Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -52,10 +53,5 @@
                     Command="{x:Static local:MainWindow.StopCommand}"/>
         </Grid>
         <Label Name="InfoLabel" Grid.Row="1" Content="{Binding Path=Message}"/>
-        <ComboBox Name="CommandLine" Grid.Row="2" Margin="4,4,4,2" IsEditable="False">
-            <sys:String>Задача</sys:String>
-            <sys:String>Настройки</sys:String>
-        </ComboBox>
-
     </Grid>
 </Window>

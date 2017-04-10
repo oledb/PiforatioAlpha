@@ -32,8 +32,8 @@ namespace Piforatio.WPF
             timerLabel.DataContext = _timerViewModel;
             _timer = new Timer(100);
             _timer.Elapsed += (obj, args) => _timerViewModel.Execute();
-            _timerViewModel.OnTimerEnd += (obj, args) =>
-                Dispatcher.Invoke( () => StopCommand_Execute(this, null));
+            _timerViewModel.OnTimerStop += (obj, args) =>
+                Dispatcher.Invoke(StopTimer);
             _timerViewModel.OnIntervalReached += (obj, args) => Player.Play(_intervalSound);
         }
 
@@ -61,13 +61,21 @@ namespace Piforatio.WPF
             }
         }
 
+        private void StopTimer()
+        {
+            Player.Play(_stopSound);
+            playButton.Content = PlayChar.ToString();
+            _timer.Stop();
+        }
+
         private void StopCommand_Execute(object sender, ExecutedRoutedEventArgs args)
         {
-            if (_timerViewModel.IsStarted)
-                Player.Play(_stopSound);
-            playButton.Content = PlayChar.ToString();
             _timerViewModel.Stop();
-            _timer.Stop();
+        }
+
+        private void StopCommand_CanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = _timerViewModel?.IsStarted ?? false;
         }
 
         public static RoutedUICommand StartAndPauseCommand { get; } = new RoutedUICommand("", "StartAndPause", typeof(Window));

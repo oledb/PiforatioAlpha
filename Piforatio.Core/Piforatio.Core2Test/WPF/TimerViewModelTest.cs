@@ -8,9 +8,9 @@ namespace Piforatio.Core2Test.WPF
     [TestFixture]
     internal class TimerViewModelTest
     {
-                  //3.22.2017 6.16pm
+        //3.22.2017 6.16pm
         [TestCase(636258034072347780)]
-                  //3.23.2017 4.34pm
+        //3.23.2017 4.34pm
         [TestCase(636258836307637505)]
         public void CreateTimerViewModel(long today)
         {
@@ -126,7 +126,7 @@ namespace Piforatio.Core2Test.WPF
             //Assert
             Assert.AreEqual("00:13:19", timer.ClockFace);
             Assert.IsTrue(timer.IsPaused);
-            
+
         }
 
         [Test]
@@ -195,35 +195,34 @@ namespace Piforatio.Core2Test.WPF
             timer.Execute();
 
             //Assert
-            Assert.AreEqual("00:00:20",timer.ClockFace);
+            Assert.AreEqual("00:00:20", timer.ClockFace);
         }
 
         /// 
         /// Events test
         /// 
-        //This test is not correct, I think
+        [Test]
         public void EventOfPauseTimeEnded()
         {
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 450);
-            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
-            var list = new List<string>();
-            timer.OnTimerEnd += (obj, args) =>
-            {
-                list.Add("Pause, reset");
-            };
+            var timer = new TimerViewModel(dateTime, 900);
+            var value = 0;
+            timer.OnTimerStop += (obj, args) => { value++; };
 
             //Act
             timer.Start();
-            timer.Pause();
+
+            //value++
+            timer.Stop();
+            timer.Start();
             timer.Execute();
-            timer.Execute();
+            //value++ 
             timer.Execute();
 
             //Assert
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("Pause, reset", list[0]);
+            Assert.AreEqual(2, value);
         }
 
         [Test]
@@ -232,7 +231,7 @@ namespace Piforatio.Core2Test.WPF
             //Arrange
             var time = new DateTime(636258836307637505, DateTimeKind.Local);
             IDateTime dateTime = new TodayFakeIncrement(time, 450);
-            TimerViewModel timer = new TimerViewModel(dateTime, 7200);
+            var timer = new TimerViewModel(dateTime, 7200);
             int index = 0;
             timer.OnIntervalReached += (obj, args) => index++;
 
@@ -240,8 +239,6 @@ namespace Piforatio.Core2Test.WPF
             timer.Start();
             for (int i = 0; i < 8; i++)
                 timer.Execute();
-
-            
 
             //Assert
             Assert.AreEqual(4, index);

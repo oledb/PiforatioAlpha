@@ -81,7 +81,7 @@ namespace Piforatio.Core2Test
         {
             //Arrange
             _timerMock.Setup(t => t.Execute())
-                .Raises(t => t.OnTimerEnd += null, new EventArgs());
+                .Raises(t => t.OnTimerStop += null, new EventArgs());
             var timer = _timerMock.Object;
             var sender = _senderMock.Object;
             var messager = new TimerMessager(sender, timer);

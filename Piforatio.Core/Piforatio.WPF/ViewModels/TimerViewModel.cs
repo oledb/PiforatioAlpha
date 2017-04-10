@@ -11,7 +11,6 @@ namespace Piforatio.WPF
         private readonly int _maxWorkTime = 10801; // 3 hours + 1 sec
         private const int IntervalTime = 900; // 15 minutes
 
-        public virtual event EventHandler OnTimerEnd;
         public virtual event EventHandler OnTimerStop;
         public virtual event EventHandler OnTimerStart;
         public virtual event EventHandler OnIntervalReached;
@@ -20,8 +19,8 @@ namespace Piforatio.WPF
         {
             _workClock = new Alarmclock();
             _workClock.OnIntervalReach += (obj, args) => OnIntervalReached?.Invoke(this, args);
-            _workClock.OnClockStop += (obj, args) => OnTimerEnd?.Invoke(this, args);
-            MaxPauseTime = 899;
+            _workClock.OnClockStop += (obj, args) => OnTimerStop?.Invoke(this, args);
+            MaxPauseTime = 900;
         }
 
         public TimerViewModel(IDateTime dateTime) : this()
@@ -75,13 +74,7 @@ namespace Piforatio.WPF
             var now = _dateTime?.Now ?? default(DateTime);
             _workClock.Pause(now);
             _pauseClock = new Alarmclock();
-            _pauseClock.OnClockStop += (obj, args) =>
-            {
-                // TODO: Should use 1 events instead of 2
-                OnTimerEnd?.Invoke(this, new EventArgs());
-                Stop();
-                NotifyPropertyChanged("IsPaused");
-            };
+            _pauseClock.OnClockStop += (obj, args) => Stop();
             _pauseClock.Start(now, MaxPauseTime);
             NotifyPropertyChanged("ClockFace");
             NotifyPropertyChanged("IsPaused");
@@ -91,8 +84,8 @@ namespace Piforatio.WPF
         {
             _workClock.Stop();
             _pauseClock = null;
-            OnTimerStop?.Invoke(this, new EventArgs());
             NotifyPropertyChanged("ClockFace");
+            NotifyPropertyChanged("IsPaused");
         }
     }
 }
