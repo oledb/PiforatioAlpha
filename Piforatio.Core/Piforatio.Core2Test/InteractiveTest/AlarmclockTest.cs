@@ -50,25 +50,6 @@ namespace Piforatio.Core2Test
 
         [TestCase(1)]
         [TestCase(100)]
-        public void StartAndPause(double wait)
-        {
-            //Arrange
-            var clock = new Alarmclock();
-
-            //Act
-            clock.Start(_today);
-            _today = Wait(wait);
-            clock.Pause(_today);
-            var a = clock.TotalSeconds;
-            _today = Wait(wait);
-            var b = clock.TotalSeconds;
-
-            //Assert
-            Assert.AreEqual(a, b);
-        }
-
-        [TestCase(1)]
-        [TestCase(100)]
         public void StartAndPauseAndExecuteSomeTimes(double wait)
         {
             //Arrange
@@ -112,18 +93,15 @@ namespace Piforatio.Core2Test
 
             //Act
             clock.Start(_today, wait);
-            var run = clock.IsStarted;
             _today = Wait(wait);
             clock.Execute(_today);
-            var stop = clock.IsStarted;
 
             //Assert
-            Assert.IsTrue(run);
-            Assert.IsFalse(stop);
+            Assert.IsFalse(clock.IsStarted);
         }
 
         [TestCase(3600)]
-        public void InvokeEventWhenStop(double wait)
+        public void InvokeEventWhenTimeIsEnding(double wait)
         {
             //Arrange
             var isStopped = false;
@@ -179,9 +157,32 @@ namespace Piforatio.Core2Test
             Assert.AreEqual(2, value);
         }
 
+        /// <summary>
+        /// When the time is ended or the alarmclock is stopped manualy, the same event raises
+        /// </summary>
+        [Test]
+        public void RaiseSameIvent()
+        {
+            //Arrange
+            var value = 0;
+            var clock = new Alarmclock();
+            clock.OnClockStop += (e, f) => { value++; };
+            clock.Start(_today, 10, 5);
+
+            //Act
+            clock.Stop(); // value++
+            clock.Start(_today, 10, 5);
+            clock.Execute(Wait(11)); //value++
+            clock.Execute(Wait(11));
+            clock.Execute(Wait(11)); 
+
+            //Assert
+            Assert.AreEqual(2, value);
+        }
+
         public DateTime Wait(double count)
         {
             return _today.AddSeconds(count);
-        }
+        } 
     }
 }

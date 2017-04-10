@@ -56,6 +56,7 @@ namespace Piforatio.Core2
             _totalTime = 0;
             _interval = -1d;
             _intervalCount = 1;
+            OnClockStop?.Invoke(this, new EventArgs());
         }
 
         private void SetTotalSeconds(DateTime now)
@@ -66,11 +67,10 @@ namespace Piforatio.Core2
 
         public void Execute(DateTime now)
         {
-            if (IsStarted && IsPaused) return;
+            if (!IsStarted || IsPaused) return;
             SetTotalSeconds(now);
             if (WaitSecodns <= 0)
             {
-                OnClockStop?.Invoke(this, new EventArgs());
                 Stop();
                 return;
             }

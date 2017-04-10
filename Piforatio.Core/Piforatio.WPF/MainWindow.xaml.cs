@@ -1,5 +1,4 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -10,7 +9,6 @@ namespace Piforatio.WPF
     {
         private TimerViewModel _timerViewModel;
         private MessageSender _messageMaker;
-        // ReSharper disable once NotAccessedField.Local
         private TimerMessager _timerMessager;
         private const char PlayChar = '\uF04B';
         private const char PauseChar = '\uF04C';
@@ -72,10 +70,8 @@ namespace Piforatio.WPF
             _timer.Stop();
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global
         public static RoutedUICommand StartAndPauseCommand { get; } = new RoutedUICommand("", "StartAndPause", typeof(Window));
 
-        // ReSharper disable once MemberCanBePrivate.Global
         public static RoutedUICommand StopCommand { get; } = new RoutedUICommand("", "StartAndPause", typeof(Window));
     }
 }
