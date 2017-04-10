@@ -13,11 +13,6 @@ namespace Piforatio.WPF
         private const char PlayChar = '\uF04B';
         private const char PauseChar = '\uF04C';
         private Timer _timer;
-        // TODO: Used hardcoded file pathes
-        private const string SoundsFolder = "D:\\Sounds";
-        private readonly string _startSound = Path.Combine(SoundsFolder, "Start.wav");
-        private readonly string _stopSound = Path.Combine(SoundsFolder, "Stop.wav");
-        private readonly string _intervalSound = Path.Combine(SoundsFolder, "Interval.wav");
 
         public MainWindow()
         {  
@@ -34,7 +29,7 @@ namespace Piforatio.WPF
             _timer.Elapsed += (obj, args) => _timerViewModel.Execute();
             _timerViewModel.OnTimerStop += (obj, args) =>
                 Dispatcher.Invoke(StopTimer);
-            _timerViewModel.OnIntervalReached += (obj, args) => Player.Play(_intervalSound);
+            _timerViewModel.OnIntervalReached += (obj, args) => Player.Play(PlayerSounds.Interval);
         }
 
         private void InitializeMessageMaker()
@@ -49,7 +44,7 @@ namespace Piforatio.WPF
             var symbol = (string)playButton.Content;
             if (symbol[0] == PlayChar)
             {
-                Player.Play(_startSound);
+                Player.Play(PlayerSounds.Start);
                 playButton.Content = PauseChar.ToString();
                 _timerViewModel.Start();
                 _timer.Start();
@@ -63,7 +58,7 @@ namespace Piforatio.WPF
 
         private void StopTimer()
         {
-            Player.Play(_stopSound);
+            Player.Play(PlayerSounds.Stop);
             playButton.Content = PlayChar.ToString();
             _timer.Stop();
         }

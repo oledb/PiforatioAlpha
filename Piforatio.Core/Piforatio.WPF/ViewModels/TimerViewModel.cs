@@ -20,7 +20,8 @@ namespace Piforatio.WPF
             _workClock = new Alarmclock();
             _workClock.OnIntervalReach += (obj, args) => OnIntervalReached?.Invoke(this, args);
             _workClock.OnClockStop += (obj, args) => OnTimerStop?.Invoke(this, args);
-            MaxPauseTime = 900;
+            MaxPauseTime = 899;
+            
         }
 
         public TimerViewModel(IDateTime dateTime) : this()
